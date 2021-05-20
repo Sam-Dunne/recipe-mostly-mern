@@ -16,6 +16,7 @@ CREATE TABLE Users (
 );
 INSERT INTO Users (id, name, email, password, role) VALUES ('1', 'testing1', 'testing1@testing', 'testing', 9);
 INSERT INTO Users (id, name, email, password) VALUES ('1a', 'testing5', 'testing5@testing', 'testing'),('2', 'testing2', 'testing2@testing', 'testing'),('3', 'testing3', 'testing3@testing', 'testing'),('4', 'testing4', 'testing4@testing', 'testing');
+
 CREATE TABLE Recipes (
 	id VARCHAR(36) NOT NULL,
     title VARCHAR(60) NOT NULL,
@@ -27,16 +28,19 @@ CREATE TABLE Recipes (
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
 INSERT INTO Recipes (id, title, summary, instructions, user_id) VALUES ('1', "## Ham Sammich", '#### Quick Lunch', '1. Put meat between the bread', '1'),('2', '## Ham n Cheese Sammich', '#### Fancy Quick Lunch', '1. add mustard. 2. Put both between the bread', '1'),('3', '## Ham n Cheese Deluxe Sammich', '#### Look Who is showing off!', '1. add condiments to bread. 2. add meat. 3. add cheese and veggies', '1'),('4', 'Pasta', 'Like Grandma used to make', 'add water, boil water, heat sauce, drain water, add sauce', '2'), ('5', 'Pizza', 'Classic, Quick', 'call dominos', '2'), ('6', 'texas cheese steak', 'waffle house style', 'go to waffle house after midnight', '3');
 # (Tag) ie., Spicy, Sweet, Savory, Beef, Chicken, 
+### name: ?Unique? ###
 CREATE TABLE FlavorTags (
 	id VARCHAR(36), 
-    name VARCHAR(60) NOT NULL UNIQUE, #?Unique?
+    name VARCHAR(60) NOT NULL UNIQUE, 
     created_at TIMESTAMP DEFAULT NOW(),
     PRIMARY KEY (id)  
 );
+
 INSERT INTO FlavorTags (id, name) VALUES ('1', 'Spicy'),('2', 'Sweet'),('3', 'Savory'),('4', 'Mild'),('5', 'Beefy'),('6', 'Medium'),('7', 'Salty'),('8', 'Sugary');
-SELECT FlavorTags.name, FlavorTags.id FROM RecipeFlavorTags JOIN FlavorTags ON FlavorTags.id = RecipeFlavorTags.flavor_tag_id WHERE recipe_id = '4';
+#SELECT FlavorTags.name, FlavorTags.id FROM RecipeFlavorTags JOIN FlavorTags ON FlavorTags.id = RecipeFlavorTags.flavor_tag_id WHERE recipe_id = '4';
 # Many to Many
 CREATE TABLE RecipeFlavorTags (
 	recipe_id VARCHAR(36) NOT NULL,
@@ -65,7 +69,7 @@ CREATE TABLE RecipeIngredients (
     PRIMARY KEY (recipe_id, ingredient_id)
 );
 INSERT INTO RecipeIngredients VALUES ('1','2','2'),('1','3','2'),('2','2','3'),('2','3','4'),('2','4','1'),('3','2','2'),('3','3','3'),('3','5','1');
-SELECT Ingredients.name, Ingredients.id, RecipeIngredients.ingredient_qty FROM RecipeIngredients JOIN Ingredients ON Ingredients.id = RecipeIngredients.ingredient_id WHERE recipe_id = '2';
+#SELECT Ingredients.name, Ingredients.id, RecipeIngredients.ingredient_qty FROM RecipeIngredients JOIN Ingredients ON Ingredients.id = RecipeIngredients.ingredient_id WHERE recipe_id = '2';
 
 
 
