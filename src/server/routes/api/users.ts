@@ -8,7 +8,8 @@ router.get('/', async (req, res, next) => {
         const allUsers = await db.users.all()
         res.json(allUsers);
     } catch (error) {
-        res.json(error);
+        console.log(error.message);
+        res.status(500).json({ message: 'goof'})
     }
 });
 
@@ -20,7 +21,8 @@ router.get('/find', async (req, res, next) => {
         const [userByEmail] = await db.users.find(column, email)
         res.json(userByEmail);
     } catch (error) {
-        res.json(error);
+        console.log(error.message);
+        res.status(500).json({ message: 'goof'})
     }
 });
 
@@ -30,7 +32,8 @@ router.post('/', async (req, res, next) => {
         const results = await db.users.insert(newUser);
         res.json(results);
     } catch (error) {
-        res.json(error);
+        console.log(error.message);
+        res.status(500).json({ message: 'goof'})
     }
 });
 

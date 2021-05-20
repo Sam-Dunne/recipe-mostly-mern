@@ -6,23 +6,25 @@ export interface I {
 export interface IRecipes {
     id?: string;
     title?: string;
-    content?: string;
-    userid?: number;
+    summary?: string;
+    instructions?: string;
+    user_id?: number;
     created_at?: Date;
     edited_at?: Date;
 };
 export interface IUserRecipes {
     id?: string;
     title?: string;
-    content?: string;
-    userid?: number;
+    summary?: string;
+    instructions?: string;
+    user_id?: number;
     created_at?: Date;
     edited_at?: Date;
-    username?: string;
+    user_name?: string;
 };
 
 export interface IUsers {
-    id?: number;
+    id?: string;
     name?: string;
     email?: string;
     password?: string;
@@ -30,8 +32,30 @@ export interface IUsers {
     _created?: Date;
 };
 
+export interface IFlavorTags {
+    id?: string;
+    name?: string;
+    created_at?: Date;
+};
+
+export interface IRecipeFlavorTags {
+    recipe_id?: string;
+    flavor_tag_id?: string;
+};
+
+export interface IIngredients {
+    id?: string;
+    name?: string;
+};
+
+export interface IRecipeingredients {
+    recipe_id?: string;
+    ingredient_id?: string;
+    ingredient_qty?: string;
+};
+
 export interface IPayload extends IUsers {
-    userid?: number;
+    user_id?: number;
 };
 
 export interface IReqUser extends Request {
@@ -40,7 +64,7 @@ export interface IReqUser extends Request {
 
 export interface IReqPayload extends Request {
     user?: {
-        userid?: number;
+        user_id?: number;
         email?: string;
         role?: string
     }

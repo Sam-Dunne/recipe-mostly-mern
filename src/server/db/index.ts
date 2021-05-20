@@ -19,9 +19,17 @@ export const Query = <T = MySQLResponse>(queries: string, values?: any) => {
 // import basicCrud from './basicCrud';
 import users from './users';
 import recipes from './recipes';
+import flavorTags from './flavorTags';
+import recipeFlavorTags from './recipeFlavorTags';
+import ingredients from './ingredients';
+import recipeIngredients from './recipeIngredients';
 
 export default {
     // basicCrud,
     users,
-    recipes
+    recipes,
+    flavorTags,
+    recipeFlavorTags,
+    ingredients,
+    recipeIngredients
 };

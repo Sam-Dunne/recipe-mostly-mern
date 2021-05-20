@@ -32,7 +32,7 @@ INSERT INTO Recipes (id, title, summary, instructions, user_id) VALUES ('1', "##
 CREATE TABLE FlavorTags (
 	id VARCHAR(36), 
     name VARCHAR(60) NOT NULL UNIQUE, #?Unique?
-    _created TIMESTAMP DEFAULT NOW(),
+    created_at TIMESTAMP DEFAULT NOW(),
     PRIMARY KEY (id)  
 );
 INSERT INTO FlavorTags (id, name) VALUES ('1', 'Spicy'),('2', 'Sweet'),('3', 'Savory'),('4', 'Mild'),('5', 'Beefy'),('6', 'Medium'),('7', 'Salty'),('8', 'Sugary');

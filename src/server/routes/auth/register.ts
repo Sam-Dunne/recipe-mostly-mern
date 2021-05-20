@@ -12,10 +12,11 @@ router.post('/', async (req, res, next) => {
         newUser.password = generateHash(newUser.password);
         const results = await db.users.insert(newUser);
 
-        const token = createToken({ userid: newUser.id, email: newUser.email, role: 'admin' })
+        const token = createToken({ user_id: newUser.id, email: newUser.email, role: 'admin' })
         res.json({ token, name: newUser.name, email: newUser.email })
     } catch (error) {
-        res.json(error);
+        console.log(error.message);
+        res.status(500).json({ message: 'goof'})
     }
 });
 

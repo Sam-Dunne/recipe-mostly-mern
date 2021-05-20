@@ -29,7 +29,7 @@ const Recipe = (props: RecipeProps) => {
             <div>
                 <h5>{recipe?.title}</h5>
                 <h5>{recipe?.created_at}</h5>
-                <h5>{recipe?.content}</h5>
+                <h5>{recipe?.summary}</h5>
                 <Link to={`/edit_recipe/${recipe?.id}`}>To Edit</Link>
             </div>
 
