@@ -35,6 +35,7 @@ const Recipe = (props: RecipeProps) => {
 
             
         </main>
+        
     );
 };
 

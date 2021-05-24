@@ -12,6 +12,7 @@ export interface IRecipes {
     created_at?: Date;
     edited_at?: Date;
 };
+
 export interface IUserRecipes {
     id?: string;
     title?: string;
@@ -29,7 +30,7 @@ export interface IUsers {
     email?: string;
     password?: string;
     role?: string;
-    _created?: Date;
+    created_at?: Date;
 };
 
 export interface IFlavorTags {
@@ -55,7 +56,7 @@ export interface IRecipeingredients {
 };
 
 export interface IPayload extends IUsers {
-    user_id?: number;
+    id?: string;
 };
 
 export interface IReqUser extends Request {
@@ -64,7 +65,7 @@ export interface IReqUser extends Request {
 
 export interface IReqPayload extends Request {
     user?: {
-        user_id?: number;
+        id?: string;
         email?: string;
         role?: string
     }
@@ -73,4 +74,5 @@ export interface IReqPayload extends Request {
 export interface MySQLResponse {
     affectedRows: number;
     insertId: number;
+    sqlMessage: string;
 }

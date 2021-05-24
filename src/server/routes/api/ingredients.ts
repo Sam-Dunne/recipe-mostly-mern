@@ -1,16 +1,19 @@
 import { Router } from 'express';
 import db from '../../db';
 import { authenticate } from 'passport';
+import { v4 as uuid} from 'uuid';
 
 const router = Router();
 
+
+
 router.get('/', async (req, res, next) => {
     try {
-        const allFlavorTags = await db.flavorTags.all();
-        res.json(allFlavorTags);
+        const allIngredients = await db.ingredients.all();
+        res.json(allIngredients);
     } catch (error) {
          console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        res.status(500).json({ message: 'goof: GET /api/ingredients/', error: error.message})
     }
 });
 
@@ -18,34 +21,36 @@ router.get('/:id', async (req, res, next) => {
     const id = req.params.id;
     const x = req.body;
     try {
-        const [flavorTagById] = await db.flavorTags.one(id);
-        res.json(flavorTagById);
+        const [ingredientById] = await db.ingredients.one(id);
+        res.json(ingredientById);
     } catch (error) {
         console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        res.status(500).json({ message: 'goof: GET /api/ingredients/id', error: error.message})
     }
 });
 
 router.post('/', async (req, res, next) => {
-    const newFlavorTag = req.body;
+    const id = uuid();
+    const newIngredient = req.body;
     try {
-        const results = await db.flavorTags.insert(newFlavorTag)
+        newIngredient.id = id;
+        const results = await db.ingredients.insert(newIngredient)
         res.json(results);
     } catch (error) {
           console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        res.status(500).json({ message: 'goof: POST /api/ingredients', error: error.message})
     }
 });
 
 router.put('/:id', authenticate('jwt'), async (req, res, next) => {
     const id = req.params.id;
-    const updatedFlavorTags = req.body;
+    const updatedIngredients = req.body;
     try {
-        const results = await db.flavorTags.update(updatedFlavorTags, id);
+        const results = await db.ingredients.update(updatedIngredients, id);
         res.json(results);
     } catch (error) {
           console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        res.status(500).json({ message: 'goof: PUT /api/ingredients/id', error: error.message})
     }
 });
 
@@ -53,11 +58,11 @@ router.delete('/:id', async (req, res, next) => {
     const id = req.params.id;
 
     try {
-        const results = await db.flavorTags.nuke(id)
+        const results = await db.ingredients.nuke(id)
         res.json(results);
     } catch (error) {
           console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        res.status(500).json({ message: 'goof: DELETE /api/ingredients/id', error: error.message})
     }
 });
 

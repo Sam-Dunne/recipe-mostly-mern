@@ -4,6 +4,8 @@ import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { apiService } from '../utils/api-services';
 import { v4 as uuidv4 } from 'uuid';
+import { Button, Form } from 'react-bootstrap';
+
 
 
 
@@ -33,18 +35,46 @@ const Register = (props: RegisterProps) => {
             })
     };
 
+        // <main className="container my-5">
+        //     <h1 className="text-primary text-center">Register</h1>
+        //     <input value={name} onChange={handleSetName} placeholder='Your Name' />
+        //     <input value={email} onChange={handleSetEmail} placeholder='Your Email' />
+        //     <input value={password} onChange={handleSetPassword} placeholder='Your Password' />
+        //     <br />
+        //     <button onClick={handleSubmit}>Submit</button>
+        //     <br />
+        //     <Link to='/books'>To Books</Link>
+        //     <br />
+        // </main>
     return (
-        <main className="container my-5">
-            <h1 className="text-primary text-center">Register</h1>
-            <input value={name} onChange={handleSetName} placeholder='Your Name' />
-            <input value={email} onChange={handleSetEmail} placeholder='Your Email' />
-            <input value={password} onChange={handleSetPassword} placeholder='Your Password' />
+        <section className='justify-content-center col-md-6 section-bgc rounded shadow-lg p-3'>
+        <h3 className='text-center'>Register</h3>
+        <Form className='p-3'>
+            <Link to='/register' className='my-3 nav-btn'>Already Signed Up...Login</Link>
             <br />
-            <button onClick={handleSubmit}>Submit</button>
-            <br />
-            <Link to='/books'>To Books</Link>
-            <br />
-        </main>
+            <Form.Group controlId="formBasic">
+                <Form.Label>Your Name</Form.Label>
+                <Form.Control value={name} onChange={handleSetName} type="text" placeholder="Your Name" />
+            </Form.Group>
+
+            <Form.Group controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control value={email} onChange={handleSetEmail} type="email" placeholder="Enter email" />
+                <Form.Text className="text-muted">
+                    We'll never share your email with anyone else.
+                </Form.Text>
+            </Form.Group>
+
+            <Form.Group controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control value={password} onChange={handleSetPassword} type="password" placeholder="Password" />
+            </Form.Group>
+
+            <Button variant="primary" type="submit" onClick={handleSubmit}>
+                Submit
+            </Button>
+        </Form>
+    </section>
     );
 };
 

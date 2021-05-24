@@ -1,5 +1,16 @@
 $theme-colors: (
-    'primary': #0091ea //Covalence Blue!  :D
+    'primary': #eeeeee, //Covalence Blue!  :D
+    'secondary': #3d4d57,
+    'danger': blue,
+    'success': green,
+    'info': #7592a3
 );
+
+.section-bgc {
+    background-color: rgb(245, 175, 110);
+}
+#wrapper {
+    min-height: 100vh
+}
 
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import db from '../../db';
 import { authenticate } from 'passport';
+import { v4 as uuid} from 'uuid'
 
 const router = Router();
 
@@ -10,7 +11,7 @@ router.get('/', async (req, res, next) => {
         res.json(allFlavorTags);
     } catch (error) {
          console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        res.status(500).json({ message: 'goof: GET /api/flavortags', error: error.message})
     }
 });
 
@@ -22,18 +23,20 @@ router.get('/:id', async (req, res, next) => {
         res.json(flavorTagById);
     } catch (error) {
         console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        res.status(500).json({ message: 'goof: GET /api/flavortags/id', error: error.message})
     }
 });
 
 router.post('/', async (req, res, next) => {
+    const id = uuid();
     const newFlavorTag = req.body;
     try {
+        newFlavorTag.id = id;
         const results = await db.flavorTags.insert(newFlavorTag)
         res.json(results);
     } catch (error) {
           console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        res.status(500).json({ message: 'goof: POST /api/flavortags', error: error.message})
     }
 });
 
@@ -45,7 +48,7 @@ router.put('/:id', authenticate('jwt'), async (req, res, next) => {
         res.json(results);
     } catch (error) {
           console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        res.status(500).json({ message: 'goof: PUT /api/flavortags/id', error: error.message})
     }
 });
 
@@ -57,7 +60,7 @@ router.delete('/:id', async (req, res, next) => {
         res.json(results);
     } catch (error) {
           console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        res.status(500).json({ message: 'goof: DELETE api/flavortags/id', error: error.message})
     }
 });
 

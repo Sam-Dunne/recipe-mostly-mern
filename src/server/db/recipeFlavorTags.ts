@@ -2,15 +2,25 @@ import { Query } from './index';
 import { IRecipeFlavorTags } from '../../interfaces';
 
 const all = () => Query<(IRecipeFlavorTags)[]>('SELECT * FROM RecipeFlavorTags');
-const allByRecipeId = (id: string) => Query<(IRecipeFlavorTags)[]>('SELECT FlavorTags.name, FlavorTags.id FROM RecipeFlavorTags JOIN FlavorTags ON FlavorTags.id = RecipeFlavorTags.flavor_tag_id WHERE recipe_id = ?', [id]);
-const insert = (newthing: IRecipeFlavorTags) => Query('INSERT INTO RecipeFlavorTags SET ?', [newthing]);
-const update = (updatedX: {recipe_id: string, flavor_tags_id: string  }, id: string) => Query('UPDATE X SET ? WHERE id = ?', [updatedX, id]);
-// const nuke = (id: string) => Query('DELETE from X WHERE books.id = ?', [id]);
+
+const allByRecipeId = (recipe_id: string) => Query<(IRecipeFlavorTags)[]>('SELECT FlavorTags.name, FlavorTags.id FROM RecipeFlavorTags JOIN FlavorTags ON FlavorTags.id = RecipeFlavorTags.flavor_tag_id WHERE recipe_id = ?', [recipe_id]);
+
+const insert = (newRecipeFlavorTag: IRecipeFlavorTags) => Query('INSERT INTO RecipeFlavorTags SET ?', [newRecipeFlavorTag]);
+
+const update = (updatedX: { flavor_tags_id: string  }, recipe_id: string) => Query('UPDATE RecipeFlavorTags SET ? WHERE recipe_id = ?', [updatedX, recipe_id]);
+
+// removes from recipe
+const nuke = (recipe_id: string, flavor_tag_id: string) => Query('DELETE from RecipeFlavorTags WHERE recipe_id = ? And flavor_tag_id = ?', [recipe_id, flavor_tag_id]);
 
 export default {
     all,
     allByRecipeId,
     insert,
     update,
-    // nuke,
-}
+    nuke,
+};
+
+// interface IRecipeFlavorTags {
+//     recipe_id?: string;
+//     flavor_tag_id?: string;
+// };

@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
         res.json(allRecipeIngredients);
     } catch (error) {
          console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        res.status(500).json({ message: 'goof: /api/recipeingredients/id', error: error.message})
     }
 });
 
@@ -24,7 +24,7 @@ router.get('/:id', async (req, res, next) => {
         res.json(recipeIngredientsbyRecipeId);
     } catch (error) {
         console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        res.status(500).json({ message: 'goof: /api/recipeingredients/id', error: error.message})
     }
 });
 
@@ -47,7 +47,7 @@ router.put('/:id', authenticate('jwt'), async (req, res, next) => {
         res.json(results);
     } catch (error) {
           console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        res.status(500).json({ message: 'goof: /api/recipeflavortags/id', error: error.message})
     }
 });
 

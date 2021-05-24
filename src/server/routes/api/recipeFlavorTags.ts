@@ -10,7 +10,7 @@ router.get('/', async (req, res, next) => {
         res.json(allRecipeFlavorTags);
     } catch (error) {
          console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        res.status(500).json({ message: 'goof: /api/recipeflavortags', error: error.message})
     }
 });
 
@@ -22,7 +22,7 @@ router.get('/:id', async (req, res, next) => {
         res.json(recipeTagsbyRecipeId);
     } catch (error) {
         console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        res.status(500).json({ message: 'goof: /api/recipeflavortags/id', error: error.message})
     }
 });
 
@@ -33,7 +33,7 @@ router.post('/', async (req, res, next) => {
         res.json(results);
     } catch (error) {
           console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        res.status(500).json({ message: 'goof: POST /api/recipeflavortags/id', error: error.message})
     }
 });
 
@@ -45,7 +45,7 @@ router.put('/:id', authenticate('jwt'), async (req, res, next) => {
         res.json(results);
     } catch (error) {
           console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        res.status(500).json({ message: 'goof: DELETE /api/recipeflavortags/id', error: error.message})
     }
 });
 

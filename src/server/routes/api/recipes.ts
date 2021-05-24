@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import db from '../../db';
 import { authenticate } from 'passport';
-import { v4 as uuidv4 } from 'uuid';
-import { IRecipeingredients } from '../../../interfaces';
+import { v4 as uuid } from 'uuid';
+import { IRecipeingredients, IReqPayload } from '../../../interfaces';
 
 
 const router = Router();
@@ -18,10 +18,11 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
-router.get('/by/:email', async (req, res, next) => {
-    const email = req.params.email;
+// all recipes by userid
+router.get('/all_by/:id', async (req: IReqPayload, res, next) => {
+    const id = req.user.id;
     try {
-        const [recipes] = await db.recipes.allForUser(email);
+        const recipes = await db.recipes.allForUser(id);
         res.json(recipes);
     } catch (error) {
         console.log(error.message);
@@ -29,17 +30,34 @@ router.get('/by/:email', async (req, res, next) => {
     }
 });
 
+router.get('/one_special/:id', async (req: IReqPayload, res, next) => {
+    const id = req.user.id;
+    try {
+        const recipe = await db.recipes.getRecipeAndConcatRecipeIngredientValuesByRecipeId(id);
+        res.json(recipe);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ message: 'goof'})
+    }
+})
+
+// inserts to recipes, in
 router.post('/multiInsert', async (req, res) => {
     try {
-        const id = uuidv4(); // Recipe ID
-        const { user_id, title, summary, instructions, array_of_ingredients } = req.body;
+        const id = uuid(); // Recipe ID
+        const { user_id, title, summary, instructions, array_of_ingredients, flavor_tag_id, ingredient_name } = req.body;
 
         const recipeResults = await db.recipes.insert({ id, user_id, title, summary, instructions });
+        
+        const ingredientId = uuid();
+        const ingredientValues = await db.ingredients.insert({id: ingredientId, name: ingredient_name})
 
-        const ingredientValues = array_of_ingredients.map((item: IRecipeingredients) => [id, item.ingredient_id, item.ingredient_qty])
-        const recipeIngredientsResults = await db.recipes.addRecipeIngredients(ingredientValues);
+        const recipeIngredientValues = array_of_ingredients.map((item: IRecipeingredients) => [id, item.ingredient_id, item.ingredient_qty])
+        const recipeIngredientsResults = await db.recipeIngredients.addRecipeIngredients(recipeIngredientValues);
 
-        if (recipeResults.affectedRows && recipeIngredientsResults.affectedRows) { // Both tables had successful insertions
+        const flavorTagValues = await db.recipeFlavorTags.insert({ flavor_tag_id, recipe_id: recipeResults.insertId.toString()});
+
+        if (recipeResults.affectedRows && recipeIngredientsResults.affectedRows && flavorTagValues && ingredientValues) { // All tables had successful insertions
             res.json({ message: "Success! Recipe successfully created", recipeID: id });
         } else {
             throw new Error("SOMEONE DIDN'T FILL OUT THEIR FIELDS RIGHT");
@@ -59,9 +77,11 @@ router.post('/multiInsert', async (req, res) => {
 //     }
 // });
 
-router.post('/', async (req, res, next) => {
+router.post('/', authenticate('jwt'), async (req, res, next) => {
+    const id = uuid();
     const newRecipe = req.body;
     try {
+        newRecipe.id = id;
         const results = await db.recipes.insert(newRecipe)
         res.json(results);
     } catch (error) {
