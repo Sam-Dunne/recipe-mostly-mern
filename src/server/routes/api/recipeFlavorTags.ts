@@ -18,7 +18,7 @@ router.get('/:id', async (req, res, next) => {
     const id = req.params.id;
     const x = req.body;
     try {
-        const [recipeTagsbyRecipeId] = await db.recipeFlavorTags.allByRecipeId(id);
+        const recipeTagsbyRecipeId = await db.recipeFlavorTags.allByRecipeId(id);
         res.json(recipeTagsbyRecipeId);
     } catch (error) {
         console.log(error.message);

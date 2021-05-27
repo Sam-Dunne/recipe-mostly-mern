@@ -1,9 +1,9 @@
 import { Query } from './index';
-import { IRecipeFlavorTags } from '../../interfaces';
+import { IFlavorTags, IRecipeFlavorTags } from '../../interfaces';
 
 const all = () => Query<(IRecipeFlavorTags)[]>('SELECT * FROM RecipeFlavorTags');
 
-const allByRecipeId = (recipe_id: string) => Query<(IRecipeFlavorTags)[]>('SELECT FlavorTags.name, FlavorTags.id FROM RecipeFlavorTags JOIN FlavorTags ON FlavorTags.id = RecipeFlavorTags.flavor_tag_id WHERE recipe_id = ?', [recipe_id]);
+const allByRecipeId = (recipe_id: string) => Query<(IRecipeFlavorTags & IFlavorTags)[]>('SELECT FlavorTags.name, FlavorTags.id FROM RecipeFlavorTags JOIN FlavorTags ON FlavorTags.id = RecipeFlavorTags.flavor_tag_id WHERE recipe_id = ?', [recipe_id]);
 
 const insert = (newRecipeFlavorTag: IRecipeFlavorTags) => Query('INSERT INTO RecipeFlavorTags SET ?', [newRecipeFlavorTag]);
 
@@ -24,3 +24,4 @@ export default {
 //     recipe_id?: string;
 //     flavor_tag_id?: string;
 // };
+

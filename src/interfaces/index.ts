@@ -8,7 +8,7 @@ export interface IRecipes {
     title?: string;
     summary?: string;
     instructions?: string;
-    user_id?: number;
+    user_id?: string;
     created_at?: Date;
     edited_at?: Date;
 };
@@ -18,7 +18,7 @@ export interface IUserRecipes {
     title?: string;
     summary?: string;
     instructions?: string;
-    user_id?: number;
+    user_id?: string;
     created_at?: Date;
     edited_at?: Date;
     user_name?: string;
@@ -42,6 +42,13 @@ export interface IFlavorTags {
 export interface IRecipeFlavorTags {
     recipe_id?: string;
     flavor_tag_id?: string;
+};
+
+export interface IRecipeFlavorTagsFull {
+    recipe_id?: string;
+    flavor_tag_id?: string;
+    name?: string;
+    id?: string;
 };
 
 export interface IIngredients {
@@ -70,6 +77,8 @@ export interface IReqPayload extends Request {
         role?: string
     }
 };
+
+
 
 export interface MySQLResponse {
     affectedRows: number;

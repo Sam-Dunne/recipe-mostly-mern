@@ -28,16 +28,16 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
-// router.post('/', async (req, res, next) => {
-//     const newRecipeIngredient = req.body;
-//     try {
-//         const results = await db.recipeIngredients.insert(newRecipeIngredient)
-//         res.json(results);
-//     } catch (error) {
-//           console.log(error.message);
-//         res.status(500).json({ message: 'goof'})
-//     }
-// });
+router.post('/', async (req, res, next) => {
+    const newRecipeIngredient = req.body;
+    try {
+        const results = await db.recipeIngredients.addRecipeIngredients(newRecipeIngredient)
+        res.json(results);
+    } catch (error) {
+          console.log(error.message);
+        res.status(500).json({ message: 'goof'})
+    }
+});
 
 router.put('/:id', authenticate('jwt'), async (req, res, next) => {
     const id = req.params.id;

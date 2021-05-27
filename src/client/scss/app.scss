@@ -1,16 +1,38 @@
 $theme-colors: (
-    'primary': #eeeeee, //Covalence Blue!  :D
+    'primary': #4760f0, //Covalence Blue!  :D
     'secondary': #3d4d57,
     'danger': blue,
-    'success': green,
-    'info': #7592a3
+    'success': #65aa6e,
+    'info': #e5e9de
 );
 
 .section-bgc {
-    background-color: rgb(245, 175, 110);
+    background-color: rgb(226, 173, 123);
 }
 #wrapper {
     min-height: 100vh
+};
+
+#navbar-svg {
+    height: 55px;
+    width: 55px;
+   
+};
+
+#svg-pestle {
+    height: 60px; 
+    width: 60px;
 }
+
+#svg-mailbox, #svg-unlocking {
+    height: 38px;
+    width: 38px;
+    // margin-right: 10px
+}
+
+// #svg-wrapper {
+//     height: 100px;
+//     width: 100px;
+// }
 
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';

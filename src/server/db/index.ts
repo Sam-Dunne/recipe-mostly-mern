@@ -6,7 +6,9 @@ const pool = mysql.createPool(config.sqlConfig);
 
 export const Query = <T = MySQLResponse>(queries: string, values?: any) => {
     return new Promise<T>((resolve, reject) => {
-        pool.query(queries, values, (err, results) => {
+        const formattedQuery = mysql.format(queries, values);
+        console.log(formattedQuery);
+        pool.query(formattedQuery, (err, results) => {
             if (err) {
                 reject(err);
             } else {

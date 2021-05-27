@@ -6,7 +6,7 @@ import AddRecipe from './views/AddRecipe';
 import EditRecipe from './views/EditRecipe';
 import Landing from './views/Landing';
 import Login from './views/Login';
-import Recipe from './views/Recipe';
+import RecipeDetails from './views/RecipeDetails';
 import Register from './views/Register';
 import UsersRecipes from './views/UserRecipes';
 
@@ -26,13 +26,13 @@ const App = (props: AppProps) => {
 							<Route exact path='/edit_recipe/:id'>
 								<EditRecipe />
 							</Route>
-							<Route exact path='/recipe/:id'>
-								<Recipe />
+							<Route exact path='/recipe_details/:id'>
+								<RecipeDetails />
 							</Route>
 							<Route exact path='/users_recipes/:id'>
 								<UsersRecipes />
 							</Route>
-							<Route exact path='/addRecipe'>
+							<Route exact path='/addRecipe/'>
 								<AddRecipe />
 							</Route>
 							<Route exact path='/login'>

@@ -47,7 +47,7 @@ const Register = (props: RegisterProps) => {
         //     <br />
         // </main>
     return (
-        <section className='justify-content-center col-md-6 section-bgc rounded shadow-lg p-3'>
+        <section className='justify-content-center col-md-6 bg-success rounded shadow-lg p-3'>
         <h3 className='text-center'>Register</h3>
         <Form className='p-3'>
             <Link to='/register' className='my-3 nav-btn'>Already Signed Up...Login</Link>
