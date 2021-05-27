@@ -50,27 +50,26 @@ const AddRecipe = (props: AddRecipeProps) => {
 
     return (
         <section className="container my-3">
-            <Form className=' bg-success rounded shadow mb-3 p-3'>
+            <Form className=' bg-primary rounded shadow mb-3 p-3'>
                 
-            <h3 className="text-light text-center mb-3">AddRecipe</h3>
+            <h3 className="text-secondary text-center mb-3">Add a Recipe</h3>
 
 
-            <input className='form-control mb-3' value={title} onChange={handleSetTitle} placeholder='Title' />
+            <input className='form-control mb-3 bg-info' value={title} onChange={handleSetTitle} placeholder='Title' />
 
-            <textarea className='form-control mb-3' value={summary} onChange={handleSetSummary} placeholder='Summary' cols={10} rows={3}></textarea>
+            <textarea className='form-control mb-3 bg-info' value={summary} onChange={handleSetSummary} placeholder='Summary' cols={10} rows={3}></textarea>
 
 
             <div className="row d-flex justify-content-around mb-3">
                 <div className='col-md-6 mb-3'>
-                    <h5 className="text-light">Enter Recipe Directions Markdown</h5>
-                    <textarea className='form-control' value={directions} onChange={handleSetDirections} placeholder='directions' rows={8} />
-                    <h6 className="text-light">Learn more about <a href="https://www.markdownguide.org/cheat-sheet/">Markdown </a>here</h6>
+                    <h5 className="text-secondary">Enter Recipe Directions Markdown</h5>
+                    <textarea className='form-control bg-info' value={directions} onChange={handleSetDirections} placeholder='directions' rows={8} />
+                    <h6 className="text-secondary">Learn more about <a href="https://www.markdownguide.org/cheat-sheet/">Markdown </a>here</h6>
                 </div>
 
                 <div className='col-md-6'>
-                    <h5 className="text-light">Markdown Live Preview</h5>
-                    <div className='card card-body mb-3 '>
-
+                    <h5 className="text-secondary">Markdown Live Preview</h5>
+                    <div className='card card-body bg-info mb-3 '>
                         <div>
                             <ReactMarkdown remarkPlugins={[gfm]} children={directions} />
                         </div>
@@ -79,12 +78,12 @@ const AddRecipe = (props: AddRecipeProps) => {
             </div>
 
             <div>
-                <h5 className="text-light ml-3">Add Ingredients</h5>
+                <h5 className="text-secondary ml-3">Add Ingredients</h5>
                 <MultiSelect setter={setIngredients} type={'ingredients'} placeholder={'Ingredients'} />
             </div>
             
             <div>
-                <h5 className="text-light ml-3">Select Tags</h5>
+                <h5 className="text-secondary ml-3">Select Tags</h5>
                 <MultiSelect setter={setFlavorTags} type={'flavorTags'} placeholder={'Flavor Tags'} />
             </div>
 

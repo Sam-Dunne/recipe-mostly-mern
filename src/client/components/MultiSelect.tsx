@@ -72,7 +72,7 @@ const MultiSelect = (props: MultiSelectProps) => {
                 onChange={(e: any) => handleUpdateSubmit(e)}
                 isMulti
                 name="colors"
-                className="basic-multi-select"
+                className="basic-multi-select bg-info"
                 classNamePrefix="select"
                 placeholder={`Choose ${props.placeholder}...`}
             />

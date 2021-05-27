@@ -15,7 +15,7 @@ const App = (props: AppProps) => {
 
 	return (
 		<BrowserRouter>
-			<div className="bg-info p-2" id='wrapper'>
+			<div className="bg-secondary p-2" id='wrapper'>
 				<Navbah />
 				<main className="container p-2 mt-4">
 					<div className="row justify-content-center align-items-center">

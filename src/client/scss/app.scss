@@ -1,9 +1,10 @@
 $theme-colors: (
-    'primary': #4760f0, //Covalence Blue!  :D
-    'secondary': #3d4d57,
-    'danger': blue,
-    'success': #65aa6e,
-    'info': #e5e9de
+    'primary': #46794d, //Covalence Blue!  :D
+    'secondary': #bdd2bf,
+    'warning': #113416,
+    'danger': rgb(173, 13, 13),
+    'success': #4e8756,
+    'info': #edf3ee
 );
 
 .section-bgc {
@@ -25,8 +26,8 @@ $theme-colors: (
 }
 
 #svg-mailbox, #svg-unlocking {
-    height: 38px;
-    width: 38px;
+    height: 45px;
+    width: 45px;
     // margin-right: 10px
 }
 
