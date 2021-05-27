@@ -6,6 +6,8 @@ import { apiService } from '../utils/api-services'
 import { IIngredients } from '../../interfaces';
 import Select from 'react-select';
 import { OptionProps } from "react-select/src/types";
+import Creatable, { makeCreatableSelect } from 'react-select/creatable';
+
 
 
 /* HOOK REACT EXAMPLE */
@@ -67,7 +69,7 @@ const MultiSelect = (props: MultiSelectProps) => {
 
     return (
         <section className="container mb-4">
-            <Select
+            <Creatable
                 options={ingredientsOptions}
                 onChange={(e: any) => handleUpdateSubmit(e)}
                 isMulti
@@ -82,7 +84,7 @@ const MultiSelect = (props: MultiSelectProps) => {
 
 interface MultiSelectProps {
     setter: React.Dispatch<React.SetStateAction<IIngredients[]>>
-    type: 'flavorTags' | 'ingredients'
+    type: 'flavorTags' | 'ingredients' 
     placeholder: 'Flavor Tags' | 'Ingredients'
 }
 

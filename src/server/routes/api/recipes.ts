@@ -79,6 +79,7 @@ router.post('/multiInsert', authenticate('jwt'), async (req: IReqPayload, res) =
 //     }
 // });
 
+// used in add Recipe step 1
 router.post('/', authenticate('jwt'), async (req: IReqPayload, res, next) => {
     const id = uuid();
     const newRecipe = req.body;

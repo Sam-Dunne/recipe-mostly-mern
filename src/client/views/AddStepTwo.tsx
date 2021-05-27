@@ -5,37 +5,37 @@ import { Link } from 'react-router-dom';
 import { apiService } from '../utils/api-services'
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
-import { IFlavorTags, IIngredients } from '../../interfaces';
+import { IFlavorTags, IIngredients, IRecipes } from '../../interfaces';
 import MultiSelect from '../components/MultiSelect';
-import {Form} from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 
 /* HOOK REACT EXAMPLE */
 const AddStepTwo = (props: AddStepTwoProps) => {
     const history = useHistory();
     const { id } = useParams<{ id: string }>();
-    const [x, setx] = useState<string>('');
-    const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
+    // const [x, setx] = useState<string>('');
+    // const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
 
-    const [qtyValues, setQtyValues] = useState<{ ingredient_qty: string }[]>([])
+    // const [, setx] = useState<string>('');
+    // const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
+
+    const [recipe, setRecipe] = useState<IRecipes>(null);
+
+    // const [qtyValues, setQtyValues] = useState<{ ingredient_qty: string }[]>([])
     const [qtyValue, setQtyValue] = useState<string>('');
-    const handleSetQtyValue = (e: React.ChangeEvent<HTMLInputElement>) => setQtyValue(e.target.value);;
-
-    const [title, setTitle] = useState<string>('');
-    const handleSetTitle = (e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
-
-    const [summary, setSummary] = useState<string>('');
-    const handleSetSummary = (e: React.ChangeEvent<HTMLTextAreaElement>) => setSummary(e.target.value);
-
-    const [directions, setDirections] = useState<string>(`##### Here's an example to get you started! \n\ ---  \n\ ###### Just fold in the cheese, David!\n\  - What does that even mean?\n\ 1. Fold\n\ 2. in the\n\ 3. cheese!!!\n\ **Do You even know what it means?** \n\ *I most certainly do!!*`);
-    const handleSetDirections = (e: React.ChangeEvent<HTMLTextAreaElement>) => setDirections(e.target.value);
-
-    const [ingredients, setIngredients] = useState<IIngredients[]>([])
+    const handleSetQtyValue = (e: React.ChangeEvent<HTMLInputElement>) => setQtyValue(e.target.value);
+    // Arrays of objects for the Select Fields
     const [flavorTags, setFlavorTags] = useState<IFlavorTags[]>([]);
+    const [ingredients, setIngredients] = useState<IIngredients[]>([]);
+
+    const [ingredient_qty, setIngredient_Qty] = useState<string>('');
     
+
     useEffect(() => {
         apiService(`/api/recipes/${id}`)
-    })
+            .then(recipe => setRecipe(recipe))
+    }, [])
 
 
     // useEffect(() => {
@@ -43,50 +43,56 @@ const AddStepTwo = (props: AddStepTwoProps) => {
     //     .then(flavorTags => setFlavorTags(flavorTags));
     // }, []);
 
-    const handleAddIngredient = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleAddIngredients = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        setQtyValues([...qtyValues, { ingredient_qty: qtyValue }])
-        setQtyValue('');
-        console.log(qtyValues)
+        // setQtyValues([...qtyValues, { ingredient_qty: qtyValue }])
+        // setQtyValue('');
+        // console.log(qtyValues)
+        console.log(ingredients)
     };
 
     return (
         <section className="container my-3">
-            <Form className=' bg-primary rounded shadow mb-3 p-3'>
-                
-            <h3 className="text-info text-center mb-3">Add Ingredients and Flavor Tags</h3>
+            <div className='bg-primary rounded shadow mb-3 p-4'>
+
+                <h3 className="text-info text-center mb-1">Add Ingredients and Flavor Tags</h3>
+
+                <h3 className='text-info text-center mb-3'>{`for "${recipe?.title}"`}</h3>
 
 
-            <input className='form-control mb-3 bg-info' value={title} onChange={handleSetTitle} placeholder='Title' />
-
-            <div>
-                <h5 className="text-secondary ml-3">Select Tags</h5>
-                <MultiSelect setter={setFlavorTags} type={'flavorTags'} placeholder={'Flavor Tags'} />
-            </div>
-
-            <div>
-                <h5 className="text-secondary ml-3">Add Ingredients</h5>
-                <MultiSelect setter={setIngredients} type={'ingredients'} placeholder={'Ingredients'} />
-            </div>
-            
-
-            {/* <div className='row justify-content-around mb-3'>
-                <form className="form-group col-md-5">
-                    <input className="form-control" value={qtyValue} onChange={handleSetQtyValue} id="" placeholder='quantity/measure'></input>
-                </form>
-            </div> */}
-            <div className='row justify-content-around mb-3'>
-                <div className="form-group col-md-5">
-                    {qtyValues?.map((qtyValue, i) => (
-                        <div key={i} className="col-6">
-                            <div className="card">{qtyValue.ingredient_qty}</div>
-                        </div>
-                    ))}
+                <div>
+                    <h5 className="text-secondary ml-3">Select Tags</h5>
+                    <MultiSelect setter={setFlavorTags} type={'flavorTags'} placeholder={'Flavor Tags'} />
                 </div>
 
+                <div>
+                    <h5 className="text-secondary ml-3">Add Ingredients</h5>
+                    <MultiSelect setter={setIngredients} type={'ingredients'} placeholder={'Ingredients'} />
+                </div>
+
+
+                <div className='row justify-content-around mb-3'>
+                    <form className="form-group col-md-5">
+                        <input className="form-control bg-info" value={qtyValue} onChange={handleSetQtyValue} id="" placeholder='quantity/measure'></input>
+                    </form>
+                </div>
+
+                <div className="row justify-content-center align-items-center">
+                    <div className="card rounded mb-3 bg-info col-12 col-md-6 ">
+                        <h3 className='card-text mb-3 text-center mx-auto bg-info'>{qtyValue} {ingredients[0]?.name} ,</h3>
+                    </div>
+                </div>
+                {/* <div className='row justify-content-around mb-3'>
+                    <div className="form-group col-md-5">
+                        {qtyValues?.map((qtyValue, i) => (
+                            <div key={i} className="col-6">
+                                <div className="card">{qtyValue.ingredient_qty}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div> */}
             </div>
-            </Form>
-            <button onClick={handleAddIngredient}>Submit</button>
+            <button onClick={handleAddIngredients}>Submit</button>
 
             <Link to='/'>Link</Link>
         </section>
