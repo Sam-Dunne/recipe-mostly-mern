@@ -86,10 +86,10 @@ router.post('/', authenticate('jwt'), async (req: IReqPayload, res, next) => {
     try {
         newRecipe.id = id;
         const results = await db.recipes.insert(newRecipe)
-        res.json(results);
+        res.json({ message: "Success! Recipe successfully created", recipeID: id });
     } catch (error) {
         console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        res.status(500).json({ message: 'goof: POST api/recipes/'})
     }
 });
 
