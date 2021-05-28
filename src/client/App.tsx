@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Navbah from './components/Navbar';
 import AddRecipe from './views/AddRecipe';
 import AddStepTwo from './views/AddStepTwo';
+import ByFlavorTag from './views/ByFlavorTag';
 import EditRecipe from './views/EditRecipe';
 import Landing from './views/Landing';
 import Login from './views/Login';
@@ -32,6 +33,9 @@ const App = (props: AppProps) => {
 							</Route>
 							<Route exact path='/users_recipes/:id'>
 								<UsersRecipes />
+							</Route>
+							<Route exact path='/by_flavor_tag/:id'>
+								<ByFlavorTag />
 							</Route>
 							<Route exact path='/addRecipe/'>
 								<AddRecipe />

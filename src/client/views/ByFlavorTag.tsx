@@ -9,7 +9,7 @@ import MultiSelect from '../components/MultiSelect';
 
 
 /* HOOK REACT EXAMPLE */
-const UsersRecipes = (props: UsersRecipesProps) => {
+const ByFlavorTag = (props: ByFlavorTagProps) => {
     const history = useHistory();
     const { id } = useParams<{ id: string }>();
     const [recipes, setRecipes] = useState<IUserRecipes[]>([]);
@@ -17,36 +17,18 @@ const UsersRecipes = (props: UsersRecipesProps) => {
     const [x, setx] = useState<string>('');
     const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
 
-    const [flavorTags, setFlavorTags] = useState<IFlavorTags[]>([]);
-
-
+    // const [flavorTags, setFlavorTags] = useState<IFlavorTags[]>([]);
 
     useEffect(() => {
-        apiService(`/api/recipes/all_by/${id}`)
+        apiService(`/api/recipes/user_recipes_flavortag/${id}`)
             .then(recipes => setRecipes(recipes))
-    }, []);
-
-    // useEffect(() => {
-    //     apiService(`api/recipes/user_recipes_flavortag/`, 'POST', {flavor_tag_id: `3` })
-    //         .then(recipes => setRecipes(recipes))
-    // }, [])
-
-    const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        const [tagId] = flavorTags;
-        console.log(tagId.id)
-
-        history.push(`/by_flavor_tag/${tagId.id}`)
-    };
+    }, [])
+      
 
     return (
         <section className="container my-2">
-            <h3 className="text-secondary text-center">Users Recipes</h3>
-            <div>
-                <h5 className="text-primary m-3">Select Tags</h5>
-                <button className="btn btn-link border" onClick={handleSubmit}>Filter</button>
-                <MultiSelect setter={setFlavorTags} type={'flavorTags'} placeholder={'Flavor Tags'} />
-            </div>
+            <h3 className="text-success text-center">Tagged Recipes</h3>
+          
             <div className="row d-flex justify-content-around align-items-center">
                 {recipes?.map(recipe => (
                     <div className="card rounded shadow bg-light px-0 m-3 col-12 col-md-5 col-lg-3" key={`option-${recipe.id}`}>
@@ -55,7 +37,6 @@ const UsersRecipes = (props: UsersRecipesProps) => {
                         <div className="card-body  ">
                             <h5 className='card-title'>{recipe.title}</h5>
                             <h6 className='card-title'>{recipe.summary}</h6>
-                            {/* {Moment(recipe?.created_at).format("MMM Do YY")} */}
                             <p className='card-text'>{Moment(recipe?.created_at).format("MMM Do YY")}</p>
                             <Link to={`/recipe_details/${recipe.id}`} className='btn btn-link border-primary rounded'>To {recipe.title}</Link>
                         </div>
@@ -66,6 +47,6 @@ const UsersRecipes = (props: UsersRecipesProps) => {
     );
 };
 
-interface UsersRecipesProps { }
+interface ByFlavorTagProps { }
 
-export default UsersRecipes;
+export default ByFlavorTag;

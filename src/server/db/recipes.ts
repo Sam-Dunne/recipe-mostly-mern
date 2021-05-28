@@ -24,7 +24,7 @@ const getRecipeAndConcatRecipeIngredientValuesByRecipeId = (recipe_id: string) =
 
 const usersRecipesByFlavorTag = (flavor_tag_id: string, recipeUserId: string) =>
     Query<(IRecipes & IRecipeFlavorTags & IFlavorTags)[]>
-        ('SELECT title, summary, user_id, recipe_id, flavor_tag_id, name From recipes AS r INNER JOIN recipeflavortags AS rft ON r.id = rft.recipe_id INNER JOIN flavortags AS ft ON rft.flavor_tag_id = ft.id WHERE flavor_tag_id = ? AND user_id= ?', [flavor_tag_id, recipeUserId]);
+        ('SELECT recipe_id AS id, title, summary, user_id, name From recipes AS r INNER JOIN recipeflavortags AS rft ON r.id = rft.recipe_id INNER JOIN flavortags AS ft ON rft.flavor_tag_id = ft.id WHERE flavor_tag_id = ? AND user_id= ?', [flavor_tag_id, recipeUserId]);
 
 export default {
     allForUser,

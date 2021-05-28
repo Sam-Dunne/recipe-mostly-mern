@@ -12,8 +12,8 @@ router.get('/user_recipes_flavortag/:id', authenticate('jwt'), async (req: IReqP
     const flavor_tag_id = req.params.id;
     const recipeUserId = req.user.id;
     try {
-        const results = await db.recipes.usersRecipesByFlavorTag(flavor_tag_id, recipeUserId)
-        res.json(results);
+        const recipesByTag = await db.recipes.usersRecipesByFlavorTag(flavor_tag_id, recipeUserId)
+        res.json(recipesByTag);
     } catch (error) {
         console.log(error.message);
         res.status(500).json({ message: 'goof'})
