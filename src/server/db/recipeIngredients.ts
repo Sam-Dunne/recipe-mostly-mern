@@ -5,7 +5,7 @@ const all = () => Query<(IRecipeingredients)[]>('SELECT * FROM Recipeingredients
 
 const allByRecipeId = (id: string) => Query<(IRecipeingredients)[]>('SELECT Ingredients.name, Ingredients.id, RecipeIngredients.ingredient_qty FROM RecipeIngredients JOIN Ingredients ON Ingredients.id = RecipeIngredients.ingredient_id WHERE recipe_id = ?', [id]);
 
-const addRecipeIngredients = (recipeIngredientsArr: IRecipeingredients[]) =>
+const addRecipeIngredients = (recipeIngredientsArr: [string,string][]) =>
     Query('INSERT INTO RecipeIngredients (recipe_id, ingredient_id) VALUES ?', [recipeIngredientsArr]);
 
 // id refers to the recipes' id

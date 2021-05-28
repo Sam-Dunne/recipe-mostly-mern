@@ -18,9 +18,6 @@ const AddStepTwo = (props: AddStepTwoProps) => {
     // const [x, setx] = useState<string>('');
     // const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
 
-    // const [, setx] = useState<string>('');
-    // const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
-
     const [recipe, setRecipe] = useState<IRecipes>(null);
 
     // const [qtyValues, setQtyValues] = useState<{ ingredient_qty: string }[]>([])
@@ -43,12 +40,15 @@ const AddStepTwo = (props: AddStepTwoProps) => {
         // setQtyValues([...qtyValues, { ingredient_qty: qtyValue }])
         // setQtyValue('');
         // console.log(qtyValues)
-        apiService(`api/recipeingredients/multi`, `POST`, {ingredients})
-        .then(res =>{
-            alert(res.message)
+        const array_of_ingredients = ingredients.map(ingredient => {
+            return ingredient.id
         })
-        console.log(ingredients)
-        console.log(id)
+        apiService(`/api/recipeingredients/multi/${id}`, `POST`, {array_of_ingredients})
+        .then(res =>{
+            console.log(res)
+        })
+        // console.log(test)
+      
     };
     // useEffect(() => {
     //     apiService('/api/flavortags')

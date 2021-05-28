@@ -43,17 +43,17 @@ router.post('/', async (req, res, next) => {
 });
 
 // multi post
-router.post('/multi', async (req, res, next) => {
+router.post('/multi/:id', async (req, res, next) => {
     const recipe_id = req.params.id;
     const {array_of_ingredients} = req.body;
     try {
         // const insertIngredientsValues = array_of_ingredients.map((ingredient: IIngredients) => [ingredient.id]);
         // const ingredient_id = insertIngredientsValues.id
       
-        const recipeIngredientsArr = array_of_ingredients.map((item: IRecipeingredients) => [ recipe_id, item.ingredient_id ]);
+        const recipeIngredientsArr = array_of_ingredients.map((item: string) => [ recipe_id, item ]);
         // console.log(insertIngredientsValues)
-        const results = await db.recipeIngredients.addRecipeIngredients([recipeIngredientsArr])
-        res.json({ results});
+        const results = await db.recipeIngredients.addRecipeIngredients(recipeIngredientsArr);
+        res.json({ results });
     } catch (error) {
           console.log(error.message);
         res.status(500).json({ message: 'goof'})

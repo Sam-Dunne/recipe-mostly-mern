@@ -17,18 +17,30 @@ const ByFlavorTag = (props: ByFlavorTagProps) => {
     const [x, setx] = useState<string>('');
     const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
 
-    // const [flavorTags, setFlavorTags] = useState<IFlavorTags[]>([]);
+    const [flavorTags, setFlavorTags] = useState<IFlavorTags[]>([]);
 
     useEffect(() => {
         apiService(`/api/recipes/user_recipes_flavortag/${id}`)
             .then(recipes => setRecipes(recipes))
-    }, [])
+    }, [id])
+
+    const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        const [tagId] = flavorTags;
+        console.log(tagId.id)
+        history.push(`/by_flavor_tag/${tagId.id}`)
+        setFlavorTags([])
+    };
       
 
     return (
         <section className="container my-2">
             <h3 className="text-success text-center">Tagged Recipes</h3>
-          
+            <div>
+                <h5 className="text-primary m-3">Select Tags</h5>
+                <button className="btn btn-link border" onClick={handleSubmit}>Filter</button>
+                <MultiSelect setter={setFlavorTags} type={'flavorTags'} placeholder={'Flavor Tags'} />
+            </div>
             <div className="row d-flex justify-content-around align-items-center">
                 {recipes?.map(recipe => (
                     <div className="card rounded shadow bg-light px-0 m-3 col-12 col-md-5 col-lg-3" key={`option-${recipe.id}`}>

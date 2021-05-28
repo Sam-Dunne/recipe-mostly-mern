@@ -47,7 +47,7 @@ CREATE TABLE RecipeFlavorTags (
     FOREIGN KEY (flavor_tag_id) REFERENCES flavorTags(id) ON DELETE CASCADE
 );
 
-SELECT recipe_id AS id, title, summary, user_id
+SELECT recipe_id AS id, title, summary, user_id, name
 From recipes AS r
 	INNER JOIN
     recipeflavortags AS rft
