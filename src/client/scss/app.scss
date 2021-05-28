@@ -1,28 +1,42 @@
+//earthy greens
+// $theme-colors: (
+//     'primary': #46794d, //Covalence Blue!  :D
+//     'secondary': #bdd2bf,
+//     'warning': #113416,
+//     'danger': rgb(172, 33, 33),
+//     'success': #4e8756,
+//     'info': #edf3ee
+// );
+
+// blue
 $theme-colors: (
-    'primary': #46794d, //Covalence Blue!  :D
-    'secondary': #bdd2bf,
-    'warning': #113416,
-    'danger': rgb(173, 13, 13),
-    'success': #4e8756,
-    'info': #edf3ee
+    'primary': #3684cc, 
+    'secondary': #eaf2f9,
+    'warning': #195f9f,
+    'danger': rgb(172, 33, 33),
+    'success': #195f9f,
+    'info': #f8fafd
 );
+
+
 
 .section-bgc {
     background-color: rgb(226, 173, 123);
-}
+};
+
 #wrapper {
     min-height: 100vh
 };
 
 #navbar-svg {
-    height: 55px;
-    width: 55px;
+    height: 50px;
+    width: 50px;
    
 };
 
 #svg-pestle {
-    height: 60px; 
-    width: 60px;
+    height: 50px; 
+    width: 50px;
 }
 
 #svg-mailbox, #svg-unlocking {

@@ -35,7 +35,7 @@ const AddRecipe = (props: AddRecipeProps) => {
         apiService('api/recipes/', 'POST', {title, summary, instructions})
         .then(res => {
             alert(res.message)
-            history.push(`/add_ingredients/${res.recipeID}`)
+            history.push(`/recipe_details/${res.recipeID}`)
         })
     }
 

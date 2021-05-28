@@ -3,9 +3,22 @@ import db from '../../db';
 import { authenticate } from 'passport';
 import { v4 as uuid } from 'uuid';
 import { IIngredients, IRecipeingredients, IReqPayload } from '../../../interfaces';
+import recipeFlavorTags from '../../db/recipeFlavorTags';
 
 
 const router = Router();
+
+router.get('/user_recipes_flavortag/:id', authenticate('jwt'), async (req: IReqPayload, res, next) => {
+    const flavor_tag_id = req.params.id;
+    const recipeUserId = req.user.id;
+    try {
+        const results = await db.recipes.usersRecipesByFlavorTag(flavor_tag_id, recipeUserId)
+        res.json(results);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ message: 'goof'})
+    }
+});
 
 // get by recipe id
 router.get('/:id', authenticate('jwt'), async (req: IReqPayload, res, next) => {
@@ -94,12 +107,12 @@ router.post('/', authenticate('jwt'), async (req: IReqPayload, res, next) => {
     }
 });
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', async (req: IReqPayload, res, next) => {
     const id = req.params.id;
     const updatedRecipe = req.body;
     try {
         const results = await db.recipes.update(updatedRecipe, id);
-        res.json(results);
+        res.json({ message: "Success! Recipe successfully updated", recipeID: id });
     } catch (error) {
         console.log(error.message);
         res.status(500).json({ message: 'goof'})

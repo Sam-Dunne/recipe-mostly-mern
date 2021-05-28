@@ -13,6 +13,7 @@ import { Form } from 'react-bootstrap';
 /* HOOK REACT EXAMPLE */
 const AddStepTwo = (props: AddStepTwoProps) => {
     const history = useHistory();
+    // recipe_id
     const { id } = useParams<{ id: string }>();
     // const [x, setx] = useState<string>('');
     // const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
@@ -27,29 +28,32 @@ const AddStepTwo = (props: AddStepTwoProps) => {
     const handleSetQtyValue = (e: React.ChangeEvent<HTMLInputElement>) => setQtyValue(e.target.value);
     // Arrays of objects for the Select Fields
     const [flavorTags, setFlavorTags] = useState<IFlavorTags[]>([]);
-    const [ingredients, setIngredients] = useState<IIngredients[]>([]);
-
+    
     const [ingredient_qty, setIngredient_Qty] = useState<string>('');
     
+    const [ingredients, setIngredients] = useState<IIngredients[]>([]);
 
     useEffect(() => {
         apiService(`/api/recipes/${id}`)
             .then(recipe => setRecipe(recipe))
     }, [])
 
-
-    // useEffect(() => {
-    //     apiService('/api/flavortags')
-    //     .then(flavorTags => setFlavorTags(flavorTags));
-    // }, []);
-
     const handleAddIngredients = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         // setQtyValues([...qtyValues, { ingredient_qty: qtyValue }])
         // setQtyValue('');
         // console.log(qtyValues)
+        apiService(`api/recipeingredients/multi`, `POST`, {ingredients})
+        .then(res =>{
+            alert(res.message)
+        })
         console.log(ingredients)
+        console.log(id)
     };
+    // useEffect(() => {
+    //     apiService('/api/flavortags')
+    //     .then(flavorTags => setFlavorTags(flavorTags));
+    // }, []);
 
     return (
         <section className="container my-3">
@@ -71,7 +75,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
                 </div>
 
 
-                <div className='row justify-content-around mb-3'>
+                {/* <div className='row justify-content-around mb-3'>
                     <form className="form-group col-md-5">
                         <input className="form-control bg-info" value={qtyValue} onChange={handleSetQtyValue} id="" placeholder='quantity/measure'></input>
                     </form>
@@ -82,7 +86,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
                         <h3 className='card-text mb-3 text-center mx-auto bg-info'>{qtyValue} {ingredients[0]?.name} ,</h3>
                     </div>
                 </div>
-                {/* <div className='row justify-content-around mb-3'>
+                <div className='row justify-content-around mb-3'>
                     <div className="form-group col-md-5">
                         {qtyValues?.map((qtyValue, i) => (
                             <div key={i} className="col-6">
