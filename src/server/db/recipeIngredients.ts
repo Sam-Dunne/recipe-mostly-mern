@@ -3,7 +3,9 @@ import { IIngredients, IRecipeingredients } from '../../interfaces';
 
 const all = () => Query<(IRecipeingredients)[]>('SELECT * FROM Recipeingredients');
 
-const allByRecipeId = (id: string) => Query<(IRecipeingredients)[]>('SELECT Ingredients.name, Ingredients.id, RecipeIngredients.ingredient_qty FROM RecipeIngredients JOIN Ingredients ON Ingredients.id = RecipeIngredients.ingredient_id WHERE recipe_id = ?', [id]);
+const allByRecipeId = (id: string) =>
+ Query<(IRecipeingredients & IIngredients)[]>
+ ('SELECT Ingredients.name, Ingredients.id, RecipeIngredients.ingredient_qty, RecipeIngredients.ingredient_id FROM RecipeIngredients JOIN Ingredients ON Ingredients.id = RecipeIngredients.ingredient_id WHERE recipe_id = ?', [id]);
 
 const addRecipeIngredients = (recipeIngredientsArr: [string,string][]) =>
     Query('INSERT INTO RecipeIngredients (recipe_id, ingredient_id) VALUES ?', [recipeIngredientsArr]);

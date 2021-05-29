@@ -62,6 +62,14 @@ export interface IRecipeingredients {
     ingredient_qty?: string;
 };
 
+export interface IRecipeIngredientsFull {
+    recipe_id?: string;
+    ingredient_id?: string;
+    ingredient_qty?: string;
+    id?: string;
+    name?: string;
+};
+
 export interface IPayload extends IUsers {
     id?: string;
 };

@@ -2,13 +2,14 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { IRecipeFlavorTags, IRecipeFlavorTagsFull, IUserRecipes } from '../../interfaces';
+import { IRecipeFlavorTags, IRecipeFlavorTagsFull, IRecipeIngredientsFull, IUserRecipes } from '../../interfaces';
 import { apiService } from '../utils/api-services';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
 
 import Moment from 'moment';
 import recipeFlavorTags from '../../server/db/recipeFlavorTags';
+import recipeIngredients from '../../server/db/recipeIngredients';
 
 /* HOOK REACT EXAMPLE */
 const RecipeDetails = (props: RecipeDetailsProps) => {
@@ -18,12 +19,16 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
     const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
     const [recipe, setRecipe] = useState<IUserRecipes>(null);
     const [recipeFlavorTags, setRecipeFlavorTags] = useState<IRecipeFlavorTagsFull[]>([]);
+    const [ingreds, setIngreds] = useState<IRecipeIngredientsFull[]>([]);
 
     useEffect(() => {
         apiService(`/api/recipes/${id}`)
             .then(recipe => setRecipe(recipe));
         apiService(`/api/recipeFlavorTags/${id}`)
-            .then(recipeFlavorTags => setRecipeFlavorTags(recipeFlavorTags))
+            .then(recipeFlavorTags => setRecipeFlavorTags(recipeFlavorTags));
+        apiService(`/api/recipeingredients/${id}`)
+            .then(ingreds => setIngreds(ingreds));
+
     }, []);
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -65,6 +70,18 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
                         </div>
                     </div>
 
+                </div>
+                <div className="row d-flex justify-content-center align-items-center rounded p-3">
+                    <div className="card justify-content-center bg-primary p-5 col-12 col-md-8 col-lg-10">
+                        <h2 className='text-info text-bold mx-auto mb-3'>Ingredients</h2>
+
+                        <div className="card-body justify-content-center rounded shadow mx-auto bg-info pb-3 col-12 col-md-8 col-lg-10">
+                            {ingreds?.map(ingred => (
+                                <h5 key={`option-${ingred.id}`} className="card-text">{`-${ingred.name}`}</h5>
+                            ))}
+                        </div>
+
+                    </div>
                 </div>
             </section>
         </>

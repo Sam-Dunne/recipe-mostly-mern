@@ -22,7 +22,7 @@ router.get('/:id', async (req, res, next) => {
     const id = req.params.id;
     const x = req.body;
     try {
-        const [recipeIngredientsbyRecipeId] = await db.recipeIngredients.allByRecipeId(id);
+        const recipeIngredientsbyRecipeId = await db.recipeIngredients.allByRecipeId(id);
         res.json(recipeIngredientsbyRecipeId);
     } catch (error) {
         console.log(error.message);
