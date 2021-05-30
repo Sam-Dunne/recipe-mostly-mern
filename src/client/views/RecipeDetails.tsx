@@ -48,11 +48,11 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
 
                 </div>
                 <div className="row d-flex justify-content-center align-items-center rounded p-3">
-                    <div className="card bg-primary p-5 col-12 col-md-8 col-lg-10">
+                    <div className="card bg-primary p-5 col-12 col-md-8 col-lg-8">
                         <div className="row bg-primary justify-content-between align-items-center mb-3 mx-auto col-12 col-md-8 col-lg-10 ">
                             <h2 className='text-info text-bold mx-auto'>{recipe?.title}</h2>
                         </div>
-                        <div className="card-body rounded shadow bg-info pb-3 ">
+                        <div className="card-body rounded shadow bg-info p-5">
                             <div className="row justify-content-around mb-4" >
                                 {recipeFlavorTags?.map(tag => (
                                     <span className="badge badge-pill badge-success p-2" key={tag.id}>{tag.name} </span>
@@ -72,9 +72,9 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
 
                 </div>
                 <div className="row d-flex justify-content-center align-items-center rounded p-3">
-                    <div className="card justify-content-center bg-primary p-5 col-12 col-md-8 col-lg-10">
+                    <div className="card justify-content-center bg-primary p-5 col-12 col-md-6 col-lg-8">
                         <h2 className='text-info text-bold mx-auto mb-3'>Ingredients</h2>
-
+                        
                         <div className="card-body justify-content-center rounded shadow mx-auto bg-info pb-3 col-12 col-md-8 col-lg-10">
                             {ingreds?.map(ingred => (
                                 <h5 key={`option-${ingred.id}`} className="card-text">{`-${ingred.name}`}</h5>
