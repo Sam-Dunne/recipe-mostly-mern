@@ -14,44 +14,45 @@ import Creatable, { makeCreatableSelect } from 'react-select/creatable';
 const MultiSelect = (props: MultiSelectProps) => {
     const history = useHistory();
     const { id } = useParams<{ id: string }>();
-    const [x, setx] = useState<string>('');
-    const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
+    // const [x, setx] = useState<string>('');
+    // const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
 
 
-    const [selectableIngredients, setAllSelectableIngredients] = useState<IIngredients[]>([]);
+    const [selectableItems, setAllSelectableItems] = useState<IIngredients[]>([]);
 
-    const [selectedIngredientsArray, setSelectedIngredientsArray] = useState<IOptionType[]>([]);
+    const [selectedItemsArray, setSelectedItemsArray] = useState<IOptionType[]>([]);
 
-    const [ingredientsOptions, setIngredientOptions] = useState<IOptionType[]>([]);
+    const [itemOptions, setItemOptions] = useState<IOptionType[]>([]);
 
     useEffect(() => {
         apiService(`/api/${props.type}`)
-            .then(selectableIngredients => setAllSelectableIngredients(selectableIngredients))
+            .then(selectableIngredients => setAllSelectableItems(selectableIngredients))
     }, []);
 
     useEffect(() => {
         type ISelectOption = Pick<OptionProps, "label" | "value">;
         // get  data in array format to work with label+value
-        const Options = (selectableIngredients || []).length
-            ? (selectableIngredients.map(selectableIngredient => ({
-                label: selectableIngredient.name,
-                value: selectableIngredient.id
+        const Options = (selectableItems || []).length
+            ? (selectableItems.map(selectableItem => ({
+                label: selectableItem.name,
+                value: selectableItem.id
             })) as ISelectOption[])
             : []
-        setIngredientOptions(Options)
-    }, [selectableIngredients]);
+        setItemOptions(Options)
+    }, [selectableItems]);
+
 
     useEffect(() => {
-        if (selectedIngredientsArray.length === 0) return;
+        if (selectedItemsArray.length === 0) return;
 
-        const cleanedIngredientsArray = selectedIngredientsArray.map(sI => {
+        const cleanedItemsArray = selectedItemsArray.map(sI => {
             return {
                 id: sI.value,
                 name: sI.label
             }
         })
-        props.setter(cleanedIngredientsArray);
-    }, [selectedIngredientsArray])
+        props.setter(cleanedItemsArray);
+    }, [selectedItemsArray])
 
     interface IOptionType {
         label: string;
@@ -59,21 +60,20 @@ const MultiSelect = (props: MultiSelectProps) => {
     };
 
     const handleUpdateSubmit = (e: any) => {
-        setSelectedIngredientsArray(e);
-
+        setSelectedItemsArray(e);
     };
 
-    if (!selectableIngredients.length) {
+
+    if (!selectableItems.length) {
         return <> </>
     }
 
     return (
         <section className="container mb-4">
             <Creatable
-                options={ingredientsOptions}
+                options={itemOptions}
                 onChange={(e: any) => handleUpdateSubmit(e)}
                 isMulti
-                name="colors"
                 className="basic-multi-select bg-info"
                 classNamePrefix="select"
                 placeholder={`Choose ${props.placeholder}...`}
@@ -84,7 +84,7 @@ const MultiSelect = (props: MultiSelectProps) => {
 
 interface MultiSelectProps {
     setter: React.Dispatch<React.SetStateAction<IIngredients[]>>
-    type: 'flavorTags' | 'ingredients' 
+    type: 'flavorTags' | 'ingredients'
     placeholder: 'Flavor Tags' | 'Ingredients'
 }
 

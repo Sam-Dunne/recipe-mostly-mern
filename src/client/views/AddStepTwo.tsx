@@ -40,6 +40,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
         // setQtyValues([...qtyValues, { ingredient_qty: qtyValue }])
         // setQtyValue('');
         // console.log(qtyValues)
+
         const array_of_ingredients = ingredients.map(ingredient => {
             return ingredient.id
         })
