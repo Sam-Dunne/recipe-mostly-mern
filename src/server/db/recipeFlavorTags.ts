@@ -7,6 +7,9 @@ const allByRecipeId = (recipe_id: string) => Query<(IRecipeFlavorTags & IFlavorT
 
 const insert = (newRecipeFlavorTag: IRecipeFlavorTags) => Query('INSERT INTO RecipeFlavorTags SET ?', [newRecipeFlavorTag]);
 
+const addRecipeFlavortagsMulti = (recipeFlavorTagsArr: [string, string][]) =>
+    Query('INSERT INTO RecipeFlavorTags (recipe_id, flavor_tag_id) VALUES ?', [recipeFlavorTagsArr]);
+
 const update = (updatedX: { flavor_tags_id: string  }, recipe_id: string) => Query('UPDATE RecipeFlavorTags SET ? WHERE recipe_id = ?', [updatedX, recipe_id]);
 
 // removes from recipe
@@ -16,6 +19,7 @@ export default {
     all,
     allByRecipeId,
     insert,
+    addRecipeFlavortagsMulti,
     update,
     nuke,
 };

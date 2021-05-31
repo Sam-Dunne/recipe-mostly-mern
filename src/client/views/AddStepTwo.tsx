@@ -46,14 +46,19 @@ const AddStepTwo = (props: AddStepTwoProps) => {
         apiService(`/api/recipeingredients/multi/${id}`, `POST`, {array_of_ingredients})
         .then(res =>{
             console.log(res)
+        });
+
+        const array_of_flavor_tags = flavorTags.map(flavortag => {
+            return flavortag.id
+        })
+        apiService(`/api/recipeflavortags/multi/${id}`, `POST`, {array_of_flavor_tags})
+        .then(res =>{
+            console.log(res);
+            history.push(`/recipe_details/${id}`)
         })
         // console.log(test)
       
     };
-    // useEffect(() => {
-    //     apiService('/api/flavortags')
-    //     .then(flavorTags => setFlavorTags(flavorTags));
-    // }, []);
 
     return (
         <section className="container my-3">

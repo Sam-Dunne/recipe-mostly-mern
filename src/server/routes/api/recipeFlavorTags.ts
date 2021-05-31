@@ -37,6 +37,22 @@ router.post('/', async (req, res, next) => {
     }
 });
 
+
+// multi post
+router.post('/multi/:id', async (req, res, next) => {
+    const recipe_id = req.params.id;
+    const {array_of_flavor_tags} = req.body;
+    try {  
+        const recipeFlavorTagsArr = array_of_flavor_tags.map((item: string) => [ recipe_id, item ]);
+
+        const results = await db.recipeFlavorTags.addRecipeFlavortagsMulti(recipeFlavorTagsArr);
+        res.json({ results });
+    } catch (error) {
+          console.log(error.message);
+        res.status(500).json({ message: 'goof'})
+    }
+});
+
 router.put('/:id', authenticate('jwt'), async (req, res, next) => {
     const id = req.params.id;
     const updatedRecipeFlavorTags = req.body;

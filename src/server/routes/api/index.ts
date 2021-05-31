@@ -4,7 +4,7 @@ import usersRouter from './users';
 import contactRouter from './contact';
 import recipesRouter from './recipes';
 import flavorTagsRouter from './flavortags';
-import recipeflavorTagsRouter from './recipeflavortags';
+import recipeflavorTagsRouter from './recipeFlavorTags';
 import ingredientsRouter from './ingredients';
 import recipeIngredientsRouter from './recipeIngredients';
 
