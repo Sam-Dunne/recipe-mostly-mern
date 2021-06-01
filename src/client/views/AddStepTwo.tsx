@@ -30,29 +30,30 @@ const AddStepTwo = (props: AddStepTwoProps) => {
 
     const [ingredients, setIngredients] = useState<IIngredients[]>([]);
 
-    const [updatedFT, setUpdatedFT] = useState<IFlavorTags[]>([]);
+    const [selectedIngs, setSelectedIngs] = useState<IIngredients[]>([]);
 
     useEffect(() => {
         apiService(`/api/recipes/${id}`)
             .then(recipe => setRecipe(recipe))
     }, [])
 
-    // useEffect(() => {
-    //     const createflavorTagsArr = flavorTags;
-    //     createflavorTagsArr.map(ft => {
-    //         if (ft.id === ft.name) {
-    //             apiService(`/api/flavortags`, "POST", {name: ft.name})
-    //             .then(res => {
-    //                 return {
-    //                     id: res.id,
-    //                     name: ft.name
-    //                 }
-    //             })
-    //         }
-    //     })
-    //     setUpdatedFT(createflavorTagsArr);
-    //     console.log(updatedFT)
-    // }, [flavorTags])
+    useEffect(() => {
+       
+        selectedIngs?.forEach(ing => {
+            if (ing.id === ing.name) {
+                apiService(`/api/ingredients`, "POST", {name: ing.name})
+                .then(res => {
+                    return {
+                        id: res.id,
+                        name: ing.name
+                    }
+                })
+                .then(newIng => setIngredients([...selectedIngs, newIng]))
+            } else {
+                setIngredients([...selectedIngs])
+            }
+        })       
+    }, [selectedIngs])
 
     const handleAddIngredients = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -61,24 +62,17 @@ const AddStepTwo = (props: AddStepTwoProps) => {
         // console.log(qtyValues)
 
         const array_of_ingredients = ingredients.map(ingredient => {
+            if ( ingredient.id === ingredient.name) return;
             return ingredient.id
-        })
+        }).filter(ingredient => ingredient)
+        
         apiService(`/api/recipeingredients/multi/${id}`, `POST`, { array_of_ingredients })
             .then(res => {
                 // console.log(res)
             });
 
-        const array_of_flavor_tags = flavorTags.map(flavortag => {
-            return flavortag.id
-        })
-        apiService(`/api/recipeflavortags/multi/${id}`, `POST`, { array_of_flavor_tags })
-            .then(res => {
-                // console.log(res);
-                history.push(`/recipe_details/${id}`)
-            })
-        // console.log(test)
-
     };
+
 
     return (
         <section className="container my-3">
@@ -88,15 +82,9 @@ const AddStepTwo = (props: AddStepTwoProps) => {
 
                 <h3 className='text-info text-center mb-3'>{`for "${recipe?.title}"`}</h3>
 
-
-                <div>
-                    <h5 className="text-secondary ml-3">Select Tags</h5>
-                    <MultiSelect setter={setFlavorTags} type={'flavorTags'} placeholder={'Flavor Tags'} />
-                </div>
-
                 <div>
                     <h5 className="text-secondary ml-3">Add Ingredients</h5>
-                    <MultiSelect setter={setIngredients} type={'ingredients'} placeholder={'Ingredients'} />
+                    <MultiSelect setter={setSelectedIngs} type={'ingredients'} placeholder={'Ingredients'} />
                 </div>
 
 

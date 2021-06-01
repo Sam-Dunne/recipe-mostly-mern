@@ -35,7 +35,7 @@ router.post('/', async (req, res, next) => {
     try {
         newIngredient.id = id;
         const results = await db.ingredients.insert(newIngredient)
-        res.json(results);
+        res.json({results, id});
     } catch (error) {
           console.log(error.message);
         res.status(500).json({ message: 'goof: POST /api/ingredients', error: error.message})
