@@ -5,41 +5,43 @@ import { Link } from 'react-router-dom';
 import { IFlavorTags, IUserRecipes } from '../../interfaces';
 import { apiService } from '../utils/api-services';
 import Moment from 'moment';
-import MultiSelect from '../components/MultiSelect';
+import SingleSelect from '../components/SingleSelect';
 
 
 /* HOOK REACT EXAMPLE */
 const ByFlavorTag = (props: ByFlavorTagProps) => {
     const history = useHistory();
     const { id } = useParams<{ id: string }>();
-    const [recipes, setRecipes] = useState<IUserRecipes[]>([]);
+    // const [x, setx] = useState<string>('');
     // const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
-    const [x, setx] = useState<string>('');
-    const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
+    
+    const [recipes, setRecipes] = useState<IUserRecipes[]>([]);
 
-    const [flavorTags, setFlavorTags] = useState<IFlavorTags[]>([]);
-
+    const [flavorTag, setFlavorTag] = useState<IFlavorTags>(null);
+    
+    const [headerTag, setHeaderTag] = useState<IFlavorTags>(null);
+    
     useEffect(() => {
         apiService(`/api/recipes/user_recipes_flavortag/${id}`)
             .then(recipes => setRecipes(recipes))
+        apiService(`/api/flavortags/${id}`)
+            .then(flavorTag => setHeaderTag(flavorTag))
     }, [id])
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        const [tagId] = flavorTags;
-        console.log(tagId.id)
-        history.push(`/by_flavor_tag/${tagId.id}`)
-        setFlavorTags([])
+        
+        history.push(`/by_flavor_tag/${flavorTag.id}`)
     };
       
 
     return (
         <section className="container my-2">
-            <h3 className="text-success text-center">Tagged Recipes</h3>
+            <h3 className="text-success text-center">{headerTag?.name} Recipes</h3>
             <div>
                 <h5 className="text-primary m-3">Select Tags</h5>
                 <button className="btn btn-link border" onClick={handleSubmit}>Filter</button>
-                <MultiSelect setter={setFlavorTags} type={'flavorTags'} placeholder={'Flavor Tags'} />
+                <SingleSelect setter={setFlavorTag} type={'flavorTags'} placeholder={'Flavor Tags'} />
+
             </div>
             <div className="row d-flex justify-content-around align-items-center">
                 {recipes?.map(recipe => (

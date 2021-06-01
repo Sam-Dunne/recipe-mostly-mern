@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { IFlavorTags, IUserRecipes } from '../../interfaces';
 import { apiService } from '../utils/api-services';
 import Moment from 'moment';
-import MultiSelect from '../components/MultiSelect';
+import SingleSelect from '../components/SingleSelect';
 
 
 /* HOOK REACT EXAMPLE */
@@ -13,13 +13,10 @@ const UsersRecipes = (props: UsersRecipesProps) => {
     const history = useHistory();
     const { id } = useParams<{ id: string }>();
     const [recipes, setRecipes] = useState<IUserRecipes[]>([]);
+    // const [x, setx] = useState<string>('');
     // const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
-    const [x, setx] = useState<string>('');
-    const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
 
-    const [flavorTags, setFlavorTags] = useState<IFlavorTags[]>([]);
-
-
+    const [flavorTag, setFlavorTag] = useState<IFlavorTags>(null);
 
     useEffect(() => {
         apiService(`/api/recipes/all_by/${id}`)
@@ -33,10 +30,7 @@ const UsersRecipes = (props: UsersRecipesProps) => {
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        const [tagId] = flavorTags;
-        console.log(tagId.id)
-
-        history.push(`/by_flavor_tag/${tagId.id}`)
+        history.push(`/by_flavor_tag/${flavorTag.id}`)
     };
 
     return (
@@ -45,7 +39,8 @@ const UsersRecipes = (props: UsersRecipesProps) => {
             <div>
                 <h5 className="text-primary m-3">Select Tags</h5>
                 <button className="btn btn-link border" onClick={handleSubmit}>Filter</button>
-                <MultiSelect setter={setFlavorTags} type={'flavorTags'} placeholder={'Flavor Tags'} />
+                <SingleSelect setter={setFlavorTag} type={'flavorTags'} placeholder={'Flavor Tags'} />
+
             </div>
             <div className="row d-flex justify-content-around align-items-center">
                 {recipes?.map(recipe => (

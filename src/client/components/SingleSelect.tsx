@@ -77,6 +77,7 @@ const SingleSelect = (props: SingleSelectProps) => {
                 className="basic-single bg-info"
                 classNamePrefix="select"
                 placeholder={`Filter by ${props.placeholder}...`}
+                isSearchable
             />
             
         </section>
