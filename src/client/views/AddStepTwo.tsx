@@ -37,22 +37,22 @@ const AddStepTwo = (props: AddStepTwoProps) => {
             .then(recipe => setRecipe(recipe))
     }, [])
 
-    useEffect(() => {
-        const createflavorTagsArr = flavorTags;
-        createflavorTagsArr.map(ft => {
-            if (ft.id === ft.name) {
-                apiService(`/api/flavortags`, "POST", {name: ft.name})
-                .then(res => {
-                    return {
-                        id: res.id,
-                        name: ft.name
-                    }
-                })
-            }
-        })
-        setUpdatedFT(createflavorTagsArr);
-        console.log(updatedFT)
-    }, [flavorTags])
+    // useEffect(() => {
+    //     const createflavorTagsArr = flavorTags;
+    //     createflavorTagsArr.map(ft => {
+    //         if (ft.id === ft.name) {
+    //             apiService(`/api/flavortags`, "POST", {name: ft.name})
+    //             .then(res => {
+    //                 return {
+    //                     id: res.id,
+    //                     name: ft.name
+    //                 }
+    //             })
+    //         }
+    //     })
+    //     setUpdatedFT(createflavorTagsArr);
+    //     console.log(updatedFT)
+    // }, [flavorTags])
 
     const handleAddIngredients = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();

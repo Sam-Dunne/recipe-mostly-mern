@@ -4,10 +4,8 @@ import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { apiService } from '../utils/api-services'
 import { IIngredients } from '../../interfaces';
-import Select from 'react-select';
 import { OptionProps } from "react-select/src/types";
 import Creatable, { makeCreatableSelect } from 'react-select/creatable';
-import flavorTags from '../../server/db/flavorTags';
 
 
 

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { apiService } from '../utils/api-services'
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
-import { IFlavorTags, IIngredients } from '../../interfaces';
+import { IFlavorTags } from '../../interfaces';
 import MultiSelect from '../components/MultiSelect';
 import { Form } from 'react-bootstrap';
 
@@ -30,13 +30,25 @@ const AddRecipe = (props: AddRecipeProps) => {
     const [instructions, setInstructions] = useState<string>(`##### Here's an example to get you started! \n\ ---  \n\ ###### Just fold in the cheese, David!\n\  - What does that even mean?\n\ 1. Fold\n\ 2. in the\n\ 3. cheese!!!\n\ **Do You even know what it means?** \n\ *I most certainly do!!*`);
     const handleSetInstructions = (e: React.ChangeEvent<HTMLTextAreaElement>) => setInstructions(e.target.value);
 
+    const [flavorTags, setFlavorTags] = useState<IFlavorTags[]>([]);
+
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        apiService('api/recipes/', 'POST', {title, summary, instructions})
+        apiService('/api/recipes/', 'POST', {title, summary, instructions})
         .then(res => {
             alert(res.message)
-            history.push(`/recipe_details/${res.recipeID}`)
-        })
+            // history.push(`/recipe_details/${res.recipeID}`)
+            const array_of_flavor_tags = flavorTags.map(flavortag => {
+                return flavortag.id
+            })
+            apiService(`/api/recipeflavortags/multi/${res.recipeID}`, `POST`, { array_of_flavor_tags })
+                .then(res => {
+                    // console.log(res);
+                    // history.push(`/recipe_details/${res.recipeID}`)
+                })
+        }) 
+        
+        
     }
 
     return (
@@ -44,6 +56,11 @@ const AddRecipe = (props: AddRecipeProps) => {
             <Form className=' bg-primary rounded shadow mb-3 p-3'>
 
                 <h3 className="text-info text-center mb-3">Add a Recipe</h3>
+
+                <div>
+                    <h5 className="text-secondary ml-3">Select Tags</h5>
+                    <MultiSelect setter={setFlavorTags} type={'flavorTags'} placeholder={'Flavor Tags'} />
+                </div>
 
                 <input className='form-control mb-3 bg-info' value={title} onChange={handleSetTitle} placeholder='Title' />
 
