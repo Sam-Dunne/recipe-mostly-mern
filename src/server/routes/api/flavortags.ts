@@ -33,7 +33,7 @@ router.post('/', async (req, res, next) => {
     try {
         newFlavorTag.id = id;
         const results = await db.flavorTags.insert(newFlavorTag)
-        res.json(results);
+        res.json({results, id, name: newFlavorTag});
     } catch (error) {
           console.log(error.message);
         res.status(500).json({ message: 'goof: POST /api/flavortags', error: error.message})

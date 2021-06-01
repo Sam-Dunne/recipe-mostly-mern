@@ -7,6 +7,7 @@ import { IIngredients } from '../../interfaces';
 import Select from 'react-select';
 import { OptionProps } from "react-select/src/types";
 import Creatable, { makeCreatableSelect } from 'react-select/creatable';
+import flavorTags from '../../server/db/flavorTags';
 
 
 
@@ -40,7 +41,7 @@ const MultiSelect = (props: MultiSelectProps) => {
             : []
         setItemOptions(Options)
     }, [selectableItems]);
-
+  
 
     useEffect(() => {
         if (selectedItemsArray.length === 0) return;

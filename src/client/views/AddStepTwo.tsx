@@ -25,15 +25,34 @@ const AddStepTwo = (props: AddStepTwoProps) => {
     const handleSetQtyValue = (e: React.ChangeEvent<HTMLInputElement>) => setQtyValue(e.target.value);
     // Arrays of objects for the Select Fields
     const [flavorTags, setFlavorTags] = useState<IFlavorTags[]>([]);
-    
+
     const [ingredient_qty, setIngredient_Qty] = useState<string>('');
-    
+
     const [ingredients, setIngredients] = useState<IIngredients[]>([]);
+
+    const [updatedFT, setUpdatedFT] = useState<IFlavorTags[]>([]);
 
     useEffect(() => {
         apiService(`/api/recipes/${id}`)
             .then(recipe => setRecipe(recipe))
     }, [])
+
+    useEffect(() => {
+        const createflavorTagsArr = flavorTags;
+        createflavorTagsArr.map(ft => {
+            if (ft.id === ft.name) {
+                apiService(`/api/flavortags`, "POST", {name: ft.name})
+                .then(res => {
+                    return {
+                        id: res.id,
+                        name: ft.name
+                    }
+                })
+            }
+        })
+        setUpdatedFT(createflavorTagsArr);
+        console.log(updatedFT)
+    }, [flavorTags])
 
     const handleAddIngredients = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -44,21 +63,21 @@ const AddStepTwo = (props: AddStepTwoProps) => {
         const array_of_ingredients = ingredients.map(ingredient => {
             return ingredient.id
         })
-        apiService(`/api/recipeingredients/multi/${id}`, `POST`, {array_of_ingredients})
-        .then(res =>{
-            console.log(res)
-        });
+        apiService(`/api/recipeingredients/multi/${id}`, `POST`, { array_of_ingredients })
+            .then(res => {
+                // console.log(res)
+            });
 
         const array_of_flavor_tags = flavorTags.map(flavortag => {
             return flavortag.id
         })
-        apiService(`/api/recipeflavortags/multi/${id}`, `POST`, {array_of_flavor_tags})
-        .then(res =>{
-            console.log(res);
-            history.push(`/recipe_details/${id}`)
-        })
+        apiService(`/api/recipeflavortags/multi/${id}`, `POST`, { array_of_flavor_tags })
+            .then(res => {
+                // console.log(res);
+                history.push(`/recipe_details/${id}`)
+            })
         // console.log(test)
-      
+
     };
 
     return (
