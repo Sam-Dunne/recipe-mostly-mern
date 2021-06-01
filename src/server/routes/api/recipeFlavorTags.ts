@@ -46,7 +46,8 @@ router.post('/multi/:id', async (req, res, next) => {
         const recipeFlavorTagsArr = array_of_flavor_tags.map((item: string) => [ recipe_id, item ]);
 
         const results = await db.recipeFlavorTags.addRecipeFlavortagsMulti(recipeFlavorTagsArr);
-        res.json({ results });
+        res.json({ results, recipe_id });
+        // console.log(res)
     } catch (error) {
           console.log(error.message);
         res.status(500).json({ message: 'goof'})

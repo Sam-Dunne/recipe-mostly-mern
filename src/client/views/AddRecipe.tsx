@@ -42,9 +42,9 @@ const AddRecipe = (props: AddRecipeProps) => {
                 return flavortag.id
             })
             apiService(`/api/recipeflavortags/multi/${res.recipeID}`, `POST`, { array_of_flavor_tags })
-                .then(res => {
-                    // console.log(res);
-                    // history.push(`/recipe_details/${res.recipeID}`)
+                .then(resp => {
+                    console.log(resp);
+                    history.push(`/recipe_details/${res.recipeID}`)
                 })
         }) 
         
