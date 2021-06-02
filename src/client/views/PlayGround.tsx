@@ -6,6 +6,7 @@ import { apiService } from '../utils/api-services'
 
 import { IIngredients, IRecipeingredients, IRecipeIngredientsFull } from '../../interfaces';
 import { IoEllipsisVerticalCircleOutline } from 'react-icons/io5';
+// import Quantity from '../components/Quantity';
 
 
 
@@ -19,8 +20,14 @@ const PlayGround = (props: PlayGroundProps) => {
 
     const [recipeIngreds, setRecipeIngreds] = useState<IRecipeIngredientsFull[]>([]);
     const [ingredient_qty, setIngredient_Qty] = useState<string>('');
-    const handleSetIngredient_Qty = (e: React.ChangeEvent<HTMLInputElement>) => setIngredient_Qty(e.target.value)
+    const handleSetIngredient_Qty = (e: React.ChangeEvent<HTMLInputElement>) => setIngredient_Qty(e.target.value);
 
+    const [ingreds, setIngreds] = useState<[string]>()
+
+    const names = recipeIngreds?.map(ingred => {
+        // setIngreds(ingred.name)
+        // setIngreds([ingred.name, ...ingreds])
+    })
 
 
     useEffect(() => {
@@ -37,12 +44,14 @@ const PlayGround = (props: PlayGroundProps) => {
     return (
         <section className="container my-3">
 
+      
+
             <div className="btn-group">
                 <button className="btn btn-secondary btn-lg" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <IoEllipsisVerticalCircleOutline />
                 </button>
                 <div className="dropdown-menu">
-                 
+
 
                 </div>
             </div>

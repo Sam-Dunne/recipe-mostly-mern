@@ -71,9 +71,9 @@ INSERT INTO Ingredients VALUES ('1', 'pasta'), ('2', 'bread'), ('3', 'ham'), ('4
 
 CREATE TABLE RecipeIngredients (
     recipe_id VARCHAR(40),
-        FOREIGN KEY (recipe_id) REFERENCES Recipes(id),
+        FOREIGN KEY (recipe_id) REFERENCES Recipes(id) on DELETE CASCADE,
     ingredient_id VARCHAR(40), 
-        FOREIGN KEY (ingredient_id) REFERENCES Ingredients(id),
+        FOREIGN KEY (ingredient_id) REFERENCES Ingredients(id) on DELETE CASCADE,
     ingredient_qty VARCHAR(420),
     PRIMARY KEY (recipe_id, ingredient_id)
 );
