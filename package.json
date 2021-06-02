@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/server.js",
+  "repository": {
+		"type": "git",
+		"url": "git+https://github.com/Sam-Dunne/recipe-mostly-mern.git"
+	},
   "scripts": {
     "watch:build": "webpack -w",
     "watch:server": "nodemon dist/server.js",
