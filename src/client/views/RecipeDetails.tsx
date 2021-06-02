@@ -88,7 +88,7 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
 
                         <div className="card-body justify-content-center rounded shadow mx-auto bg-info pb-3 col-12 col-md-8 col-lg-10">
                             {ingreds?.map(ingred => (
-                                <h5 key={`option-${ingred.id}`} className="card-text">{`-${ingred.name}`}</h5>
+                                <h5 key={`option-${ingred.ingredient_id}`} className="card-text">{`-${ingred.name}`}</h5>
                             ))}
                         </div>
 

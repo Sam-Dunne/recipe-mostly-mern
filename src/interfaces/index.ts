@@ -66,7 +66,6 @@ export interface IRecipeIngredientsFull {
     recipe_id?: string;
     ingredient_id?: string;
     ingredient_qty?: string;
-    id?: string;
     name?: string;
 };
 

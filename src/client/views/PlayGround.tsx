@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { apiService } from '../utils/api-services'
 
 import { IIngredients, IRecipeingredients, IRecipeIngredientsFull } from '../../interfaces';
+import { IoEllipsisVerticalCircleOutline } from 'react-icons/io5';
 
 
 
@@ -29,22 +30,35 @@ const PlayGround = (props: PlayGroundProps) => {
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-      
+
     };
 
 
     return (
         <section className="container my-3">
-            <div className='bg-primary rounded shadow mb-3 p-4'>
 
-                <h3 className="text-info text-center mb-1">{`Add Qty & Measure`}</h3>
+            <div className="btn-group">
+                <button className="btn btn-secondary btn-lg" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <IoEllipsisVerticalCircleOutline />
+                </button>
+                <div className="dropdown-menu">
+                    <a className="dropdown-item" href="#">Action</a>
+                    <a className="dropdown-item" href="#">Another action</a>
+                    <a className="dropdown-item" href="#">Something else here</a>
+                    <div className="dropdown-divider"></div>
+                    <a className="dropdown-item" href="#">Separated link</a>
 
-                    {recipeIngreds?.map(ingred => (
-                <div  key={`option-${ingred.id}`} className="card-body justify-content-center rounded shadow mb-2 mx-auto bg-info pb-3 col-12 col-md-8 col-lg-10">
-                        <input type="text" placeholder='QTY and Measure' value={ingredient_qty} onChange={handleSetIngredient_Qty}/>
-                        <h5 className="card-text">{`${ingred.name}`}</h5>
                 </div>
-                    ))}
+            </div>
+
+            <div className='bg-primary rounded shadow mb-3 p-4'>
+                <h3 className="text-info text-center mb-1">{`Add Qty & Measure`}</h3>
+                {recipeIngreds?.map(ingred => (
+                    <div key={`option-${ingred.ingredient_id}`} className="card-body justify-content-center rounded shadow mb-2 mx-auto bg-info pb-3 col-12 col-md-8 col-lg-10">
+                        <input type="text" placeholder='QTY and Measure' value={ingredient_qty} onChange={handleSetIngredient_Qty} />
+                        <h5 className="card-text">{`${ingred.name}`}</h5>
+                    </div>
+                ))}
             </div>
             <button className="btn btn-link btn-secondary border" onClick={handleSubmit}>Filter</button>
 
