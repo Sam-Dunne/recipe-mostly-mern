@@ -44,7 +44,7 @@ const App = (props: AppProps) => {
 							<Route exact path='/add_Ingredients/:id'>
 								<AddStepTwo />
 							</Route>
-							<Route exact path='/single'>
+							<Route exact path='/single/:id'>
 								<Playground />
 							</Route>
 							<Route exact path='/login'>

@@ -68,7 +68,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
         
         apiService(`/api/recipeingredients/multi/${id}`, `POST`, { array_of_ingredients })
             .then(res => {
-                // console.log(res)
+                history.push(`/single/${id}`)
             });
 
     };

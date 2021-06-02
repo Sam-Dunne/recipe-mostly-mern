@@ -77,6 +77,14 @@ CREATE TABLE RecipeIngredients (
     ingredient_qty VARCHAR(420),
     PRIMARY KEY (recipe_id, ingredient_id)
 );
+
+###altered recipeingredients to ON Delete Cascade###
+#SHOW CREATE TABLE recipeingredients;
+#alter table recipeingredients drop foreign key recipeingredients_ibfk_1;
+#alter table recipeingredients drop foreign key recipeingredients_ibfk_2;
+#alter table recipeingredients add foreign key (recipe_id) references recipes(id) on DELETE CASCADE;
+#alter table recipeingredients add foreign key (ingredient_id) references ingredients(id) on DELETE CASCADE;
+
 INSERT INTO RecipeIngredients SET `recipe_id` = '334c6f4e-6f2f-4c2b-b5c9-85480547a14f', `ingredient_id` = '1', `ingredient_qty` = '2';
 INSERT INTO RecipeIngredients VALUES ('1','2','2'),('1','3','2'),('2','2','3'),('2','3','4'),('2','4','1'),('3','2','2'),('3','3','3'),('3','5','1');
 SELECT Ingredients.name, Ingredients.id, RecipeIngredients.ingredient_qty FROM RecipeIngredients JOIN Ingredients ON Ingredients.id = RecipeIngredients.ingredient_id WHERE recipe_id = 'e2e9be05-26f1-44c1-99a0-fcb04b6773d3';
@@ -134,5 +142,6 @@ CREATE PROCEDURE spConcatRecipeIngredients(recipe_id VARCHAR(36))
 DELIMITER ;
 
 
-
 SELECT recipes.id, recipes.title, recipes.summary, recipes.instructions, recipes.user_id, recipes.created_at, recipes.edited_at, users.name AS username, users.role FROM Recipes LEFT JOIN Users ON recipes.user_id = users.id WHERE users.id="2dbc86ff-67aa-44d5-98f3-7d81e9a99a15";
+
+
