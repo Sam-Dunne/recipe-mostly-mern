@@ -19,21 +19,25 @@ const PlayGround = (props: PlayGroundProps) => {
     // const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
 
     const [recipeIngreds, setRecipeIngreds] = useState<IRecipeIngredientsFull[]>([]);
+
     const [ingredient_qty, setIngredient_Qty] = useState<string>('');
     const handleSetIngredient_Qty = (e: React.ChangeEvent<HTMLInputElement>) => setIngredient_Qty(e.target.value);
 
-    const [ingreds, setIngreds] = useState<[string]>()
+    const [ingreds, setIngreds] = useState<string[]>([])
 
-    const names = recipeIngreds?.map(ingred => {
-        // setIngreds(ingred.name)
-        // setIngreds([ingred.name, ...ingreds])
-    })
+    const names = recipeIngreds?.map(ingred => ingred.name)
 
 
     useEffect(() => {
         apiService(`/api/recipeingredients/${id}`)
             .then(ingreds => setRecipeIngreds(ingreds));
     }, []);
+
+    useEffect(() => {
+         const names = recipeIngreds?.map(ingred => ingred.name)
+         setIngreds(names)
+         console.log(names)
+    }, [recipeIngreds]);
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -48,7 +52,7 @@ const PlayGround = (props: PlayGroundProps) => {
 
             <div className="btn-group">
                 <button className="btn btn-secondary btn-lg" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <IoEllipsisVerticalCircleOutline />
+                    <IoEllipsisVerticalCircleOutline className='bg-primary text-danger' />
                 </button>
                 <div className="dropdown-menu">
 
