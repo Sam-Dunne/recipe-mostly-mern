@@ -83,7 +83,7 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
 
                 </div>
                 <div className="row d-flex justify-content-center align-items-center rounded p-3">
-                    <div className="card justify-content-center bg-primary p-5 col-12 col-md-6 col-lg-8">
+                    <div className="card justify-content-center bg-primary p-5 col-12 col-md-8 col-lg-8">
                         <h2 className='text-info text-bold mx-auto mb-3'>Ingredients</h2>
 
                         <div className="card-body justify-content-center rounded shadow mx-auto bg-info pb-3 col-12 col-md-8 col-lg-10">
