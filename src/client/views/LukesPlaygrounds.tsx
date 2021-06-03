@@ -4,8 +4,9 @@ import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { apiService } from '../utils/api-services';
 
-import { IIngredients, IRecipeingredients, IRecipeIngredientsFull } from '../../interfaces';
+import { IFlavorTags, IIngredients, IRecipeingredients, IRecipeIngredientsFull } from '../../interfaces';
 import { IoEllipsisVerticalCircleOutline } from 'react-icons/io5';
+import SingleSelectLocal from '../components/SingleSelectLocal';
 
 /* HOOK REACT EXAMPLE */
 const PlayGround = (props: PlayGroundProps) => {
@@ -16,6 +17,9 @@ const PlayGround = (props: PlayGroundProps) => {
 
 	const [qtyValue, setQtyValue] = useState<string>('');
 	const handleSetQtyValue = (e: React.ChangeEvent<HTMLInputElement>) => setQtyValue(e.target.value.toString())
+
+	const [qtyMesure, setQtyMesure] = useState<IFlavorTags>(null);;
+	// const handleSetQtyMesure = (e: React.ChangeEvent<HTMLInputElement>) => setQtyMesure(e.target.value.toString())
 
 	const [ingredient_qty, setIngredient_Qty] = useState<{ [key: string]: string }>({});
 
@@ -47,6 +51,7 @@ const PlayGround = (props: PlayGroundProps) => {
 	return (
 		<section className="container my-3">
 			<div className="p-4 mb-3 rounded shadow bg-primary">
+				<SingleSelectLocal setter={setQtyMesure}/>
 				<h3 className="mb-1 text-center text-info">Add Qty & Measure</h3>
 				{recipeIngreds?.map(ingred => (
 					<div
@@ -54,7 +59,7 @@ const PlayGround = (props: PlayGroundProps) => {
 						className="pb-3 mx-auto mb-2 rounded shadow card-body justify-content-center bg-info col-12 col-md-8 col-lg-10">
 						<input 
 						
-						type='number'
+						type='text'
 						placeholder='Quantos'
 						value={qtyValue}
 						onChange={handleSetQtyValue}
