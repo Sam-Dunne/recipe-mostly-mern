@@ -41,7 +41,6 @@ const PlayGround = (props: PlayGroundProps) => {
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-
     };
 
 

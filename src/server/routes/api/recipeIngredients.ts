@@ -4,6 +4,7 @@ import { authenticate } from 'passport';
 import { v4 as uuidv4 } from 'uuid';
 import recipeFlavorTags from '../../db/recipeFlavorTags';
 import { IIngredients, IRecipeingredients } from '../../../interfaces';
+import recipeIngredients from '../../db/recipeIngredients';
 
 
 const router = Router();
@@ -13,8 +14,8 @@ router.get('/', async (req, res, next) => {
         const allRecipeIngredients = await db.recipeIngredients.all();
         res.json(allRecipeIngredients);
     } catch (error) {
-         console.log(error.message);
-        res.status(500).json({ message: 'goof: /api/recipeingredients/id', error: error.message})
+        console.log(error.message);
+        res.status(500).json({ message: 'goof: /api/recipeingredients/id', error: error.message })
     }
 });
 
@@ -26,7 +27,7 @@ router.get('/:id', async (req, res, next) => {
         res.json(recipeIngredientsbyRecipeId);
     } catch (error) {
         console.log(error.message);
-        res.status(500).json({ message: 'goof: /api/recipeingredients/id', error: error.message})
+        res.status(500).json({ message: 'goof: /api/recipeingredients/id', error: error.message })
     }
 });
 // single
@@ -37,23 +38,61 @@ router.post('/', async (req, res, next) => {
         const results = await db.recipeIngredients.addRecipeIngredients(newRecipeIngredient)
         res.json(results);
     } catch (error) {
-          console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        console.log(error.message);
+        res.status(500).json({ message: 'goof' })
     }
 });
 
-// multi post
+// multi post 2/3 columns
 router.post('/multi/:id', async (req, res, next) => {
     const recipe_id = req.params.id;
-    const {array_of_ingredients} = req.body;
-    try {  
-        const recipeIngredientsArr = array_of_ingredients.map((item: string) => [ recipe_id, item ]);
+    const { array_of_ingredients } = req.body;
+    try {
+        const recipeIngredientsArr = array_of_ingredients.map((item: string) => [recipe_id, item]);
 
         const results = await db.recipeIngredients.addRecipeIngredients(recipeIngredientsArr);
         res.json({ results });
     } catch (error) {
-          console.log(error.message);
-        res.status(500).json({ message: 'goof'})
+        console.log(error.message);
+        res.status(500).json({ message: 'goof' })
+    }
+});
+
+// multi RecipeIngredientsFull post
+router.post('/multi_ing_qty/:id', async (req, res, next) => {
+    const recipe_id = req.params.id;
+    const {array_of_ingredientUpdates} = req.body;
+    try {
+        const ingredient_qty_Arr = array_of_ingredientUpdates.map((item: string) => [recipe_id, item[0], item[1]] );
+        // const ingredient_id_Arr = array_of_ingredientUpdates.map((item: string) => item[0] );
+        // const recipe_id_Arr = array_of_ingredientUpdates.map((item: any) => recipe_id );
+
+        const results = await db.recipeIngredients.addRecipeIngredientsFull(ingredient_qty_Arr);
+        res.json( results );
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ message: 'goof' })
+    }
+});
+
+// multi RecipeIngredientsFull post for existing recipeIngredients
+router.post('/multi_existing_qty/:id', async (req, res, next) => {
+    const recipe_id = req.params.id;
+    const {array_of_ingredientUpdates} = req.body;
+    try {
+        const toAdd_Arr = array_of_ingredientUpdates.map((item: string) => [recipe_id, item[0], item[1]] );
+
+        // const ingredient_qty_Arr = array_of_ingredientUpdates.map((item: string) => item[1] );
+        const ingredient_id_Arr = array_of_ingredientUpdates.map((item: string) => item[0] );
+
+        const cleanup = await db.recipeIngredients.batchNuke(recipe_id)
+
+        const results = await db.recipeIngredients.addRecipeIngredientsFull(toAdd_Arr);
+
+        res.json( results );
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ message: 'goof' })
     }
 });
 
@@ -64,8 +103,8 @@ router.put('/:id', authenticate('jwt'), async (req, res, next) => {
         const results = await db.recipeIngredients.update(updatednewRecipeIngredient, id);
         res.json(results);
     } catch (error) {
-          console.log(error.message);
-        res.status(500).json({ message: 'goof: /api/recipeflavortags/id', error: error.message})
+        console.log(error.message);
+        res.status(500).json({ message: 'goof: /api/recipeflavortags/id', error: error.message })
     }
 });
 

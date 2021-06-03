@@ -21,6 +21,23 @@ const PlayGround = (props: PlayGroundProps) => {
 		e.preventDefault();
 		console.log('[raw state log]');
 		console.log(ingredient_qty);
+		let result = Object.keys(ingredient_qty).map(function (key) {
+          
+			// Using Number() to convert key to number type
+			// Using obj[key] to retrieve key value
+			return [key.toString(), ingredient_qty[key.toString()]];
+		});
+		console.log(result);
+
+		const ingredient_idArr = result.map(ingredient_id => {
+			return ingredient_id[0]
+		})
+		console.log(ingredient_idArr)
+
+		const ingredient_qtyArr = result.map(ingredient_qty => {
+			return ingredient_qty[1]
+		})
+		console.log(ingredient_qtyArr)
 	};
 
 	useEffect(() => {

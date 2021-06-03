@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // import PrivateRoute from './utils/PrivateRoute';
 import Navbah from './components/Navbar';
-import Playground from './views/Playground';
+import Playground from './views/LukesPlaygrounds';
 import AddRecipe from './views/AddRecipe';
 import AddStepTwo from './views/AddStepTwo';
 import ByFlavorTag from './views/ByFlavorTag';
