@@ -48,7 +48,31 @@ const SingleSelectLocal = (props: SingleSelectLocalProps) => {
         },
         {
             "id": "8",
-            "name": "slice"
+            "name": "oz"
+        },
+        {
+            "id": "9",
+            "name": "lb"
+        },
+        {
+            "id": "10",
+            "name": "lbs"
+        },
+        {
+            "id": "11",
+            "name": "grams"
+        },
+        {
+            "id": "12",
+            "name": "kg"
+        },
+        {
+            "id": "13",
+            "name": "ml"
+        },
+        {
+            "id": "14",
+            "name": "Liter"
         },
     ];
 

@@ -18,8 +18,8 @@ const PlayGround = (props: PlayGroundProps) => {
 	const [qtyValue, setQtyValue] = useState<string>('');
 	const handleSetQtyValue = (e: React.ChangeEvent<HTMLInputElement>) => setQtyValue(e.target.value.toString())
 
-	const [qtyMesure, setQtyMesure] = useState<IFlavorTags>(null);;
-	// const handleSetQtyMesure = (e: React.ChangeEvent<HTMLInputElement>) => setQtyMesure(e.target.value.toString())
+	const [qtyMeasure, setQtyMeasure] = useState<IFlavorTags>(null);;
+	// const handleSetQtyMeasure = (e: React.ChangeEvent<HTMLInputElement>) => setQtyMeasure(e.target.value.toString())
 
 	const [ingredient_qty, setIngredient_Qty] = useState<{ [key: string]: string }>({});
 
@@ -35,13 +35,18 @@ const PlayGround = (props: PlayGroundProps) => {
 			// Using obj[key] to retrieve key value
 			return [key.toString(), ingredient_qty[key.toString()]];
 		});
-		// console.log(result);
+		console.log(result);
+		//prevents empty form submission
+		if (result.length === 0) {
+			alert('catch')
+			return;
+		}
 
-		apiService(`/api/recipeingredients/multi_existing_qty/${id}`, `POST`, {array_of_ingredientUpdates: result})
-		.then(res => {
-			console.log(res)
-			history.push(`/recipe_details/${id}`);
-		})
+		apiService(`/api/recipeingredients/multi_existing_qty/${id}`, `POST`, { array_of_ingredientUpdates: result })
+			.then(res => {
+				console.log(res)
+				history.push(`/recipe_details/${id}`);
+			})
 	};
 
 	useEffect(() => {
@@ -51,23 +56,22 @@ const PlayGround = (props: PlayGroundProps) => {
 	return (
 		<section className="container my-3">
 			<div className="p-4 mb-3 rounded shadow bg-primary">
-				<SingleSelectLocal setter={setQtyMesure}/>
 				<h3 className="mb-1 text-center text-info">Add Qty & Measure</h3>
 				{recipeIngreds?.map(ingred => (
 					<div
 						key={`option-${ingred.ingredient_id}`}
 						className="pb-3 mx-auto mb-2 rounded shadow card-body justify-content-center bg-info col-12 col-md-8 col-lg-10">
-						<input 
-						
-						type='text'
-						placeholder='Quantos'
-						value={qtyValue}
-						onChange={handleSetQtyValue}
+						<input
+							type='text'
+							placeholder='Quantos'
+							value={qtyValue}
+							onChange={handleSetQtyValue}
 						/>
+						<SingleSelectLocal setter={setQtyMeasure} />
 						<input
 							name={ingred.ingredient_id}
 							type="text"
-							placeholder="QTY and Measure"
+							placeholder={ingred.ingredient_qty || 'Qty and Measure'}
 							value={ingredient_qty[ingred.ingredient_id] || ''}
 							onChange={handleSetIngredient_Qty}
 						/>
@@ -84,6 +88,6 @@ const PlayGround = (props: PlayGroundProps) => {
 	);
 };
 
-interface PlayGroundProps {}
+interface PlayGroundProps { }
 
 export default PlayGround;
