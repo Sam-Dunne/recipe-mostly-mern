@@ -13,6 +13,10 @@ const PlayGround = (props: PlayGroundProps) => {
 	const { id } = useParams<{ id: string }>();
 
 	const [recipeIngreds, setRecipeIngreds] = useState<IRecipeIngredientsFull[]>([]);
+
+	const [qtyValue, setQtyValue] = useState<string>('');
+	const handleSetQtyValue = (e: React.ChangeEvent<HTMLInputElement>) => setQtyValue(e.target.value.toString())
+
 	const [ingredient_qty, setIngredient_Qty] = useState<{ [key: string]: string }>({});
 
 	const handleSetIngredient_Qty = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -20,20 +24,14 @@ const PlayGround = (props: PlayGroundProps) => {
 
 	const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
-		console.log('[raw state log]');
-		console.log(ingredient_qty);
+		// console.log('[raw state log]');
+		// console.log(ingredient_qty);
 		let result = Object.keys(ingredient_qty).map(function (key) {
-          
-			// Using Number() to convert key to number type
+			// Using toString() to convert key to string type
 			// Using obj[key] to retrieve key value
 			return [key.toString(), ingredient_qty[key.toString()]];
 		});
-		console.log(result);
-
-		// const array_of_ingredientUpdates = result.map(ingredient_id => {
-		// 	return ingredient_id[0]
-		// })
-		// console.log(array_of_ingredientUpdates)
+		// console.log(result);
 
 		apiService(`/api/recipeingredients/multi_existing_qty/${id}`, `POST`, {array_of_ingredientUpdates: result})
 		.then(res => {
@@ -54,6 +52,13 @@ const PlayGround = (props: PlayGroundProps) => {
 					<div
 						key={`option-${ingred.ingredient_id}`}
 						className="pb-3 mx-auto mb-2 rounded shadow card-body justify-content-center bg-info col-12 col-md-8 col-lg-10">
+						<input 
+						
+						type='number'
+						placeholder='Quantos'
+						value={qtyValue}
+						onChange={handleSetQtyValue}
+						/>
 						<input
 							name={ingred.ingredient_id}
 							type="text"
