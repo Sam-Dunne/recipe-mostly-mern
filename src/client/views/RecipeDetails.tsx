@@ -66,6 +66,9 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
                         <div className="row bg-primary justify-content-between align-items-center mb-3 mx-auto col-12 col-md-8 col-lg-10 ">
                             <h2 className='text-info text-bold mx-auto'>{recipe?.title}</h2>
                         </div>
+                        {(ingreds.length == 0) &&
+                            <Link to={`/add_Ingredients/${id}`} className='btn btn-link bg-secondary border-light text-success mb-2 mx-auto col-4'><MdAddCircleOutline />  Ingredients</Link>
+                        }
                         <div className="card-body rounded shadow bg-info p-5">
                             <div className="row justify-content-around mb-4" >
                                 {recipeFlavorTags?.map(tag => (
