@@ -77,18 +77,18 @@ const SingleSelectLocal = (props: SingleSelectLocalProps) => {
     }, [selectableItems]);
 
 
-    // useEffect(() => {
-    //     if (!selectedItem) return;
+    useEffect(() => {
+        if (!selectedItem) return;
 
-    //     const cleanedItem = 
-    //     {
-    //         id: selectedItem.value,
-    //         name: selectedItem.label
-    //     }
+        const cleanedItem = 
+        {
+            id: selectedItem.value,
+            name: selectedItem.label
+        }
 
-    //     console.log(cleanedItem)
-    //     props.setter(cleanedItem);
-    // }, [selectedItem])
+        console.log(cleanedItem)
+        props.setter(cleanedItem);
+    }, [selectedItem])
 
     interface IOptionType {
         label: string;
