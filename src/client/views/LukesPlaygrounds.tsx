@@ -9,6 +9,7 @@ import { IoEllipsisVerticalCircleOutline } from 'react-icons/io5';
 
 /* HOOK REACT EXAMPLE */
 const PlayGround = (props: PlayGroundProps) => {
+	const history = useHistory();
 	const { id } = useParams<{ id: string }>();
 
 	const [recipeIngreds, setRecipeIngreds] = useState<IRecipeIngredientsFull[]>([]);
@@ -29,15 +30,16 @@ const PlayGround = (props: PlayGroundProps) => {
 		});
 		console.log(result);
 
-		const ingredient_idArr = result.map(ingredient_id => {
-			return ingredient_id[0]
-		})
-		console.log(ingredient_idArr)
+		// const array_of_ingredientUpdates = result.map(ingredient_id => {
+		// 	return ingredient_id[0]
+		// })
+		// console.log(array_of_ingredientUpdates)
 
-		const ingredient_qtyArr = result.map(ingredient_qty => {
-			return ingredient_qty[1]
+		apiService(`/api/recipeingredients/multi_existing_qty/${id}`, `POST`, {array_of_ingredientUpdates: result})
+		.then(res => {
+			console.log(res)
+			history.push(`/recipe_details/${id}`);
 		})
-		console.log(ingredient_qtyArr)
 	};
 
 	useEffect(() => {

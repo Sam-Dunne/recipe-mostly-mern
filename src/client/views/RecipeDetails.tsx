@@ -82,18 +82,18 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
                     </div>
 
                 </div>
-                <div className="row d-flex justify-content-center align-items-center rounded p-3">
+                {(ingreds.length > 0) && <div className="row d-flex justify-content-center align-items-center rounded p-3">
                     <div className="card justify-content-center bg-primary p-5 col-12 col-md-8 col-lg-8">
                         <h2 className='text-info text-bold mx-auto mb-3'>Ingredients</h2>
 
                         <div className="card-body justify-content-center rounded shadow mx-auto bg-info pb-3 col-12 col-md-8 col-lg-10">
                             {ingreds?.map(ingred => (
-                                <h5 key={`option-${ingred.ingredient_id}`} className="card-text">{`-${ingred.name}`}</h5>
+                                <h5 key={`option-${ingred.ingredient_id}`} className="card-text">{`${ingred.ingredient_qty} ${ingred.name}`}</h5>
                             ))}
                         </div>
 
                     </div>
-                </div>
+                </div>}
             </section>
         </>
     );
