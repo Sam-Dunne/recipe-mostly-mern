@@ -71,7 +71,8 @@ const AddStepTwo = (props: AddStepTwoProps) => {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'That is okay, take me to the next step to edit quantities and measures for existing recipe ingredients !'
+                confirmButtonText: 'That is okay, take me to the next step to edit quantities and measures for existing recipe ingredients !',
+                cancelButtonText: 'No, cancel! Stay here and Let me double check'
             }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire(

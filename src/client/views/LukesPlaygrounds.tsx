@@ -15,9 +15,16 @@ const PlayGround = (props: PlayGroundProps) => {
 
 	const [recipeIngreds, setRecipeIngreds] = useState<IRecipeIngredientsFull[]>([]);
 
-	const [qtyValue, setQtyValue] = useState<string>('');
-	const handleSetQtyValue = (e: React.ChangeEvent<HTMLInputElement>) => setQtyValue(e.target.value.toString())
+	// v1
+	// const [qtyValue, setQtyValue] = useState<string>('');
+	// const handleSetQtyValue = (e: React.ChangeEvent<HTMLInputElement>) => setQtyValue(e.target.value.toString())
+	// v2
+	const [qtyValue, setQtyValue] = useState<{ [key: string]: string }>({});
 
+	const handleSetQtyValue = (e: React.ChangeEvent<HTMLInputElement>) =>
+	setQtyValue(prev => ({ ...prev, [e.target.name]: e.target.value }));
+
+	
 	const [qtyMeasure, setQtyMeasure] = useState<IFlavorTags>(null);;
 	// const handleSetQtyMeasure = (e: React.ChangeEvent<HTMLInputElement>) => setQtyMeasure(e.target.value.toString())
 
@@ -29,7 +36,7 @@ const PlayGround = (props: PlayGroundProps) => {
 	const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		// console.log('[raw state log]');
-		// console.log(ingredient_qty);
+		console.log(ingredient_qty);
 		let result = Object.keys(ingredient_qty).map(function (key) {
 			// Using toString() to convert key to string type
 			// Using obj[key] to retrieve key value
@@ -42,11 +49,11 @@ const PlayGround = (props: PlayGroundProps) => {
 			return;
 		}
 
-		apiService(`/api/recipeingredients/multi_existing_qty/${id}`, `POST`, { array_of_ingredientUpdates: result })
-			.then(res => {
-				console.log(res)
-				history.push(`/recipe_details/${id}`);
-			})
+		// apiService(`/api/recipeingredients/multi_existing_qty/${id}`, `POST`, { array_of_ingredientUpdates: result })
+		// 	.then(res => {
+		// 		console.log(res)
+		// 		history.push(`/recipe_details/${id}`);
+		// 	})
 	};
 
 	useEffect(() => {
@@ -64,7 +71,7 @@ const PlayGround = (props: PlayGroundProps) => {
 						<input
 							type='text'
 							placeholder='Quantos'
-							value={qtyValue}
+							value={qtyValue[ingred.ingredient_qty]}
 							onChange={handleSetQtyValue}
 						/>
 						<SingleSelectLocal setter={setQtyMeasure} />
