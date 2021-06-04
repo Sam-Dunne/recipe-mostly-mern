@@ -8,6 +8,7 @@ import gfm from 'remark-gfm';
 import { IFlavorTags, IIngredients, IRecipeIngredientsFull, IRecipes } from '../../interfaces';
 import MultiSelect from '../components/MultiSelect';
 import { Form } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 
 /* HOOK REACT EXAMPLE */
@@ -60,19 +61,39 @@ const AddStepTwo = (props: AddStepTwoProps) => {
 
     const handleAddIngredients = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        // setQtyValues([...qtyValues, { ingredient_qty: qtyValue }])
-        // setQtyValue('');
-        // console.log(qtyValues)
 
-        const array_of_ingredients = ingredients.map(ingredient => {
-            if (ingredient.id === ingredient.name) return;
-            return ingredient.id
-        }).filter(ingredient => ingredient)
+        if (selectedIngs.length === 0) {
+            // ???  Modal with option to stay or move on to next step ???
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You haven't added any new ingredients!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'That is okay, take me to the next step !'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Final Step here we come!',
+                        'Onward',
+                        'success'
+                    )
+                    history.push(`/single/${id}`)
+                }
+            })
+            return
+        }
 
-        apiService(`/api/recipeingredients/multi/${id}`, `POST`, { array_of_ingredients })
-            .then(res => {
-                history.push(`/single/${id}`)
-            });
+        // const array_of_ingredients = ingredients.map(ingredient => {
+        //     if (ingredient.id === ingredient.name) return;
+        //     return ingredient.id
+        // }).filter(ingredient => ingredient)
+
+        // apiService(`/api/recipeingredients/multi/${id}`, `POST`, { array_of_ingredients })
+        //     .then(res => {
+        //         history.push(`/single/${id}`)
+        //     });
 
     };
 
@@ -116,7 +137,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
 
             <Link to='/'>Link</Link>
 
-           {(ingreds.length > 0) && <div className="row d-flex justify-content-center align-items-center rounded p-3">
+            {(ingreds.length > 0) && <div className="row d-flex justify-content-center align-items-center rounded p-3">
                 <div className="card justify-content-center bg-primary p-5 col-12 col-md-8 col-lg-8">
                     <h2 className='text-info text-bold mx-auto mb-3'>Existing Recipe Ingredients</h2>
 
