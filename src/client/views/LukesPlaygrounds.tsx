@@ -22,16 +22,16 @@ const PlayGround = (props: PlayGroundProps) => {
 	const [qtyValue, setQtyValue] = useState<{ [key: string]: string }>({});
 
 	const handleSetQtyValue = (e: React.ChangeEvent<HTMLInputElement>) =>
-	setQtyValue(prev => ({ ...prev, [e.target.name]: e.target.value }));
+		setQtyValue(prev => ({ ...prev, [e.target.name]: e.target.value }));
 
-	
+
 	const [qtyMeasure, setQtyMeasure] = useState<IFlavorTags>(null);;
 	// const handleSetQtyMeasure = (e: React.ChangeEvent<HTMLInputElement>) => setQtyMeasure(e.target.value.toString())
 
 	const [ingredient_qty, setIngredient_Qty] = useState<{ [key: string]: string }>({});
 
 	const handleSetIngredient_Qty = (e: React.ChangeEvent<HTMLInputElement>) =>
-		setIngredient_Qty(prev => ({ ...prev, [e.target.name]: e.target.value }));
+		setIngredient_Qty(({ ...ingredient_qty, [e.target.name]: e.target.value }));
 
 	const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
@@ -57,8 +57,15 @@ const PlayGround = (props: PlayGroundProps) => {
 	};
 
 	useEffect(() => {
-		apiService(`/api/recipeingredients/${id}`).then(ingreds => setRecipeIngreds(ingreds));
+		apiService(`/api/recipeingredients/${id}`).then(ingreds => {
+			setRecipeIngreds(ingreds)
+
+			const ingsWithQtyz = ingreds.map(ing => ({ [ing.id]: ing.ingredient_qty }));
+			const objectifiedIngredz = Object.assign({}, ...ingsWithQtyz);
+			setIngredient_Qty(objectifiedIngredz)
+		});
 	}, []);
+	console.log(ingredient_qty);
 
 	return (
 		<section className="container my-3">
@@ -78,8 +85,8 @@ const PlayGround = (props: PlayGroundProps) => {
 						<input
 							name={ingred.ingredient_id}
 							type="text"
-							placeholder={ingred.ingredient_qty || 'Qty and Measure'}
-							value={ingredient_qty[ingred.ingredient_id] || ''}
+							placeholder={ingredient_qty[ingred.ingredient_id] || 'Qty and Measure'}
+							// value={ingred.ingredient_qty || 'Qty and Measure'}
 							onChange={handleSetIngredient_Qty}
 						/>
 						<h5 className="card-text">{`${ingred.name}`}</h5>
