@@ -7,8 +7,12 @@ import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
 import { IFlavorTags, IIngredients, IRecipeIngredientsFull, IRecipes } from '../../interfaces';
 import MultiSelect from '../components/MultiSelect';
-import { Form } from 'react-bootstrap';
+import { Dropdown, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
+import { IoEllipsisVerticalCircleOutline } from 'react-icons/io5';
+import { MdAddCircleOutline } from 'react-icons/md';
+import { GoHome } from 'react-icons/go';
+import { FiEdit } from 'react-icons/fi';
 
 
 /* HOOK REACT EXAMPLE */
@@ -102,13 +106,29 @@ const AddStepTwo = (props: AddStepTwoProps) => {
     return (
         <section className="container my-3">
             <div className='bg-primary rounded shadow mb-3 p-4'>
+                <div className="row justify-content-between align-items-center p-3">
+                    <h3 className="text-info text-center mb-1 ml-4">Add Ingredients to {recipe?.title}</h3>
 
-                <h3 className="text-info text-center mb-1">Add Ingredients and Flavor Tags</h3>
 
-                <h3 className='text-info text-center mb-3'>{`for "${recipe?.title}"`}</h3>
+                    <div className="btn-group mr-4">
+                        <button className="btn btn-lg" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <IoEllipsisVerticalCircleOutline className='bg-primary text-info icon' />
+                        </button>
+                        <div className="dropdown-menu dropdown-menu-right">
+                            <Dropdown.Item as="button">
+                                <Link to={`/users_recipes/${recipe?.user_id}`} className='btn btn-link border-light text-success'><GoHome />  All your recipes </Link>
+                            </Dropdown.Item>
+                            <Dropdown.Item as="button">
+                                <Link to={`/edit_recipe/${recipe?.id}`} className='btn btn-link border-light text-success'><FiEdit />  Recipe</Link>
+                            </Dropdown.Item>
 
+                        </div>
+                    </div>
+
+
+                </div>
                 <div>
-                    <h5 className="text-secondary ml-3">Add Ingredients</h5>
+                   
                     <MultiSelect setter={setSelectedIngs} type={'ingredients'} placeholder={'Ingredients'} />
                 </div>
 
