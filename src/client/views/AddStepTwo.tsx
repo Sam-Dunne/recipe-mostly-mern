@@ -71,12 +71,12 @@ const AddStepTwo = (props: AddStepTwoProps) => {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'That is okay, take me to the next step !'
+                confirmButtonText: 'That is okay, take me to the next step to edit quantities and measures for existing recipe ingredients !'
             }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire(
                         'Final Step here we come!',
-                        'Onward',
+                        'Remember to update qty and measure for ALL ingredients before submittal',
                         'success'
                     )
                     history.push(`/single/${id}`)
@@ -85,15 +85,15 @@ const AddStepTwo = (props: AddStepTwoProps) => {
             return
         }
 
-        // const array_of_ingredients = ingredients.map(ingredient => {
-        //     if (ingredient.id === ingredient.name) return;
-        //     return ingredient.id
-        // }).filter(ingredient => ingredient)
+        const array_of_ingredients = ingredients.map(ingredient => {
+            if (ingredient.id === ingredient.name) return;
+            return ingredient.id
+        }).filter(ingredient => ingredient)
 
-        // apiService(`/api/recipeingredients/multi/${id}`, `POST`, { array_of_ingredients })
-        //     .then(res => {
-        //         history.push(`/single/${id}`)
-        //     });
+        apiService(`/api/recipeingredients/multi/${id}`, `POST`, { array_of_ingredients })
+            .then(res => {
+                history.push(`/single/${id}`)
+            });
 
     };
 
