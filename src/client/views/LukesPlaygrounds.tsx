@@ -49,11 +49,11 @@ const PlayGround = (props: PlayGroundProps) => {
 			return;
 		}
 
-		// apiService(`/api/recipeingredients/multi_existing_qty/${id}`, `POST`, { array_of_ingredientUpdates: result })
-		// 	.then(res => {
-		// 		console.log(res)
-		// 		history.push(`/recipe_details/${id}`);
-		// 	})
+		apiService(`/api/recipeingredients/multi_existing_qty/${id}`, `POST`, { array_of_ingredientUpdates: result })
+			.then(res => {
+				console.log(res)
+				history.push(`/recipe_details/${id}`);
+			})
 	};
 
 	useEffect(() => {

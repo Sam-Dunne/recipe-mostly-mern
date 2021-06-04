@@ -85,12 +85,15 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
                             <h2 className='text-info text-bold mx-auto'>{recipe?.title}</h2>
                         </div>
                         {(ingreds.length == 0) &&
-                            <Link to={`/add_Ingredients/${id}`} className='btn btn-link bg-secondary border-light text-success mb-2 mx-auto col-4'><MdAddCircleOutline />  Ingredients</Link>
+                            <Link to={`/add_Ingredients/${id}`} className='btn btn-link bg-secondary border-light text-success mb-2 mx-auto col-4'>
+                                <MdAddCircleOutline />  Ingredients</Link>
                         }
                         <div className="card-body rounded shadow bg-info p-5">
                             <div className="row justify-content-around mb-4" >
                                 {recipeFlavorTags?.map(tag => (
-                                    <span className="badge badge-pill badge-success p-2" key={tag.id}>{tag.name} </span>
+                                    <div key={tag.id}>
+                                        <Link to={`/by_flavor_tag/${tag.id}`}><span className="badge badge-pill badge-success p-2" >{tag.name} </span></Link>
+                                    </div>
                                 ))}
                             </div>
                             <p className='card-text'>{Moment(recipe?.created_at).format("MMM Do YY")}</p>
