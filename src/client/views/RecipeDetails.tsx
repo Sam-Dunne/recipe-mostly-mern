@@ -36,8 +36,9 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
 
     }, []);
 
-    const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        console.log(`button`)
     };
 
     return (
@@ -103,7 +104,11 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
                             </div>
 
                         </div>
+                        <div className="row justify-content-end mx-3 mt-3">
+                            <button className="btn btn-danger" onClick={handleDelete}>Delete this Recipe</button>
+                        </div>
                     </div>
+
 
                 </div>
                 {(ingreds.length > 0) && <div className="row d-flex justify-content-center align-items-center rounded p-3">
