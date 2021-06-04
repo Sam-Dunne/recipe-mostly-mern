@@ -119,12 +119,13 @@ router.put('/:id', async (req: IReqPayload, res, next) => {
     }
 });
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', authenticate('jwt'), async (req: IReqPayload, res, next) => {
     const id = req.params.id;
-
+    const user_id = req.user.id
     try {
         const results = await db.recipes.nuke(id)
-        res.json(results);
+        res.json({ message: "Success! Recipe successfully created", recipeID: id, user_id });
+
     } catch (error) {
         console.log(error.message);
         res.status(500).json({ message: 'goof'})

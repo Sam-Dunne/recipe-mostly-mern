@@ -15,6 +15,8 @@ import { MdAddCircleOutline } from 'react-icons/md';
 import { GoHome } from 'react-icons/go'
 import { FiEdit } from 'react-icons/fi'
 import { IoEllipsisVerticalCircleOutline } from 'react-icons/io5';
+import Swal from 'sweetalert2';
+
 
 /* HOOK REACT EXAMPLE */
 const RecipeDetails = (props: RecipeDetailsProps) => {
@@ -38,7 +40,33 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
 
     const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        console.log(`button`)
+        console.log(`button`);
+
+        // ???  Modal with option to stay or move on to next step ???
+        Swal.fire({
+            title: 'Are you sure you want to DELETE this recipe?',
+            text: "This Action is Permanent!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, I want to DELETE this recipe!',
+            cancelButtonText: 'No, cancel!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    `${recipe?.title} Recipe has been deleted`,
+                    'success'
+                )
+                history.push(`/users_recipes/${recipe?.user_id}`)
+            }
+        })
+
+        // apiService(`/api/recipes/${id}`, `DELETE`)
+        //     .then(res => {
+        //         alert(`Recipe successfully Deleted`)
+        //         history.push(`/users_recipes/${res.user_id}`)
+        //     });
     };
 
     return (
