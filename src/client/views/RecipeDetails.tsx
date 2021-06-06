@@ -54,19 +54,17 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
             cancelButtonText: 'No, cancel!'
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire(
-                    `${recipe?.title} Recipe has been deleted`,
-                    'success'
-                )
-                history.push(`/users_recipes/${recipe?.user_id}`)
+                apiService(`/api/recipes/${id}`, `DELETE`)
+                    .then(res => {
+                        Swal.fire(
+                            `${recipe?.title} Recipe has been deleted`,
+                            'success'
+                        )
+                        history.push(`/users_recipes/${res.user_id}`)
+                    });
             }
         })
 
-        // apiService(`/api/recipes/${id}`, `DELETE`)
-        //     .then(res => {
-        //         alert(`Recipe successfully Deleted`)
-        //         history.push(`/users_recipes/${res.user_id}`)
-        //     });
     };
 
     return (
@@ -145,7 +143,7 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
 
                         <div className="card-body justify-content-center rounded shadow mx-auto bg-info pb-3 col-12 col-md-8 col-lg-10">
                             {ingreds?.map(ingred => (
-                                <h5 key={`option-${ingred.ingredient_id}`} className="card-text">{`${ingred.ingredient_qty || "Zero"} ${ingred.name}`}</h5>
+                                <h5 key={`option-${ingred.ingredient_id}`} className="card-text">{`${ingred.ingredient_qty || "***Zero***"} ${ingred.name}`}</h5>
                             ))}
                         </div>
 
