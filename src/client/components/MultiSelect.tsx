@@ -6,6 +6,7 @@ import { apiService } from '../utils/api-services'
 import { IIngredients, IRecipeIngredientsFull } from '../../interfaces';
 import { OptionProps } from "react-select/src/types";
 import Creatable, { makeCreatableSelect } from 'react-select/creatable';
+import Select from 'react-select';
 
 
 
@@ -30,13 +31,13 @@ const MultiSelect = (props: MultiSelectProps) => {
 
             // for fetching existing recipeIngredients to be filter selectableItems
             apiService(`/api/recipeingredients/${props.recipeId?.id}`)
-                .then(ingreds =>setIngreds(ingreds));
+                .then(ingreds => setIngreds(ingreds));
         }
 
         apiService(`/api/${props.type}`)
             .then(selectableIngredients => setAllSelectableItems(selectableIngredients))
 
-        
+
     }, []);
 
     useEffect(() => {
@@ -91,21 +92,34 @@ const MultiSelect = (props: MultiSelectProps) => {
 
     return (
         <section className="container mb-4">
-            <Creatable
-                options={itemOptions}
-                onChange={(e: any) => handleUpdateSubmit(e)}
-                isMulti
-                className="basic-multi-select bg-info"
-                classNamePrefix="select"
-                placeholder={`Choose ${props.placeholder}...`}
-            />
+            {(props.type === 'ingredients') &&
+                <Creatable
+                    options={itemOptions}
+                    onChange={(e: any) => handleUpdateSubmit(e)}
+                    isMulti
+                    className="basic-multi-select bg-info"
+                    classNamePrefix="select"
+                    placeholder={`Choose ${props.placeholder}...`}
+                />
+            }
+
+            {(props.type === 'flavorTags') &&
+                <Select
+                    options={itemOptions}
+                    onChange={(e: any) => handleUpdateSubmit(e)}
+                    isMulti
+                    className="basic-multi-select bg-info"
+                    classNamePrefix="select"
+                    placeholder={`Choose ${props.placeholder}...`}
+                />
+            }
         </section>
     );
 };
 
 interface MultiSelectProps {
     setter: React.Dispatch<React.SetStateAction<IIngredients[]>>
-    recipeId?: { id: any } 
+    recipeId?: { id: any }
     type: 'flavorTags' | 'ingredients'
     placeholder: 'Flavor Tags' | 'Ingredients'
 }
