@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { Link } from 'react-router-dom';
 import { apiService } from '../utils/api-services'
 import { IFlavorTags, IIngredients } from '../../interfaces';
-import Select from 'react-select';
 import { OptionProps } from "react-select/src/types";
+import Select from 'react-select';
 
 
 

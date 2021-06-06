@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { IRecipeFlavorTagsFull, IRecipeIngredientsFull, IUserRecipes } from '../../interfaces';
 import { apiService } from '../utils/api-services';
-import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { GoHome } from 'react-icons/go'
 import { FiEdit } from 'react-icons/fi'
@@ -36,12 +36,10 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
             .then(recipeFlavorTags => setRecipeFlavorTags(recipeFlavorTags));
         apiService(`/api/recipeingredients/${id}`)
             .then(ingreds => setIngreds(ingreds));
-
-
     }, []);
 
+    // trigger for conditional render of Link to AddStepThree if any recipeIngredient does not have a ingredient_qty value
     useEffect(() => {
-
         ingreds.map(ingred => {
             if (!ingred.ingredient_qty) {
                 setMissingIngred_qty(true);
@@ -54,7 +52,7 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
         e.preventDefault();
         console.log(`button`);
 
-        // ???  Modal with option to stay or move on to next step ???
+        // Modal with option to stay or move on to next step
         Swal.fire({
             title: 'Are you sure you want to DELETE this recipe?',
             text: "This Action is Permanent!",

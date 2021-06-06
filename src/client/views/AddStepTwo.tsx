@@ -3,16 +3,13 @@ import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { apiService } from '../utils/api-services'
-import ReactMarkdown from 'react-markdown';
-import gfm from 'remark-gfm';
-import { IFlavorTags, IIngredients, IRecipeIngredientsFull, IRecipes } from '../../interfaces';
-import MultiSelect from '../components/MultiSelect';
-import { Button, Dropdown, Form } from 'react-bootstrap';
-import Swal from 'sweetalert2';
+import { IIngredients, IRecipeIngredientsFull, IRecipes } from '../../interfaces';
+import { Button, Dropdown } from 'react-bootstrap';
 import { IoEllipsisVerticalCircleOutline } from 'react-icons/io5';
-import { MdAddCircleOutline } from 'react-icons/md';
 import { GoHome } from 'react-icons/go';
 import { FiEdit } from 'react-icons/fi';
+import MultiSelect from '../components/MultiSelect';
+import Swal from 'sweetalert2';
 
 
 /* HOOK REACT EXAMPLE */
@@ -29,10 +26,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
     // const [qtyValues, setQtyValues] = useState<{ ingredient_qty: string }[]>([])
     const [qtyValue, setQtyValue] = useState<string>('');
     const handleSetQtyValue = (e: React.ChangeEvent<HTMLInputElement>) => setQtyValue(e.target.value);
-    // Arrays of objects for the Select Fields
-    const [flavorTags, setFlavorTags] = useState<IFlavorTags[]>([]);
-
-    const [ingredient_qty, setIngredient_Qty] = useState<string>('');
+    
 
     const [ingredients, setIngredients] = useState<IIngredients[]>([]);
 
@@ -46,7 +40,6 @@ const AddStepTwo = (props: AddStepTwoProps) => {
     }, [])
 
     useEffect(() => {
-
         selectedIngs?.forEach(ing => {
             if (ing.id === ing.name) {
                 apiService(`/api/ingredients`, "POST", { name: ing.name })
@@ -108,8 +101,6 @@ const AddStepTwo = (props: AddStepTwoProps) => {
             <div className='bg-primary rounded shadow mb-3 p-4'>
                 <div className="row justify-content-between align-items-center p-3">
                     <h3 className="text-info text-center mb-1 ml-4">Add Ingredients to {recipe?.title}</h3>
-
-
                     <div className="btn-group mr-4">
                         <button className="btn btn-lg" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <IoEllipsisVerticalCircleOutline className='bg-primary text-info icon' />
@@ -124,43 +115,17 @@ const AddStepTwo = (props: AddStepTwoProps) => {
 
                         </div>
                     </div>
-
-
                 </div>
                 <div>
-
-                    <MultiSelect setter={setSelectedIngs} type={'ingredients'} placeholder={'Ingredients'} />
+                    <MultiSelect setter={setSelectedIngs} type={'ingredients'} recipeId={{id}} placeholder={'Ingredients'} />
                 </div>
 
-
-                {/* <div className='row justify-content-around mb-3'>
-                    <form className="form-group col-md-5">
-                        <input className="form-control bg-info" value={qtyValue} onChange={handleSetQtyValue} id="" placeholder='quantity/measure'></input>
-                    </form>
-                </div>
-
-                <div className="row justify-content-center align-items-center">
-                    <div className="card rounded mb-3 bg-info col-12 col-md-6 ">
-                        <h3 className='card-text mb-3 text-center mx-auto bg-info'>{qtyValue} {ingredients[0]?.name} ,</h3>
-                    </div>
-                </div>
-                <div className='row justify-content-around mb-3'>
-                    <div className="form-group col-md-5">
-                        {qtyValues?.map((qtyValue, i) => (
-                            <div key={i} className="col-6">
-                                <div className="card">{qtyValue.ingredient_qty}</div>
-                            </div>
-                        ))}
-                    </div>
-                </div> */}
                 <div className='row justify-content-center mt-4'>
                     <Button variant='primary' type="submit" className='btn-link mx-auto border-info text-info p-3 font-weight-bold' onClick={handleAddIngredients}>
                         Submit
                      </Button>
                 </div>
             </div>
-
-            <Link to='/'>Link</Link>
 
             {(ingreds.length > 0) && <div className="row d-flex justify-content-center align-items-center rounded p-3">
                 <div className="card justify-content-center bg-primary p-5 col-12 col-md-8 col-lg-8">

@@ -1,12 +1,10 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { Link } from 'react-router-dom';
 import { apiService } from '../utils/api-services';
+import { IFlavorTags, IRecipeIngredientsFull } from '../../interfaces';
 
-import { IFlavorTags, IIngredients, IRecipeingredients, IRecipeIngredientsFull } from '../../interfaces';
-import { IoEllipsisVerticalCircleOutline } from 'react-icons/io5';
-import SingleSelectLocal from '../components/SingleSelectLocal';
+
 
 /* HOOK REACT EXAMPLE */
 const AddStepThree = (props: AddStepThreeProps) => {

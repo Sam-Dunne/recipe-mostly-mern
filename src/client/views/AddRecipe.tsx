@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { apiService } from '../utils/api-services'
+import { IFlavorTags } from '../../interfaces';
+import { Form } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
-import { IFlavorTags } from '../../interfaces';
 import MultiSelect from '../components/MultiSelect';
-import { Form } from 'react-bootstrap';
 
 
 /* HOOK REACT EXAMPLE */
@@ -59,7 +59,7 @@ const AddRecipe = (props: AddRecipeProps) => {
 
                 <div>
                     <h5 className="text-secondary ml-3">Select Tags</h5>
-                    <MultiSelect setter={setFlavorTags} type={'flavorTags'} placeholder={'Flavor Tags'} />
+                    <MultiSelect setter={setFlavorTags} recipeId={null} type={'flavorTags'} placeholder={'Flavor Tags'} />
                 </div>
 
                 <input className='form-control mb-3 bg-info' value={title} onChange={handleSetTitle} placeholder='Title' />

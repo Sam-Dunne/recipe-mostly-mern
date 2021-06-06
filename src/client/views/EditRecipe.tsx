@@ -4,10 +4,10 @@ import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { IUserRecipes } from '../../interfaces';
 import { apiService } from '../utils/api-services';
+import { Form } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
 import Moment from 'moment';
-import { Form } from 'react-bootstrap';
 import recipeFlavorTags from '../../server/db/recipeFlavorTags';
 
 

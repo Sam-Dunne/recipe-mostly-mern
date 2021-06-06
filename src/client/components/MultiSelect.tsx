@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { apiService } from '../utils/api-services'
-import { IIngredients } from '../../interfaces';
+import { IIngredients, IRecipeIngredientsFull } from '../../interfaces';
 import { OptionProps } from "react-select/src/types";
 import Creatable, { makeCreatableSelect } from 'react-select/creatable';
 
@@ -19,16 +19,38 @@ const MultiSelect = (props: MultiSelectProps) => {
 
     const [selectableItems, setAllSelectableItems] = useState<IIngredients[]>([]);
 
+    const [ingreds, setIngreds] = useState<IRecipeIngredientsFull[]>([]);
+
     const [selectedItemsArray, setSelectedItemsArray] = useState<IOptionType[]>([]);
 
     const [itemOptions, setItemOptions] = useState<IOptionType[]>([]);
 
     useEffect(() => {
+        if (props.type === 'ingredients') {
+
+            // for fetching existing recipeIngredients to be filter selectableItems
+            apiService(`/api/recipeingredients/${props.recipeId?.id}`)
+                .then(ingreds =>setIngreds(ingreds));
+        }
+
         apiService(`/api/${props.type}`)
             .then(selectableIngredients => setAllSelectableItems(selectableIngredients))
+
+        
     }, []);
 
     useEffect(() => {
+        console.log(selectableItems)
+        console.log(ingreds)
+        // const selectableItemsFiltered = ingreds.map(ingred => (
+        //     selectableItems.map(item => {
+        //         if (item.id === ingred.ingredient_id) return;
+        //         return item.id;
+        //     }).filter(ingred => item)
+        // ))
+        // trying to filter existing recipeIngredients from the dropdown
+        // const selectableItemsFiltered = selectableItems.filter(ingred => ingreds.includes(ingred))
+        // console.log(selectableItemsFiltered)
         type ISelectOption = Pick<OptionProps, "label" | "value">;
         // get  data in array format to work with label+value
         const Options = (selectableItems || []).length
@@ -39,7 +61,7 @@ const MultiSelect = (props: MultiSelectProps) => {
             : []
         setItemOptions(Options)
     }, [selectableItems]);
-  
+
 
     useEffect(() => {
         if (selectedItemsArray.length === 0) return;
@@ -83,6 +105,7 @@ const MultiSelect = (props: MultiSelectProps) => {
 
 interface MultiSelectProps {
     setter: React.Dispatch<React.SetStateAction<IIngredients[]>>
+    recipeId?: { id: any } 
     type: 'flavorTags' | 'ingredients'
     placeholder: 'Flavor Tags' | 'Ingredients'
 }
