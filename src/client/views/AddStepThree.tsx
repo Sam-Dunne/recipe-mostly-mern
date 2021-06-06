@@ -9,7 +9,7 @@ import { IoEllipsisVerticalCircleOutline } from 'react-icons/io5';
 import SingleSelectLocal from '../components/SingleSelectLocal';
 
 /* HOOK REACT EXAMPLE */
-const PlayGround = (props: PlayGroundProps) => {
+const AddStepThree = (props: AddStepThreeProps) => {
 	const history = useHistory();
 	const { id } = useParams<{ id: string }>();
 
@@ -102,6 +102,6 @@ const PlayGround = (props: PlayGroundProps) => {
 	);
 };
 
-interface PlayGroundProps { }
+interface AddStepThreeProps { }
 
-export default PlayGround;
+export default AddStepThree;

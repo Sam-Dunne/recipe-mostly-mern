@@ -84,7 +84,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
                         'Remember to update qty and measure for ALL ingredients before submittal',
                         'success'
                     )
-                    history.push(`/single/${id}`)
+                    history.push(`/add_qtymeasure/${id}`)
                 }
             })
             return
@@ -97,7 +97,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
 
         apiService(`/api/recipeingredients/multi/${id}`, `POST`, { array_of_ingredients })
             .then(res => {
-                history.push(`/single/${id}`)
+                history.push(`/add_qtymeasure/${id}`)
             });
 
     };

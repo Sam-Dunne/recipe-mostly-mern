@@ -2,7 +2,6 @@ import * as React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // import PrivateRoute from './utils/PrivateRoute';
 import Navbah from './components/Navbar';
-import Playground from './views/LukesPlaygrounds';
 import AddRecipe from './views/AddRecipe';
 import AddStepTwo from './views/AddStepTwo';
 import ByFlavorTag from './views/ByFlavorTag';
@@ -12,6 +11,7 @@ import Login from './views/Login';
 import RecipeDetails from './views/RecipeDetails';
 import Register from './views/Register';
 import UsersRecipes from './views/UserRecipes';
+import AddStepThree from './views/AddStepThree';
 
 /* HOOK REACT EXAMPLE */
 const App = (props: AppProps) => {
@@ -44,8 +44,8 @@ const App = (props: AppProps) => {
 							<Route exact path='/add_Ingredients/:id'>
 								<AddStepTwo />
 							</Route>
-							<Route exact path='/single/:id'>
-								<Playground />
+							<Route exact path='/add_qtymeasure/:id'>
+								<AddStepThree />
 							</Route>
 							<Route exact path='/login'>
 								<Login />
