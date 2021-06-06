@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { apiService } from '../utils/api-services'
 import { IFlavorTags } from '../../interfaces';
-import { Form } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
 import MultiSelect from '../components/MultiSelect';
@@ -34,6 +34,10 @@ const AddRecipe = (props: AddRecipeProps) => {
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
+        if (!title) {
+            alert('no title')
+            return
+        }
         apiService('/api/recipes/', 'POST', {title, summary, instructions})
         .then(res => {
             alert(res.message)
@@ -83,12 +87,14 @@ const AddRecipe = (props: AddRecipeProps) => {
                         </div>
                     </div>
                 </div>
-
+                <div className='row justify-content-center mt-4'>
+                    <Button variant='primary' type="submit" className='btn-link mx-auto border-info text-info p-3 font-weight-bold' onClick={handleSubmit}>
+                        Submit
+                     </Button>
+                </div>
 
             </Form>
-            <button onClick={handleSubmit}>Submit</button>
 
-            <Link to='/'>Link</Link>
         </section>
     );
 };
