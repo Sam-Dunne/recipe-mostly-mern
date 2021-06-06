@@ -90,22 +90,14 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
                             <Dropdown.Item as="button">
                                 <Link to={`/edit_recipe/${recipe?.id}`} className='btn btn-link border-light text-success'><FiEdit />  Recipe</Link>
                             </Dropdown.Item>
+                            <div className="row justify-content-end mx-3 mt-3">
+                                <button className="btn btn-danger" onClick={handleDelete}>Delete this Recipe</button>
+                            </div>
 
                         </div>
                     </div>
-                    {/* <DropdownButton variant='info btn-lg' id="dropdown-item-button" className='btn rounded p-3' title="">
-
-                        <Dropdown.Item as="button">
-                            <Link to={`/add_Ingredients/${id}`} className='btn btn-link border-light text-success'><MdAddCircleOutline />  Ingredients</Link>
-                        </Dropdown.Item>
-                        <Dropdown.Item as="button">
-                            <Link to={`/users_recipes/${recipe?.user_id}`} className='btn btn-link border-light text-success'><GoHome />  All your recipes </Link>
-                        </Dropdown.Item>
-                        <Dropdown.Item as="button">
-                            <Link to={`/edit_recipe/${recipe?.id}`} className='btn btn-link border-light text-success'><FiEdit />  Recipe</Link>
-                        </Dropdown.Item>
-                    </DropdownButton> */}
                 </div>
+
                 <div className="row d-flex justify-content-center align-items-center rounded p-3">
                     <div className="card bg-primary p-5 col-12 col-md-8 col-lg-8">
                         <div className="row bg-primary justify-content-between align-items-center mb-3 mx-auto col-12 col-md-8 col-lg-10 ">
@@ -130,9 +122,7 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
                             </div>
 
                         </div>
-                        <div className="row justify-content-end mx-3 mt-3">
-                            <button className="btn btn-danger" onClick={handleDelete}>Delete this Recipe</button>
-                        </div>
+                     
                     </div>
 
 
