@@ -26,7 +26,7 @@ const SingleSelect = (props: SingleSelectProps) => {
 
     useEffect(() => {
         apiService(`/api/${props.type}`)
-            .then(selectableIngredients => setAllSelectableItems(selectableIngredients))
+            .then(selectableItems => setAllSelectableItems(selectableItems))
     }, []);
 
     useEffect(() => {
@@ -62,6 +62,9 @@ const SingleSelect = (props: SingleSelectProps) => {
 
     const handleUpdateSubmit = (e: any) => {
         setSelectedItem(e);
+        console.log(e.value)
+        history.push(`/by_flavor_tag/${e.value}`)
+
     };
 
     if (!selectableItems.length) {

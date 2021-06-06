@@ -23,22 +23,11 @@ const UsersRecipes = (props: UsersRecipesProps) => {
             .then(recipes => setRecipes(recipes))
     }, []);
 
-    // useEffect(() => {
-    //     apiService(`api/recipes/user_recipes_flavortag/`, 'POST', {flavor_tag_id: `3` })
-    //         .then(recipes => setRecipes(recipes))
-    // }, [])
-
-    const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        history.push(`/by_flavor_tag/${flavorTag.id}`)
-    };
-
     return (
         <section className="container my-2">
             <h3 className="text-secondary text-center">Users Recipes</h3>
             <div>
-                <h5 className="text-primary m-3">Select Tags</h5>
-                <button className="btn btn-link border" onClick={handleSubmit}>Filter</button>
+                
                 <SingleSelect setter={setFlavorTag} type={'flavorTags'} placeholder={'Flavor Tags'} />
 
             </div>
