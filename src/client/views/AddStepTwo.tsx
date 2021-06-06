@@ -7,7 +7,7 @@ import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
 import { IFlavorTags, IIngredients, IRecipeIngredientsFull, IRecipes } from '../../interfaces';
 import MultiSelect from '../components/MultiSelect';
-import { Dropdown, Form } from 'react-bootstrap';
+import { Button, Dropdown, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { IoEllipsisVerticalCircleOutline } from 'react-icons/io5';
 import { MdAddCircleOutline } from 'react-icons/md';
@@ -128,7 +128,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
 
                 </div>
                 <div>
-                   
+
                     <MultiSelect setter={setSelectedIngs} type={'ingredients'} placeholder={'Ingredients'} />
                 </div>
 
@@ -153,8 +153,12 @@ const AddStepTwo = (props: AddStepTwoProps) => {
                         ))}
                     </div>
                 </div> */}
+                <div className='row justify-content-center mt-4'>
+                    <Button variant='primary' type="submit" className='btn-link mx-auto border-info text-info p-3 font-weight-bold' onClick={handleAddIngredients}>
+                        Submit
+                     </Button>
+                </div>
             </div>
-            <button onClick={handleAddIngredients}>Submit</button>
 
             <Link to='/'>Link</Link>
 
