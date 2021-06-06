@@ -2,20 +2,17 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { IRecipeFlavorTags, IRecipeFlavorTagsFull, IRecipeIngredientsFull, IUserRecipes } from '../../interfaces';
+import { IRecipeFlavorTagsFull, IRecipeIngredientsFull, IUserRecipes } from '../../interfaces';
 import { apiService } from '../utils/api-services';
-import ReactMarkdown from 'react-markdown';
-import gfm from 'remark-gfm';
-
-import Moment from 'moment';
-import recipeFlavorTags from '../../server/db/recipeFlavorTags';
-import recipeIngredients from '../../server/db/recipeIngredients';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { GoHome } from 'react-icons/go'
 import { FiEdit } from 'react-icons/fi'
 import { IoEllipsisVerticalCircleOutline } from 'react-icons/io5';
 import { TiDocumentDelete } from 'react-icons/ti';
+import ReactMarkdown from 'react-markdown';
+import gfm from 'remark-gfm';
+import Moment from 'moment';
 import Swal from 'sweetalert2';
 
 
@@ -23,8 +20,11 @@ import Swal from 'sweetalert2';
 const RecipeDetails = (props: RecipeDetailsProps) => {
     const history = useHistory();
     const { id } = useParams<{ id: string }>();
-    const [x, setx] = useState<string>('');
-    const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
+    // const [x, setx] = useState<string>('');
+    // const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
+
+    const [missingIngred_qty, setMissingIngred_qty] = useState<boolean>(false);
+
     const [recipe, setRecipe] = useState<IUserRecipes>(null);
     const [recipeFlavorTags, setRecipeFlavorTags] = useState<IRecipeFlavorTagsFull[]>([]);
     const [ingreds, setIngreds] = useState<IRecipeIngredientsFull[]>([]);
@@ -37,7 +37,18 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
         apiService(`/api/recipeingredients/${id}`)
             .then(ingreds => setIngreds(ingreds));
 
+
     }, []);
+
+    useEffect(() => {
+
+        ingreds.map(ingred => {
+            if (!ingred.ingredient_qty) {
+                setMissingIngred_qty(true);
+                return
+            }
+        })
+    }, [ingreds])
 
     const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -89,7 +100,7 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
                                 <Link to={`/users_recipes/${recipe?.user_id}`} className='btn btn-link border-light text-success'><GoHome />  All your recipes </Link>
                             </Dropdown.Item>
                             <Dropdown.Item as="button">
-                                <Link to={`/edit_recipe/${recipe?.id}`} className='btn btn-link border-light text-success'><FiEdit />  Recipe</Link>
+                                <Link to={`/edit_recipe/${recipe?.id}`} className='btn btn-link border-light text-success'><FiEdit />  Recipe Body</Link>
                             </Dropdown.Item>
                             <button className="btn mx-4" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <TiDocumentDelete className='bg-info text-danger' /><span> Delete</span>
@@ -113,6 +124,11 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
                             <Link to={`/add_Ingredients/${id}`} className='btn btn-link bg-secondary border-light text-success mb-2 mx-auto col-4'>
                                 <MdAddCircleOutline />  Ingredients</Link>
                         }
+                        {(missingIngred_qty) &&
+                            <Link to={`/add_qtymeasure/${id}`} className='btn btn-link bg-secondary border-light text-success mb-2 mx-auto col-4'>
+                                <MdAddCircleOutline />  Some Ingredients are missing values. Fix here</Link>
+                        }
+
                         <div className="card-body rounded shadow bg-info p-5">
                             <div className="row justify-content-around mb-4" >
                                 {recipeFlavorTags?.map(tag => (

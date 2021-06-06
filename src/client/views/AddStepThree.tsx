@@ -68,36 +68,34 @@ const AddStepThree = (props: AddStepThreeProps) => {
 	console.log(ingredient_qty);
 
 	return (
-		<section className="container my-3">
-			<div className="p-4 mb-3 rounded shadow bg-primary">
-				<h3 className="mb-1 text-center text-info">Add Qty & Measure</h3>
+		<section className="container my-3 col-12 col-md-10 col-lg-8">
+			<div className="p-4 mb-3 rounded shadow bg-primary ">
+				<h3 className="mb-3 text-center text-info">Add Qty & Measure</h3>
 				{recipeIngreds?.map(ingred => (
 					<div
 						key={`option-${ingred.ingredient_id}`}
-						className="pb-3 mx-auto mb-2 rounded shadow card-body justify-content-center bg-info col-12 col-md-8 col-lg-10">
-						<input
-							type='text'
-							placeholder='Quantos'
-							value={qtyValue[ingred.ingredient_qty]}
-							onChange={handleSetQtyValue}
-						/>
-						<SingleSelectLocal setter={setQtyMeasure} />
-						<input
-							name={ingred.ingredient_id}
-							type="text"
-							placeholder={ingredient_qty[ingred.ingredient_id] || 'Qty and Measure'}
-							// value={ingred.ingredient_qty || 'Qty and Measure'}
-							onChange={handleSetIngredient_Qty}
-						/>
-						<h5 className="card-text">{`${ingred.name}`}</h5>
+						className="pb-3 mx-auto mb-2 rounded shadow card-body justify-content-center bg-info col-12 col-md-10 col-lg-10">
+						<div className="row align-items-center justify-content-between mx-3">
+
+							<input
+								name={ingred.ingredient_id}
+								type="text"
+								placeholder={ingredient_qty[ingred.ingredient_id] || 'Qty and Measure'}
+								// value={ingred.ingredient_qty || 'Qty and Measure'}
+								onChange={handleSetIngredient_Qty}
+							/>
+							<h5 className="card-text mx-3">  {`${ingred.name}`}</h5>
+						</div>
 					</div>
 				))}
+				<div className='row justify-content-center'>
+					<button className="border btn btn-link btn-secondary mx-auto" onClick={handleSubmit}>
+						Submit
+					</button>
+				</div>
 			</div>
-			<button className="border btn btn-link btn-secondary" onClick={handleSubmit}>
-				Filter
-			</button>
 
-			<Link to="/">Link</Link>
+
 		</section>
 	);
 };
