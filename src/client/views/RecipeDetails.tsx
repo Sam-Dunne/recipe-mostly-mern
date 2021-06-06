@@ -15,6 +15,7 @@ import { MdAddCircleOutline } from 'react-icons/md';
 import { GoHome } from 'react-icons/go'
 import { FiEdit } from 'react-icons/fi'
 import { IoEllipsisVerticalCircleOutline } from 'react-icons/io5';
+import { TiDocumentDelete } from 'react-icons/ti';
 import Swal from 'sweetalert2';
 
 
@@ -90,8 +91,13 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
                             <Dropdown.Item as="button">
                                 <Link to={`/edit_recipe/${recipe?.id}`} className='btn btn-link border-light text-success'><FiEdit />  Recipe</Link>
                             </Dropdown.Item>
-                            <div className="row justify-content-end mx-3 mt-3">
-                                <button className="btn btn-danger" onClick={handleDelete}>Delete this Recipe</button>
+                            <button className="btn mx-4" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <TiDocumentDelete className='bg-info text-danger' /><span> Delete</span>
+                            </button>
+                            <div className="dropdown-menu mx-auto">
+                                <div className="row justify-content-center mx-3 mt-3">
+                                    <button className="btn btn-danger" onClick={handleDelete}>Delete this Recipe</button>
+                                </div>
                             </div>
 
                         </div>
@@ -122,7 +128,7 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
                             </div>
 
                         </div>
-                     
+
                     </div>
 
 
