@@ -7,7 +7,7 @@ import { IIngredients, IRecipeIngredientsFull } from '../../interfaces';
 import { OptionProps } from "react-select/src/types";
 import Creatable, { makeCreatableSelect } from 'react-select/creatable';
 import Select from 'react-select';
-
+import { mergeAndFilter } from '../utils/mergeAndFilter';
 
 
 /* HOOK REACT EXAMPLE */
@@ -41,17 +41,8 @@ const MultiSelect = (props: MultiSelectProps) => {
     }, []);
 
     useEffect(() => {
-        console.log(selectableItems)
-        console.log(ingreds)
-        // const selectableItemsFiltered = ingreds.map(ingred => (
-        //     selectableItems.map(item => {
-        //         if (item.id === ingred.ingredient_id) return;
-        //         return item.id;
-        //     }).filter(ingred => item)
-        // ))
-        // trying to filter existing recipeIngredients from the dropdown
-        // const selectableItemsFiltered = selectableItems.filter(ingred => ingreds.includes(ingred))
-        // console.log(selectableItemsFiltered)
+        const result = mergeAndFilter(selectableItems, ingreds);
+        console.log(result);
         type ISelectOption = Pick<OptionProps, "label" | "value">;
         // get  data in array format to work with label+value
         const Options = (selectableItems || []).length
