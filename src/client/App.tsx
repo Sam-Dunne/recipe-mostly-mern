@@ -12,6 +12,7 @@ import RecipeDetails from './views/RecipeDetails';
 import Register from './views/Register';
 import UsersRecipes from './views/UserRecipes';
 import AddStepThree from './views/AddStepThree';
+import Footer from './components/Footer';
 
 /* HOOK REACT EXAMPLE */
 const App = (props: AppProps) => {
@@ -57,6 +58,7 @@ const App = (props: AppProps) => {
 					</div>
 				</main>
 			</div>
+			<Footer />
 		</BrowserRouter>
 	);
 };

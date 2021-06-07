@@ -28,7 +28,7 @@ $theme-colors: (
 };
 
 #wrapper {
-    min-height: 100vh
+    min-height: 90vh
 };
 
 #navbar-svg {
@@ -46,6 +46,11 @@ $theme-colors: (
     height: 45px;
     width: 45px;
     // margin-right: 10px
+}
+
+#footer {
+    min-height: 10vh;
+    max-height: fit-content;
 }
 
 // #svg-wrapper {
