@@ -13,6 +13,7 @@ import Register from './views/Register';
 import UsersRecipes from './views/UserRecipes';
 import AddStepThree from './views/AddStepThree';
 import Footer from './components/Footer';
+import PrivateRoute from './utils/PrivateRoute';
 
 /* HOOK REACT EXAMPLE */
 const App = (props: AppProps) => {
@@ -27,27 +28,27 @@ const App = (props: AppProps) => {
 							<Route exact path='/'>
 								<Landing />
 							</Route>
-							<Route exact path='/edit_recipe/:id'>
+							<PrivateRoute exact path='/edit_recipe/:id'>
 								<EditRecipe />
-							</Route>
-							<Route exact path='/recipe_details/:id'>
+							</PrivateRoute>
+							<PrivateRoute exact path='/recipe_details/:id'>
 								<RecipeDetails />
-							</Route>
-							<Route exact path='/users_recipes/:id'>
+							</PrivateRoute>
+							<PrivateRoute exact path='/users_recipes/:id'>
 								<UsersRecipes />
-							</Route>
-							<Route exact path='/by_flavor_tag/:id'>
+							</PrivateRoute>
+							<PrivateRoute exact path='/by_flavor_tag/:id'>
 								<ByFlavorTag />
-							</Route>
-							<Route exact path='/addRecipe/'>
+							</PrivateRoute>
+							<PrivateRoute exact path='/addRecipe/'>
 								<AddRecipe />
-							</Route>
-							<Route exact path='/add_Ingredients/:id'>
+							</PrivateRoute>
+							<PrivateRoute exact path='/add_Ingredients/:id'>
 								<AddStepTwo />
-							</Route>
-							<Route exact path='/add_qtymeasure/:id'>
+							</PrivateRoute>
+							<PrivateRoute exact path='/add_qtymeasure/:id'>
 								<AddStepThree />
-							</Route>
+							</PrivateRoute>
 							<Route exact path='/login'>
 								<Login />
 							</Route>
