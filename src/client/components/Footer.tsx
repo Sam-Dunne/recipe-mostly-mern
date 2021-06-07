@@ -26,7 +26,7 @@ const Footer = (props: FooterProps) => {
                 <h4 className="text-secondary text-center mb-3">Thanks for visiting!</h4>
                 <div className="row justify-content-around align-items-center px-4">
                     <a href="https://www.linkedin.com/in/samdunnewebdev/" target='blank'><SiLinkedin className='bg-primary text-info icon' /></a>
-                    <Link to='/contact/' className='text-success bg-info p-3 rounded shadow' >Contact</Link>
+                    <Link to='/' className='text-success bg-info p-3 rounded shadow' >Contact</Link>
                     <a href="https://github.com/Sam-Dunne" target='blank'><GoMarkGithub className='bg-primary text-info icon' /></a>
                 </div>
             </div>
