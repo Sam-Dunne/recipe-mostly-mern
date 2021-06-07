@@ -26,7 +26,7 @@ const UsersRecipes = (props: UsersRecipesProps) => {
     return (
         <section className="container my-2">
             <h3 className="text-secondary text-center">Users Recipes</h3>
-            <div>
+            <div className='col-6 mx-auto'>
                 
                 <SingleSelect setter={setFlavorTag} type={'flavorTags'} placeholder={'Flavor Tags'} />
 

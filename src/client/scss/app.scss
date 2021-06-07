@@ -1,22 +1,22 @@
 //earthy greens
-$theme-colors: (
-    'primary': #46794d, //Covalence Blue!  :D
-    'secondary': #bdd2bf,
-    'warning': #113416,
-    'danger': rgb(172, 33, 33),
-    'success': #4e8756,
-    'info': #edf3ee
-);
+// $theme-colors: (
+//     'primary': #46794d, //Covalence Blue!  :D
+//     'secondary': #bdd2bf,
+//     'warning': #113416,
+//     'danger': rgb(172, 33, 33),
+//     'success': #4e8756,
+//     'info': #edf3ee
+// );
 
 // blue
-// $theme-colors: (
-//     'primary': #3684cc, 
-//     'secondary': #eaf2f9,
-//     'warning': #195f9f,
-//     'danger': rgb(172, 33, 33),
-//     'success': #195f9f,
-//     'info': #f8fafd
-// );
+$theme-colors: (
+    'primary': #195f9f, 
+    'secondary': #e0d1ba,
+    'warning': #195f9f,
+    'danger': rgb(172, 33, 33),
+    'success': #195f9f,
+    'info': #f8fafd
+);
 
 .icon {
     height: 50px;

@@ -10,6 +10,8 @@ import { GoHome } from 'react-icons/go';
 import { FiEdit } from 'react-icons/fi';
 import MultiSelect from '../components/MultiSelect';
 import Swal from 'sweetalert2';
+import Modal from '../components/SweetAlerts/AddStepTwoModals'
+import { resultsAriaMessage } from 'react-select/src/accessibility';
 
 
 /* HOOK REACT EXAMPLE */
@@ -61,6 +63,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
 
         if (selectedIngs.length === 0) {
             // ???  Modal with option to stay or move on to next step ???
+            
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You haven't added any new ingredients!",

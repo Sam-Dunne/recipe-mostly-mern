@@ -92,10 +92,13 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
                         </button>
                         <div className="dropdown-menu">
                             <Dropdown.Item as="button">
+                                <Link to={`/users_recipes/${recipe?.user_id}`} className='btn btn-link border-light text-success'><GoHome />  All your recipes </Link>
+                            </Dropdown.Item>
+                            <Dropdown.Item as="button">
                                 <Link to={`/add_Ingredients/${id}`} className='btn btn-link border-light text-success'><MdAddCircleOutline />  Ingredients</Link>
                             </Dropdown.Item>
                             <Dropdown.Item as="button">
-                                <Link to={`/users_recipes/${recipe?.user_id}`} className='btn btn-link border-light text-success'><GoHome />  All your recipes </Link>
+                                <Link to={`/add_qtymeasure/${id}`} className='btn btn-link border-light text-success'><FiEdit />  Qty and Measure</Link>
                             </Dropdown.Item>
                             <Dropdown.Item as="button">
                                 <Link to={`/edit_recipe/${recipe?.id}`} className='btn btn-link border-light text-success'><FiEdit />  Recipe Body</Link>
@@ -119,11 +122,11 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
                         <div className="row bg-primary justify-content-between align-items-center mb-3 mx-auto col-12 col-md-8 col-lg-10 ">
                         </div>
                         {(ingreds.length == 0) &&
-                            <Link to={`/add_Ingredients/${id}`} className='btn btn-link bg-secondary border-light text-success mb-2 mx-auto'>
+                            <Link to={`/add_Ingredients/${id}`} className='btn btn-link bg-info border-light text-success mb-2 mx-auto'>
                                 <MdAddCircleOutline />  Ingredients</Link>
                         }
                         {(missingIngred_qty) &&
-                            <Link to={`/add_qtymeasure/${id}`} className='btn btn-link bg-secondary border-light text-success mb-2 mx-auto'>
+                            <Link to={`/add_qtymeasure/${id}`} className='btn btn-link bg-info border-light text-success mb-2 mx-auto'>
                                 <MdAddCircleOutline />  Some Ingredients are missing values. Fix here</Link>
                         }
 

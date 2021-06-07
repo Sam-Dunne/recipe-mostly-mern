@@ -87,7 +87,7 @@ const AddStepThree = (props: AddStepThreeProps) => {
 					</div>
 				))}
 				<div className='row justify-content-center'>
-					<button className="border btn btn-link btn-secondary mx-auto" onClick={handleSubmit}>
+					<button className="border btn btn-link btn-info mx-auto" onClick={handleSubmit}>
 						Submit
 					</button>
 				</div>

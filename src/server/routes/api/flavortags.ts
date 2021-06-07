@@ -27,7 +27,7 @@ router.get('/:id', authenticate('jwt'), async (req, res, next) => {
     }
 });
 
-router.post('/', authenticate('jwt'), async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     const id = uuid();
     const newFlavorTag = req.body;
     try {
