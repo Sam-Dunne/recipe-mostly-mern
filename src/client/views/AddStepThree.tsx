@@ -34,22 +34,22 @@ const AddStepThree = (props: AddStepThreeProps) => {
 	const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		// console.log('[raw state log]');
-		console.log(ingredient_qty);
+		// console.log(ingredient_qty);
 		let result = Object.keys(ingredient_qty).map(function (key) {
 			// Using toString() to convert key to string type
 			// Using obj[key] to retrieve key value
 			return [key.toString(), ingredient_qty[key.toString()]];
 		});
-		console.log(result);
+		// console.log(result);
 		//prevents empty form submission
-		if (result.length === 0) {
-			alert('catch')
-			return;
-		}
+		// if (result.length === 0) {
+		// 	alert('catch')
+		// 	return;
+		// }
 
 		apiService(`/api/recipeingredients/multi_existing_qty/${id}`, `POST`, { array_of_ingredientUpdates: result })
 			.then(res => {
-				console.log(res)
+				// console.log(res)
 				history.push(`/recipe_details/${id}`);
 			})
 	};

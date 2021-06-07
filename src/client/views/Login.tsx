@@ -27,14 +27,6 @@ const Login = (props: LoginProps) => {
                 history.push(`/users_recipes/${res.id}`)
             })
     };
-    // <h1 className="text-primary text-center">Login</h1>
-    // <input value={email} onChange={handleSetEmail} placeholder='Your Email' />
-    // <input value={password} onChange={handleSetPassword} placeholder='Your Password' />
-    // <br />
-    // <button onClick={handleSubmit}>Submit</button>
-    // <br />
-    // <Link to='/books'>To Books</Link>
-    // <br />
 
     return (
         <section className='justify-content-center col-md-8 rounded shadow-lg bg-primary p-4 mx-2'>

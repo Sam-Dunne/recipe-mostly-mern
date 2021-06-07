@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { apiService } from '../utils/api-services'
 import { IIngredients, IRecipeIngredientsFull, IRecipes } from '../../interfaces';
-import { Button, Dropdown } from 'react-bootstrap';
+import { Button, Dropdown, OverlayTrigger, Popover } from 'react-bootstrap';
 import { IoEllipsisVerticalCircleOutline } from 'react-icons/io5';
 import { GoHome } from 'react-icons/go';
 import { FiEdit } from 'react-icons/fi';
@@ -95,12 +95,31 @@ const AddStepTwo = (props: AddStepTwoProps) => {
 
     };
 
+    const popover = (
+        <Popover id="popover-basic">
+          <Popover.Title as="h3">Popover right</Popover.Title>
+          <Popover.Content>
+            And here's some <strong>amazing</strong> content. It's very engaging.
+            right?
+          </Popover.Content>
+        </Popover>
+      );
+      
+      const Example = () => (
+        <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
+          <Button variant="success">Click me to see</Button>
+        </OverlayTrigger>
+      );
+      
+    
+
 
     return (
         <section className="container my-3">
             <div className='bg-primary rounded shadow mb-3 p-4'>
                 <div className="row justify-content-between align-items-center p-3">
                     <h3 className="text-info text-center mb-1 ml-4">Add Ingredients to {recipe?.title}</h3>
+                    <Example />
                     <div className="btn-group mr-4">
                         <button className="btn btn-lg" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <IoEllipsisVerticalCircleOutline className='bg-primary text-info icon' />

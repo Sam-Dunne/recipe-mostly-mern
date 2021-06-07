@@ -50,7 +50,7 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
 
     const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        console.log(`button`);
+        // console.log(`button`);
 
         // Modal with option to stay or move on to next step
         Swal.fire({
@@ -114,20 +114,20 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
                 </div>
 
                 <div className="row d-flex justify-content-center align-items-center rounded p-3">
-                    <div className="card bg-primary p-5 col-12 col-md-8 col-lg-8">
-                        <div className="row bg-primary justify-content-between align-items-center mb-3 mx-auto col-12 col-md-8 col-lg-10 ">
+                    <div className="card bg-primary p-3 col-12 col-md-8 col-lg-8">
                             <h2 className='text-info text-bold mx-auto'>{recipe?.title}</h2>
+                        <div className="row bg-primary justify-content-between align-items-center mb-3 mx-auto col-12 col-md-8 col-lg-10 ">
                         </div>
                         {(ingreds.length == 0) &&
-                            <Link to={`/add_Ingredients/${id}`} className='btn btn-link bg-secondary border-light text-success mb-2 mx-auto col-4'>
+                            <Link to={`/add_Ingredients/${id}`} className='btn btn-link bg-secondary border-light text-success mb-2 mx-auto'>
                                 <MdAddCircleOutline />  Ingredients</Link>
                         }
                         {(missingIngred_qty) &&
-                            <Link to={`/add_qtymeasure/${id}`} className='btn btn-link bg-secondary border-light text-success mb-2 mx-auto col-4'>
+                            <Link to={`/add_qtymeasure/${id}`} className='btn btn-link bg-secondary border-light text-success mb-2 mx-auto'>
                                 <MdAddCircleOutline />  Some Ingredients are missing values. Fix here</Link>
                         }
 
-                        <div className="card-body rounded shadow bg-info p-5">
+                        <div className="card-body rounded shadow bg-info p-5 mx-auto col-12 col-md-8 col-lg-10 ">
                             <div className="row justify-content-around mb-4" >
                                 {recipeFlavorTags?.map(tag => (
                                     <div key={tag.id}>
@@ -153,7 +153,7 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
 
                         <div className="card-body justify-content-center rounded shadow mx-auto bg-info pb-3 col-12 col-md-8 col-lg-10">
                             {ingreds?.map(ingred => (
-                                <h5 key={`option-${ingred.ingredient_id}`} className="card-text">{`${ingred.ingredient_qty || "***Zero***"} ${ingred.name}`}</h5>
+                                <p key={`option-${ingred.ingredient_id}`} className="card-text">{`${ingred.ingredient_qty || "***Zero***"} ${ingred.name}`}</p>
                             ))}
                         </div>
 
