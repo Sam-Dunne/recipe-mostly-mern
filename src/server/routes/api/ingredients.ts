@@ -7,7 +7,7 @@ const router = Router();
 
 
 
-router.get('/', async (req, res, next) => {
+router.get('/', authenticate('jwt'), async (req, res, next) => {
     try {
         const allIngredients = await db.ingredients.all();
         res.json(allIngredients);
@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', authenticate('jwt'), async (req, res, next) => {
     const id = req.params.id;
     const x = req.body;
     try {
@@ -29,7 +29,7 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', authenticate('jwt'), async (req, res, next) => {
     const id = uuid();
     const newIngredient = req.body;
     try {
@@ -54,7 +54,7 @@ router.put('/:id', authenticate('jwt'), async (req, res, next) => {
     }
 });
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', authenticate('jwt'), async (req, res, next) => {
     const id = req.params.id;
 
     try {

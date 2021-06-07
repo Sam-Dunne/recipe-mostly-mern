@@ -9,7 +9,7 @@ import recipeIngredients from '../../db/recipeIngredients';
 
 const router = Router();
 
-router.get('/', async (req, res, next) => {
+router.get('/', authenticate('jwt'), async (req, res, next) => {
     try {
         const allRecipeIngredients = await db.recipeIngredients.all();
         res.json(allRecipeIngredients);
@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', authenticate('jwt'), async (req, res, next) => {
     const id = req.params.id;
     const x = req.body;
     try {
@@ -31,7 +31,7 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 // single
-router.post('/', async (req, res, next) => {
+router.post('/', authenticate('jwt'), async (req, res, next) => {
     const newRecipeIngredient = req.body;
     console.log(newRecipeIngredient)
     try {
@@ -44,7 +44,7 @@ router.post('/', async (req, res, next) => {
 });
 
 // multi post 2/3 columns
-router.post('/multi/:id', async (req, res, next) => {
+router.post('/multi/:id', authenticate('jwt'), async (req, res, next) => {
     const recipe_id = req.params.id;
     const { array_of_ingredients } = req.body;
     try {
@@ -59,7 +59,7 @@ router.post('/multi/:id', async (req, res, next) => {
 });
 
 // multi RecipeIngredientsFull post
-router.post('/multi_ing_qty/:id', async (req, res, next) => {
+router.post('/multi_ing_qty/:id', authenticate('jwt'), async (req, res, next) => {
     const recipe_id = req.params.id;
     const {array_of_ingredientUpdates} = req.body;
     try {
@@ -76,7 +76,7 @@ router.post('/multi_ing_qty/:id', async (req, res, next) => {
 });
 
 // multi RecipeIngredientsFull post for existing recipeIngredients
-router.post('/multi_existing_qty/:id', async (req, res, next) => {
+router.post('/multi_existing_qty/:id', authenticate('jwt'), async (req, res, next) => {
     const recipe_id = req.params.id;
     const {array_of_ingredientUpdates} = req.body;
     try {

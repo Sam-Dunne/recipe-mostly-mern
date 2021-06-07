@@ -44,7 +44,7 @@ router.get('/all_by/:id', authenticate('jwt'), async (req: IReqPayload, res, nex
     }
 });
 
-router.get('/one_special/:id', async (req: IReqPayload, res, next) => {
+router.get('/one_special/:id', authenticate('jwt'), async (req: IReqPayload, res, next) => {
     const id = req.user.id;
     try {
         const recipe = await db.recipes.getRecipeAndConcatRecipeIngredientValuesByRecipeId(id);
@@ -107,7 +107,7 @@ router.post('/', authenticate('jwt'), async (req: IReqPayload, res, next) => {
     }
 });
 
-router.put('/:id', async (req: IReqPayload, res, next) => {
+router.put('/:id', authenticate('jwt'), async (req: IReqPayload, res, next) => {
     const id = req.params.id;
     const updatedRecipe = req.body;
     try {

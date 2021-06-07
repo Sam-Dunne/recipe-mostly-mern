@@ -5,7 +5,7 @@ import { v4 as uuid} from 'uuid'
 
 const router = Router();
 
-router.get('/', async (req, res, next) => {
+router.get('/', authenticate('jwt'), async (req, res, next) => {
     try {
         const allFlavorTags = await db.flavorTags.all();
         res.json(allFlavorTags);
@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', authenticate('jwt'), async (req, res, next) => {
     const id = req.params.id;
     const x = req.body;
     try {
@@ -27,7 +27,7 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', authenticate('jwt'), async (req, res, next) => {
     const id = uuid();
     const newFlavorTag = req.body;
     try {
@@ -52,7 +52,7 @@ router.put('/:id', authenticate('jwt'), async (req, res, next) => {
     }
 });
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', authenticate('jwt'), async (req, res, next) => {
     const id = req.params.id;
 
     try {

@@ -4,7 +4,7 @@ import { authenticate } from 'passport';
 
 const router = Router();
 
-router.get('/', async (req, res, next) => {
+router.get('/', authenticate('jwt'), async (req, res, next) => {
     try {
         const allRecipeFlavorTags = await db.recipeFlavorTags.all();
         res.json(allRecipeFlavorTags);
@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', authenticate('jwt'), async (req, res, next) => {
     const id = req.params.id;
     const x = req.body;
     try {
@@ -26,7 +26,7 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', authenticate('jwt'), async (req, res, next) => {
     const newRecipeFlavorTag = req.body;
     try {
         const results = await db.recipeFlavorTags.insert(newRecipeFlavorTag)
@@ -39,7 +39,7 @@ router.post('/', async (req, res, next) => {
 
 
 // multi post
-router.post('/multi/:id', async (req, res, next) => {
+router.post('/multi/:id', authenticate('jwt'), async (req, res, next) => {
     const recipe_id = req.params.id;
     const {array_of_flavor_tags} = req.body;
     try {  
