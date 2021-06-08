@@ -11,7 +11,7 @@
 // blue
 $theme-colors: (
     'primary': #195f9f, 
-    'secondary': #e0d1ba,
+    'secondary': #f7f1e8,
     'warning': #195f9f,
     'danger': rgb(43, 126, 11),
     'success': #195f9f,
@@ -28,7 +28,7 @@ $theme-colors: (
 };
 
 #wrapper {
-    min-height: 90vh
+    min-height: 85vh
 };
 
 #navbar-svg {
@@ -49,8 +49,8 @@ $theme-colors: (
 }
 
 #footer {
-    min-height: 10vh;
-    max-height: fit-content;
+    min-height: 15vh;
+    // max-height: fit-content;
 }
 
 // #svg-wrapper {

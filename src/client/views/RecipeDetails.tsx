@@ -141,7 +141,9 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
                             </div>
                             <p className='card-text'>{Moment(recipe?.created_at).format("MMM Do YY")}</p>
                             <h5>{recipe?.summary}</h5>
-                            <div>
+                            <hr />
+                            <div className='mt-3'>
+                                <h6>Cooking Instructions:</h6>
                                 <ReactMarkdown remarkPlugins={[gfm]} children={recipe?.instructions} />
                             </div>
 
