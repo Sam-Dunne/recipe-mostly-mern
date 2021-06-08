@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+import SubmitBtn from '../components/SubmitBtn';
 import { apiService } from '../utils/api-services';
 
 /* HOOK REACT EXAMPLE */
@@ -49,11 +50,7 @@ const Login = (props: LoginProps) => {
                         </span>
                     </div>
                 </Form.Group>
-                <div className='row justify-content-center mt-4'>
-                    <Button variant='primary' type="submit" className='btn-link mx-auto border-info text-info p-3 font-weight-bold' onClick={handleSubmit}>
-                        Submit
-                     </Button>
-                </div>
+                <SubmitBtn onClick={handleSubmit} children='Login' />
             </Form>
             <div className='row justify-content-center mt-4'>
                 <Link to='/register' className='btn btn-link border-light text-light'>Don't have an Account?...Register here</Link>

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { apiService } from '../utils/api-services';
 import { IFlavorTags, IRecipeIngredientsFull } from '../../interfaces';
+import SubmitBtn from '../components/SubmitBtn';
 
 
 
@@ -86,11 +87,7 @@ const AddStepThree = (props: AddStepThreeProps) => {
 						</div>
 					</div>
 				))}
-				<div className='row justify-content-center'>
-					<button className="border btn btn-link btn-info mx-auto" onClick={handleSubmit}>
-						Submit
-					</button>
-				</div>
+				<SubmitBtn onClick={handleSubmit} children='Submit' />
 			</div>
 
 

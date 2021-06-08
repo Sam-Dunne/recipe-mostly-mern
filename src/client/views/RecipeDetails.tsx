@@ -117,17 +117,18 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
                 </div>
 
                 <div className="row d-flex justify-content-center align-items-center rounded p-3">
-                    <div className="card bg-primary p-3 col-12 col-md-8 col-lg-8">
+                    <div className="card bg-primary p-4 col-12 col-md-8 col-lg-8">
                             <h2 className='text-info text-bold mx-auto'>{recipe?.title}</h2>
                         <div className="row bg-primary justify-content-between align-items-center mb-3 mx-auto col-12 col-md-8 col-lg-10 ">
                         </div>
                         {(ingreds.length == 0) &&
-                            <Link to={`/add_Ingredients/${id}`} className='btn btn-link bg-info border-light text-success mb-2 mx-auto'>
+                        
+                            <Link to={`/add_Ingredients/${id}`} className='btn btn-danger btn-link border-info text-info p-3 font-weight-bold mb-3 mx-auto'>
                                 <MdAddCircleOutline />  Ingredients</Link>
                         }
                         {(missingIngred_qty) &&
-                            <Link to={`/add_qtymeasure/${id}`} className='btn btn-link bg-info border-light text-success mb-2 mx-auto'>
-                                <MdAddCircleOutline />  Some Ingredients are missing values. Fix here</Link>
+                            <Link to={`/add_qtymeasure/${id}`} className='btn btn-link btn-danger border-info text-info p-3 font-weight-bold mb-3 mx-auto'>
+                                <MdAddCircleOutline />  Some Ingredients are missing Qty/Measure values. Fix here</Link>
                         }
 
                         <div className="card-body rounded shadow bg-info p-5 mx-auto col-12 col-md-8 col-lg-10 ">
@@ -151,7 +152,7 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
 
                 </div>
                 {(ingreds.length > 0) && <div className="row d-flex justify-content-center align-items-center rounded p-3">
-                    <div className="card justify-content-center bg-primary p-5 col-12 col-md-8 col-lg-8">
+                    <div className="card justify-content-center bg-primary p-4 col-12 col-md-8 col-lg-8">
                         <h2 className='text-info text-bold mx-auto mb-3'>Ingredients</h2>
 
                         <div className="card-body justify-content-center rounded shadow mx-auto bg-info pb-3 col-12 col-md-8 col-lg-10">

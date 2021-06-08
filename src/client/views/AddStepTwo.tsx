@@ -12,6 +12,7 @@ import MultiSelect from '../components/MultiSelect';
 import Swal from 'sweetalert2';
 import Modal from '../components/SweetAlerts/AddStepTwoModals'
 import { resultsAriaMessage } from 'react-select/src/accessibility';
+import SubmitBtn from '../components/SubmitBtn';
 
 
 /* HOOK REACT EXAMPLE */
@@ -143,9 +144,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
                 </div>
 
                 <div className='row justify-content-center mt-4'>
-                    <Button variant='primary' type="submit" className='btn-link mx-auto border-info text-info p-3 font-weight-bold' onClick={handleAddIngredients}>
-                        Submit
-                     </Button>
+                <SubmitBtn onClick={handleAddIngredients} children='Submit' />
                 </div>
             </div>
 

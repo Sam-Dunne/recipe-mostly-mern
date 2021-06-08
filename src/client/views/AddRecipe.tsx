@@ -8,6 +8,7 @@ import { Button, Form } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
 import MultiSelect from '../components/MultiSelect';
+import SubmitBtn from '../components/SubmitBtn';
 
 
 /* HOOK REACT EXAMPLE */
@@ -87,11 +88,7 @@ const AddRecipe = (props: AddRecipeProps) => {
                         </div>
                     </div>
                 </div>
-                <div className='row justify-content-center mt-4'>
-                    <Button variant='primary' type="submit" className='btn-link mx-auto border-info text-info p-3 font-weight-bold' onClick={handleSubmit}>
-                        Submit
-                     </Button>
-                </div>
+                <SubmitBtn onClick={handleSubmit} children='Submit' />
 
             </Form>
 
