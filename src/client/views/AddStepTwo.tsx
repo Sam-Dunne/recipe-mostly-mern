@@ -29,7 +29,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
     // const [qtyValues, setQtyValues] = useState<{ ingredient_qty: string }[]>([])
     const [qtyValue, setQtyValue] = useState<string>('');
     const handleSetQtyValue = (e: React.ChangeEvent<HTMLInputElement>) => setQtyValue(e.target.value);
-    
+
 
     const [ingredients, setIngredients] = useState<IIngredients[]>([]);
 
@@ -64,7 +64,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
 
         if (selectedIngs.length === 0) {
             // ???  Modal with option to stay or move on to next step ???
-            
+
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You haven't added any new ingredients!",
@@ -101,28 +101,27 @@ const AddStepTwo = (props: AddStepTwoProps) => {
 
     const popover = (
         <Popover id="popover-basic">
-          <Popover.Title as="h3">Popover right</Popover.Title>
-          <Popover.Content>
-            And here's some <strong>amazing</strong> content. It's very engaging.
+            <Popover.Title as="h3">Popover right</Popover.Title>
+            <Popover.Content>
+                And here's some <strong>amazing</strong> content. It's very engaging.
             right?
           </Popover.Content>
         </Popover>
-      );
-      
-      const Example = () => (
+    );
+
+    const Example = () => (
         <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
-          <Button variant="success">Click me to see</Button>
+            <Button variant="success">Click me to see</Button>
         </OverlayTrigger>
-      );
-      
-    
+    );
+
+
 
 
     return (
         <section className="container my-3">
-            <div className='bg-primary rounded shadow mb-3 p-4'>
-                <div className="row justify-content-between align-items-center p-3">
-                    <h5 className="text-info text-center mb-1 ml-4">Add Ingredients to {recipe?.title}</h5>
+            <div className='bg-primary rounded shadow mb-3 px-3 pt-2'>
+                <div className="row justify-content-end align-items-center">
                     {/* <Example /> */}
                     <div className="btn-group mr-4">
                         <button className="btn btn-lg" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -139,18 +138,19 @@ const AddStepTwo = (props: AddStepTwoProps) => {
                         </div>
                     </div>
                 </div>
+                <h5 className="text-info text-center mb-3 mx-auto">Add Ingredients to</h5>
+                <h3 className="text-info text-center font-italic mb-3 mx-auto">{recipe?.title}</h3>
                 <div>
-                    <MultiSelect setter={setSelectedIngs} type={'ingredients'} recipeId={{id}} placeholder={'Ingredients'} />
+                    <MultiSelect setter={setSelectedIngs} type={'ingredients'} recipeId={{ id }} placeholder={'Ingredients'} />
                 </div>
 
-                <div className='row justify-content-center mt-4'>
                 <SubmitBtn onClick={handleAddIngredients} children='Submit' />
-                </div>
+
             </div>
 
             {(ingreds.length > 0) && <div className="row d-flex justify-content-center align-items-center rounded p-3">
                 <div className="card justify-content-center bg-primary p-5 col-12 col-md-8 col-lg-8">
-                    <h2 className='text-info text-bold mx-auto mb-3'>Existing Recipe Ingredients</h2>
+                    <h5 className='text-info text-bold mx-auto mb-3'>Existing Recipe Ingredients</h5>
 
                     <div className="card-body justify-content-center rounded shadow mx-auto bg-info pb-3 col-12 col-md-8 col-lg-10">
                         {ingreds?.map(ingred => (

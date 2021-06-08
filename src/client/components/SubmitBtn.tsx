@@ -12,7 +12,7 @@ const SubmitBtn = (props: SubmitBtnProps) => {
             <Button
                 variant='danger'
                 type="submit"
-                className='btn-link mx-auto border-info text-info p-3 font-weight-bold'
+                className='btn-link mx-auto border-info text-info p-3 font-weight-bold mb-3'
                 onClick={props.onClick}
             >
                 {props.children}
