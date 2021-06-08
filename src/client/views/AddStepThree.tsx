@@ -59,7 +59,7 @@ const AddStepThree = (props: AddStepThreeProps) => {
 		apiService(`/api/recipeingredients/${id}`).then(ingreds => {
 			setRecipeIngreds(ingreds)
 
-			const ingsWithQtyz = ingreds.map(ing => ({ [ing.id]: ing.ingredient_qty }));
+			const ingsWithQtyz = ingreds.map((ing: any) => ({ [ing.id]: ing.ingredient_qty }));
 			const objectifiedIngredz = Object.assign({}, ...ingsWithQtyz);
 			setIngredient_Qty(objectifiedIngredz)
 		});
