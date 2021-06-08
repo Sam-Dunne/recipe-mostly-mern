@@ -32,7 +32,7 @@ const ByFlavorTag = (props: ByFlavorTagProps) => {
     return (
         <section className="container my-2">
             <h3 className="text-success text-center">{headerTag?.name} Recipes</h3>
-            <div className='col-6 mx-auto'>
+            <div className='col-12 col-md-8 col-lg-6 mx-auto'>
               
                 <SingleSelect setter={setFlavorTag} type={'flavorTags'} placeholder={'Flavor Tags'} />
 
