@@ -121,8 +121,8 @@ const AddStepTwo = (props: AddStepTwoProps) => {
         <section className="container my-3">
             <div className='bg-primary rounded shadow mb-3 p-4'>
                 <div className="row justify-content-between align-items-center p-3">
-                    <h3 className="text-info text-center mb-1 ml-4">Add Ingredients to {recipe?.title}</h3>
-                    <Example />
+                    <h5 className="text-info text-center mb-1 ml-4">Add Ingredients to {recipe?.title}</h5>
+                    {/* <Example /> */}
                     <div className="btn-group mr-4">
                         <button className="btn btn-lg" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <IoEllipsisVerticalCircleOutline className='bg-primary text-info icon' />

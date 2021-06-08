@@ -42,11 +42,11 @@ const MultiSelect = (props: MultiSelectProps) => {
 
     useEffect(() => {
         const result = mergeAndFilter(selectableItems, ingreds);
-        console.log(result);
+        // console.log({result});
         type ISelectOption = Pick<OptionProps, "label" | "value">;
         // get  data in array format to work with label+value
-        const Options = (selectableItems || []).length
-            ? (selectableItems.map(selectableItem => ({
+        const Options = (result || []).length
+            ? (result.map(selectableItem => ({
                 label: selectableItem.name,
                 value: selectableItem.id
             })) as ISelectOption[])

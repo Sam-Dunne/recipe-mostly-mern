@@ -25,9 +25,7 @@ const Navbah = (props: NavbahProps) => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                </Nav>
-                <Nav>
-                    <NavLink to={`/addrecipe`} className='text-light'>Add Recipe</NavLink>
+                    <NavLink to={`/addrecipe`} className='ml-3 text-light'>Add Recipe</NavLink>
                     <NavLink to={`/login`} className='ml-3 text-light'>Login</NavLink>
                     <NavLink to={`/register`} className='ml-3 text-light'>Register</NavLink>
                 </Nav>
