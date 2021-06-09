@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { apiService } from '../utils/api-services';
 import { FaReact, FaNode, FaSass } from 'react-icons/fa';
 import { SiMysql, SiPostman, SiTypescript, SiCss3, SiJavascript } from 'react-icons/si';
+import SubmitBtn from '../components/SubmitBtn';
 
 const Landing = (props: LandingProps) => {
     const [from, setFrom] = useState<string>('');
@@ -55,14 +56,7 @@ const Landing = (props: LandingProps) => {
                         onChange={handleSetMessage}
                         value={message}
                         placeholder="Message" />
-                    <div className="container ">
-                        <div className="row justify-content-between align-items-center">
-                            <button className="btn btn-primary mb-2" onClick={handleSubmit}>Contact Me!</button>
-                            <Link to="/" className="btn btn-link bg-light rounded mb-2">
-                                Back Home
-                            </Link>
-                        </div>
-                    </div>
+                    <SubmitBtn onClick={handleSubmit} children={`Send`}/>
                 </form>
             </div>
         </section>
