@@ -1,35 +1,22 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { Link } from 'react-router-dom';
 import { apiService } from '../utils/api-services'
 import { IIngredients, IRecipeIngredientsFull, IRecipes } from '../../interfaces';
-import { Button, Dropdown, OverlayTrigger, Popover } from 'react-bootstrap';
-import { IoEllipsisVerticalCircleOutline } from 'react-icons/io5';
-import { GoHome } from 'react-icons/go';
-import { FiEdit } from 'react-icons/fi';
 import MultiSelect from '../components/MultiSelect';
 import Swal from 'sweetalert2';
-import Modal from '../components/SweetAlerts/AddStepTwoModals'
-import { resultsAriaMessage } from 'react-select/src/accessibility';
 import SubmitBtn from '../components/SubmitBtn';
+import HowToAddIngredPopOver from '../components/PopOversRBS/HowToAddIngredPopOver';
+import AddIngredientsEllipsis from '../components/EllipsisDropdowns/AddIngredientsEllipsis';
 
 
-/* HOOK REACT EXAMPLE */
 const AddStepTwo = (props: AddStepTwoProps) => {
     const history = useHistory();
     // recipe_id
     const { id } = useParams<{ id: string }>();
-    // const [x, setx] = useState<string>('');
-    // const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
 
     const [recipe, setRecipe] = useState<IRecipes>(null);
     const [ingreds, setIngreds] = useState<IRecipeIngredientsFull[]>([]);
-
-    // const [qtyValues, setQtyValues] = useState<{ ingredient_qty: string }[]>([])
-    const [qtyValue, setQtyValue] = useState<string>('');
-    const handleSetQtyValue = (e: React.ChangeEvent<HTMLInputElement>) => setQtyValue(e.target.value);
-
 
     const [ingredients, setIngredients] = useState<IIngredients[]>([]);
 
@@ -86,7 +73,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
             })
             return
         }
-
+        // removes double creations from component state
         const array_of_ingredients = ingredients.map(ingredient => {
             if (ingredient.id === ingredient.name) return;
             return ingredient.id
@@ -96,52 +83,26 @@ const AddStepTwo = (props: AddStepTwoProps) => {
             .then(res => {
                 history.push(`/add_qtymeasure/${id}`)
             });
-
     };
-
-    const popover = (
-        <Popover id="popover-basic">
-            <Popover.Title as="h3">Popover right</Popover.Title>
-            <Popover.Content>
-                And here's some <strong>amazing</strong> content. It's very engaging.
-            right?
-          </Popover.Content>
-        </Popover>
-    );
-
-    const Example = () => (
-        <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
-            <Button variant="success">Click me to see</Button>
-        </OverlayTrigger>
-    );
-
-
-
 
     return (
         <section className="container my-3">
             <div className='bg-primary rounded shadow mb-3 px-3 pt-2'>
                 <div className="row justify-content-end align-items-center">
-                    {/* <Example /> */}
-                    <div className="btn-group mr-4">
-                        <button className="btn btn-lg" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <IoEllipsisVerticalCircleOutline className='bg-primary text-info icon' />
-                        </button>
-                        <div className="dropdown-menu dropdown-menu-right">
-                            <Dropdown.Item as="button">
-                                <Link to={`/users_recipes/${recipe?.user_id}`} className='btn btn-link border-light text-success'><GoHome />  All your recipes </Link>
-                            </Dropdown.Item>
-                            <Dropdown.Item as="button">
-                                <Link to={`/edit_recipe/${recipe?.id}`} className='btn btn-link border-light text-success'><FiEdit />  Recipe</Link>
-                            </Dropdown.Item>
-
-                        </div>
-                    </div>
+                    <AddIngredientsEllipsis
+                        toUsers_recipes={`/users_recipes/${recipe?.user_id}`}
+                        toAddQtyMeasure={`/add_qtymeasure/${id}`}
+                        toEdit_recipe={`/edit_recipe/${recipe?.id}`} />
                 </div>
                 <h5 className="text-info text-center mb-3 mx-auto">Add Ingredients to</h5>
                 <h3 className="text-info text-center font-italic mb-3 mx-auto">{recipe?.title}</h3>
-                <div>
-                    <MultiSelect setter={setSelectedIngs} type={'ingredients'} recipeId={{ id }} placeholder={'Ingredients'} />
+                <div className='row justify-content-around '>
+                    <div className="align-items-center mx-auto col-2 col-sm-1">
+                        <HowToAddIngredPopOver />
+                    </div>
+                    <div className="align-items-center mt-1 col-10 col-sm-11">
+                        <MultiSelect setter={setSelectedIngs} type={'ingredients'} recipeId={{ id }} placeholder={'Ingredients'} />
+                    </div>
                 </div>
 
                 <SubmitBtn onClick={handleAddIngredients} children='Submit' />

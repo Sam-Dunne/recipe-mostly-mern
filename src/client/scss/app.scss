@@ -12,7 +12,7 @@
 $theme-colors: (
     'primary': #195f9f, 
     'secondary': #f7f1e8,
-    'warning': #195f9f,
+    'warning': #9f1919,
     'danger': rgb(43, 126, 11),
     'success': #195f9f,
     'info': #f8fafd
@@ -23,8 +23,13 @@ $theme-colors: (
     width: 50px;
 }
 
+.question {
+    height:30px;
+    width: 30px;
+}
+
 .section-bgc {
-    background-color: rgb(226, 173, 123);
+    background-color: rgb(150, 150, 150);
 };
 
 #wrapper {

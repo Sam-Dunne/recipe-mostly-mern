@@ -22,20 +22,22 @@ const Landing = (props: LandingProps) => {
         <section className="container p-2">
             <div className="row justify-content-center align-items-center p-3">
                 <div className="card card-body bg-primary col-md-10 col-lg-8">
-                    <h2 className="mx-5 text-center">Recipe Registry</h2>
+                    <h2 className="mx-5 text-center text-info">Recipe Registry</h2>
+                    <p className="card card-text bg-light p-2">This site is built with Node with Express,
+                    MySQL, React, and TypeScript.  Incorporates 3rd Party APIs Stripe and Mailgun.
+                      As well as Passport for Authentication and Authorization. Thanks for visiting!</p>
                     <div className="row justify-content-around align-items-center my-3">
                         <span><FaReact className='bg-primary text-info icon rounded' /></span>
                         <span><SiJavascript className='bg-primary text-info icon rounded' /></span>
                         <span><FaNode className='bg-primary text-info icon rounded' /></span>
                         <span><SiMysql className='bg-primary text-info icon rounded' /></span>
+                    </div>
+                    <div className="row justify-content-around align-items-center my-3">
                         <span><SiPostman className='bg-primary text-info icon rounded' /></span>
                         <span><SiTypescript className='bg-primary text-info icon rounded' /></span>
                         <span><FaSass className='bg-primary text-info icon rounded' /></span>
                         <span><SiCss3 className='bg-primary text-info icon rounded' /></span>
                     </div>
-                    <p className="card card-text bg-light p-2">This site is built with Node with Express,
-                    MySQL, React, and TypeScript.  Incorporates 3rd Party APIs Stripe and Mailgun.
-                      As well as Passport for Authentication and Authorization. Thanks for visiting!</p>
                 </div>
             </div>
             <div className="row justify-content-center align-items-center p-3">

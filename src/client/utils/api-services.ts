@@ -1,4 +1,4 @@
-
+import MyModal from '../components/SweetAlerts'
 
 export async function apiService<T = any>(uri: string, method: string = 'GET', data?: {}) {
 	// retreive token from storage
@@ -35,6 +35,7 @@ export async function apiService<T = any>(uri: string, method: string = 'GET', d
 		}
 
 		if (res.status === 401) {
+			MyModal.fieldValidation(`Oops...`,`Incorrect Password!`);
 			throw new Error('no token, expired token, or server could not validate token');
 		}
 

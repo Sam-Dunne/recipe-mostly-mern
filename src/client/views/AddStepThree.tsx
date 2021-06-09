@@ -4,6 +4,7 @@ import { useHistory, useParams } from 'react-router';
 import { apiService } from '../utils/api-services';
 import { IFlavorTags, IRecipeIngredientsFull } from '../../interfaces';
 import SubmitBtn from '../components/SubmitBtn';
+import HowToQtyMeasurePopOver from '../components/PopOversRBS/HowToQtyMeasurePopOver';
 
 
 
@@ -41,12 +42,6 @@ const AddStepThree = (props: AddStepThreeProps) => {
 			// Using obj[key] to retrieve key value
 			return [key.toString(), ingredient_qty[key.toString()]];
 		});
-		// console.log(result);
-		//prevents empty form submission
-		// if (result.length === 0) {
-		// 	alert('catch')
-		// 	return;
-		// }
 
 		apiService(`/api/recipeingredients/multi_existing_qty/${id}`, `POST`, { array_of_ingredientUpdates: result })
 			.then(res => {
@@ -69,7 +64,15 @@ const AddStepThree = (props: AddStepThreeProps) => {
 	return (
 		<section className="container my-3 col-12 col-md-10 col-lg-8">
 			<div className="p-4 mb-3 rounded shadow bg-primary ">
-				<h3 className="mb-3 text-center text-info">Add Qty & Measure</h3>
+				<div className='row justify-content-around mb-3'>
+					<div className="align-items-center mt-1 col-10 col-sm-10">
+						<h3 className="text-info">Add Qty & Measure</h3>
+					</div>
+					<div className="align-items-center mr-4 col-2 col-sm-1">
+						<HowToQtyMeasurePopOver />
+					</div>
+				</div>
+
 				{recipeIngreds?.map(ingred => (
 					<div
 						key={`option-${ingred.ingredient_id}`}

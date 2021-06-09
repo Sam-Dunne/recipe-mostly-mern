@@ -7,6 +7,7 @@ import { apiService } from '../utils/api-services';
 import { Button, Form } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
+import MyModal from '../components/SweetAlerts'
 import Moment from 'moment';
 import recipeFlavorTags from '../../server/db/recipeFlavorTags';
 
@@ -43,7 +44,8 @@ const EditRecipe = (props: EditRecipeProps) => {
         e.preventDefault();
         apiService(`/api/recipes/${id}`, `PUT`, {title, summary, instructions})
         .then(res => {
-            alert(res.message);
+            MyModal.timeoutSuccess('Nice!',`${res.message}!`);
+
             history.push(`/recipe_details/${res.recipeID}`)
         })
     };

@@ -6,6 +6,7 @@ import { apiService } from '../utils/api-services';
 import { v4 as uuidv4 } from 'uuid';
 import { Button, Form } from 'react-bootstrap';
 import SubmitBtn from '../components/SubmitBtn';
+import MyModal from '../components/SweetAlerts'
 
 
 
@@ -23,16 +24,19 @@ const Register = (props: RegisterProps) => {
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        if (name.length === 0 || email.length === 0 || password.length === 0 || name.length > 60 || email.length > 60 || password.length > 60 || password.length < 6) {
-            alert(`Required Fields`);
+        if (name.length === 0 || email.length === 0 || password.length === 0 || name.length > 60 || email.length > 60 || password.length > 60) {
+            MyModal.fieldValidation(('All Input Fields Required'), ( '60 Characters Max for each.'));
+            return;
+        }
+        if (password.length >= 1 && password.length < 6) {
+            MyModal.fieldValidation(('Weak Password'), ( 'Min Password length is 6 characters'));
             return;
         }
         apiService(`/auth/register`, 'POST', { id: uuidv4(), name, email, password })
             .then(res => {
                 localStorage.setItem('token', res.token);
-                alert(`Thanks for joining, ${res.name}`)
-                history.push('/addRecipe/')
-
+                MyModal.timeoutSuccess(`Welcome`, `Thanks for joining, ${res.name}!`);
+                history.push('/addRecipe/');
             })
     };
 
@@ -59,7 +63,7 @@ const Register = (props: RegisterProps) => {
                     <Form.Label className='text-info'>Password</Form.Label>
                     <Form.Control value={password} onChange={handleSetPassword} type="password" placeholder="Password" />
                 </Form.Group>
-             
+
                 <SubmitBtn onClick={handleSubmit} children='Register' />
                 <Link to='/register' className='my-3 nav-btn text-info'>Already Signed Up...Login</Link>
 

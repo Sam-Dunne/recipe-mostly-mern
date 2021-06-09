@@ -3,10 +3,11 @@ import { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import SubmitBtn from '../components/SubmitBtn';
 import { apiService } from '../utils/api-services';
+import SubmitBtn from '../components/SubmitBtn';
+import MyModal from '../components/SweetAlerts'
 
-/* HOOK REACT EXAMPLE */
+
 const Login = (props: LoginProps) => {
     const history = useHistory();
 
@@ -17,15 +18,15 @@ const Login = (props: LoginProps) => {
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        if (email.length === 0 || password.length === 0 || email.length > 60 || password.length > 60) {
-            alert(`Required Fields`);
+        if (email.length === 0 || password.length === 0) {
+            MyModal.fieldValidation(('Oops...'), ( 'Both fields required'));
             return;
         }
         apiService(`/auth/login`, 'POST', { email, password })
             .then(res => {
                 localStorage.setItem('token', res.token);
-                alert(`Welcome back, ${res.name}`)
-                history.push(`/users_recipes/${res.id}`)
+                MyModal.timeoutSuccess('',`Welcome Back, ${res.name}!`);
+                history.push(`/users_recipes/${res.id}`);
             })
     };
 
