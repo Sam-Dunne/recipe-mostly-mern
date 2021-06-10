@@ -5,6 +5,7 @@ import { apiService } from '../utils/api-services';
 import { FaReact, FaNode, FaSass } from 'react-icons/fa';
 import { SiMysql, SiPostman, SiTypescript, SiCss3, SiJavascript } from 'react-icons/si';
 import SubmitBtn from '../components/SubmitBtn';
+import MyModal from '../components/SweetAlerts';
 
 const Landing = (props: LandingProps) => {
     const [from, setFrom] = useState<string>('');
@@ -16,17 +17,32 @@ const Landing = (props: LandingProps) => {
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        if (!from || !subject || !message) {
+            MyModal.fieldValidation(('Oops...'), ( 'All fields required'));
+            return
+        }
         apiService('/api/contact', 'POST', { from, subject, message })
-            .then(result => console.log(result));
+            .then(result => {
+                MyModal.timeoutSuccess('Thanks for the Message!', `${result.newEmail.from}`)
+                setFrom('');
+                setSubject('');
+                setMessage('')
+            })
     }
     return (
         <section className="container p-2">
             <div className="row justify-content-center align-items-center p-3">
                 <div className="card card-body bg-primary col-md-10 col-lg-8">
                     <h2 className="mx-5 text-center text-info">Recipe Registry</h2>
-                    <p className="card card-text bg-light p-2">This site is built with Node with Express,
-                    MySQL, React, and TypeScript.  Incorporates 3rd Party APIs Stripe and Mailgun.
-                      As well as Passport for Authentication and Authorization. Thanks for visiting!</p>
+                    <p className="card card-text bg-light p-2">Welcome! This app is a convenient way to store and edit your favorite personal recipes.
+                     First you will input a recipe's Title, brief summary, and cooking instructions, as well as select as many "Flavor Tags" from a dropdown that fit that recipe.
+                     Upon submittal, you'll be delivered to a view where you may add all or some core ingredients (ie. bacon, lettuce, tomato, etc).
+                     Next you'll add the Quantity and Measure (ie. 2 cups, 3 tsp, 4 whole), for each ingredient. 
+                     You may then edit and/or append ingredients and the cooking directions as needed.  Thanks for visiting, I hope you enjoy!  </p>
+                    <p className="card card-text bg-light p-2">This app is built with Node,
+                    MySQL, React, and TypeScript.  Incorporates 3rd Party API Mailgun.
+                      As well as Passport for Authentication and Authorization. Thanks for visiting!
+                       This was very challenging and I learned so much throughout the process.</p>
                     <div className="row justify-content-around align-items-center my-3">
                         <span><FaReact className='bg-primary text-info icon rounded' /></span>
                         <span><SiJavascript className='bg-primary text-info icon rounded' /></span>

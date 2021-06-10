@@ -17,30 +17,28 @@ const MultiSelect = (props: MultiSelectProps) => {
     // const [x, setx] = useState<string>('');
     // const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
 
-
+    // all ingredients from db fetch
     const [selectableItems, setAllSelectableItems] = useState<IIngredients[]>([]);
-
+    // all existing ingredients of this recipe from db fetch
     const [ingreds, setIngreds] = useState<IRecipeIngredientsFull[]>([]);
 
     const [selectedItemsArray, setSelectedItemsArray] = useState<IOptionType[]>([]);
-
+    // Dropdown options...result of merge and filter func, converted from {id,name} to {label, value}
     const [itemOptions, setItemOptions] = useState<IOptionType[]>([]);
 
     useEffect(() => {
         if (props.type === 'ingredients') {
-
             // for fetching existing recipeIngredients to be filter selectableItems
             apiService(`/api/recipeingredients/${props.recipeId?.id}`)
                 .then(ingreds => setIngreds(ingreds));
         }
 
         apiService(`/api/${props.type}`)
-            .then(selectableIngredients => setAllSelectableItems(selectableIngredients))
-
-
+            .then(selectableIngredients => setAllSelectableItems(selectableIngredients));
     }, []);
 
     useEffect(() => {
+        // removes existing recipeIngredients from options
         const result = mergeAndFilter(selectableItems, ingreds);
         // console.log({result});
         type ISelectOption = Pick<OptionProps, "label" | "value">;
@@ -87,7 +85,9 @@ const MultiSelect = (props: MultiSelectProps) => {
                 <Creatable
                     options={itemOptions}
                     onChange={(e: any) => handleUpdateSubmit(e)}
+                    // onInputChange={(e: any) => handleUpdateSubmit(e)}
                     isMulti
+                    isClearable
                     className="basic-multi-select bg-info"
                     classNamePrefix="select"
                     placeholder={`Choose ${props.placeholder}...`}

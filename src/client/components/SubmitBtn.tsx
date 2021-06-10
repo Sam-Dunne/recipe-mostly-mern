@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { SiLinkedin } from 'react-icons/si';
-import { GoMarkGithub } from "react-icons/go";
+
 import { Button } from 'react-bootstrap';
 
 

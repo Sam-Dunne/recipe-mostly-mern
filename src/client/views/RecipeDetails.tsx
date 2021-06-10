@@ -4,12 +4,7 @@ import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { IRecipeFlavorTagsFull, IRecipeIngredientsFull, IUserRecipes } from '../../interfaces';
 import { apiService } from '../utils/api-services';
-import { Dropdown } from 'react-bootstrap';
 import { MdAddCircleOutline } from 'react-icons/md';
-import { GoHome } from 'react-icons/go'
-import { FiEdit } from 'react-icons/fi'
-import { IoEllipsisVerticalCircleOutline } from 'react-icons/io5';
-import { TiDocumentDelete } from 'react-icons/ti';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
 import Moment from 'moment';

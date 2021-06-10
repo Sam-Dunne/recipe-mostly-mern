@@ -96,6 +96,18 @@ router.post('/multi_existing_qty/:id', authenticate('jwt'), async (req, res, nex
     }
 });
 
+router.post('/by_name/:id', async (req, res, next) => {
+    const id = req.params.id;
+    const name = req.body;
+    try {
+        const result = await db.recipeIngredients.findByName(id, name);
+        res.json(result);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ message: 'goof: GET /api/ingredients/id', error: error.message})
+    }
+});
+
 router.put('/:id', authenticate('jwt'), async (req, res, next) => {
     const id = req.params.id;
     const updatednewRecipeIngredient = req.body;

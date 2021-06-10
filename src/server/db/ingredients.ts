@@ -7,6 +7,8 @@ const one = (id: string) => Query<(IIngredients)[]>('SELECT * FROM Ingredients W
 const insert = (newIngredient: IIngredients) => Query('INSERT INTO Ingredients SET ?', [newIngredient]);
 const update = (updatedIngredient: { name: string }, id: string) => Query('UPDATE Ingredients SET ? WHERE id = ?', [updatedIngredient, id]);
 const nuke = (id: string) => Query('DELETE from Ingredients WHERE id = ?', [id]);
+const find = (column: string, value: string) => Query<IIngredients[]>('SELECT * FROM ingredients WHERE ?? = ?', [column, value]);
+
 
 export default {
     all,
@@ -14,6 +16,7 @@ export default {
     insert,
     update,
     nuke,
+    find
 };
 
 // interface IIngredients {

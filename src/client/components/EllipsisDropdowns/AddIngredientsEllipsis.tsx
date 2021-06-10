@@ -6,7 +6,7 @@ import { IoEllipsisVerticalCircleOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 
 
-const AddIngredientsEllips = (props: AddIngredientsEllipsProps) => {
+const AddIngredientsEllipsis = (props: AddIngredientsEllipsisProps) => {
 
     return (
         <div className="btn-group mr-4">
@@ -30,10 +30,10 @@ const AddIngredientsEllips = (props: AddIngredientsEllipsProps) => {
 
 };
 
-interface AddIngredientsEllipsProps {
+interface AddIngredientsEllipsisProps {
     toUsers_recipes: string;
     toEdit_recipe: string;
     toAddQtyMeasure: string;
 }
 
-export default AddIngredientsEllips;
+export default AddIngredientsEllipsis;

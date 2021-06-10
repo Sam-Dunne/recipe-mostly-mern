@@ -46,6 +46,38 @@ const AddStepTwo = (props: AddStepTwoProps) => {
         })
     }, [selectedIngs])
 
+    // useEffect(() => {
+    //     selectedIngs?.forEach(ing => {
+    //         if (ing.id === ing.name) {
+    //             apiService(`/api/ingredients/find/byname/${ing.name.toLowerCase()}`)
+    //                 .then(found => {
+    //                     console.log({found})
+    //                     // create if not found
+    //                     if (!found) {
+    //                         console.log('not found')
+    //                         apiService(`/api/ingredients`, "POST", { name: ing.name })
+    //                             .then(res => {
+    //                                 return {
+    //                                     id: res.id,
+    //                                     name: ing.name
+    //                                 }
+    //                             })
+    //                             .then(newIng => setIngredients([...selectedIngs, newIng]))
+    //                     } else {
+    //                         const temp = selectedIngs;
+    //                         const duplicate = temp.findIndex(ing => ing.id === ing.name)
+    //                         temp.splice(duplicate, 1)
+    //                         setIngredients([...temp, ing])
+                          
+    //                     }
+    //                 })
+    //         }
+    //         else {
+    //             setIngredients([...selectedIngs])
+    //         }
+    //     })
+    // }, [selectedIngs])
+
     const handleAddIngredients = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 

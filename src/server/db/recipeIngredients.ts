@@ -20,7 +20,8 @@ const addRecipeIngredientsFull = (ingredient_qty_Arr: [[string]]) =>
 // const addRecipeIngredientQtyToExisting = (ingredient_qty_Arr: [[string]], ingredient_id_Arr: [string][], recipe_id: string) =>
 //     Query('INSERT INTO RecipeIngredients (recipe_id, ingredient_id, ingredient_qty) VALUES ? ON DUPLICATE KEY UPDATE ingredient_id = ? ON DUPLICATE KEY UPDATE recipe_id = ?', [ingredient_qty_Arr, ingredient_id_Arr, recipe_id]);
 // batch insert for all RecipeIngredients columns
-
+const findByName = (id: string, name: string) => 
+Query('SELECT Ingredients.name FROM RecipeIngredients JOIN Ingredients ON Ingredients.id = RecipeIngredients.ingredient_id WHERE recipe_id = ? AND ingredients.name = ?', [id, name])
 
 // id refers to the recipes' id
 const update = (updatedRecipeIngredient: { ingredient_id: string, ingredient_qty: string }, recipe_id: string) => Query('UPDATE RecipeIngredients SET ? WHERE recipe_id = ?', [updatedRecipeIngredient, recipe_id]);
@@ -37,6 +38,7 @@ export default {
     allByRecipeId,
     addRecipeIngredients,
     addRecipeIngredientsFull,
+    findByName,
     // addRecipeIngredientQtyToExisting,
     update,
     nuke,

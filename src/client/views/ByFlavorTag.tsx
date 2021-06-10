@@ -27,15 +27,26 @@ const ByFlavorTag = (props: ByFlavorTagProps) => {
         apiService(`/api/flavortags/${id}`)
             .then(flavorTag => setHeaderTag(flavorTag))
     }, [id]);
+
+    // useEffect(() => {
+    //     if (recipes.length === 0) {
+    //         alert(`no ${flavorTag} recipes`)
+    //     }
+    // },[flavorTag])
+
+    
       
 
     return (
         <section className="container my-2">
-            <h3 className="text-success text-center">{headerTag?.name} Recipes</h3>
+            {(recipes.length === 0) &&
+            <h3 className="text-success text-center mb-3">No {headerTag?.name} Recipes</h3>
+            }
+            {(recipes.length > 0) && 
+            <h3 className="text-success text-center mb-3">{headerTag?.name} Recipes</h3>
+            }
             <div className='col-12 col-md-8 col-lg-6 mx-auto'>
-              
                 <SingleSelect setter={setFlavorTag} type={'flavorTags'} placeholder={'Flavor Tags'} />
-
             </div>
             <div className="row d-flex justify-content-around align-items-center">
                 {recipes?.map(recipe => (
