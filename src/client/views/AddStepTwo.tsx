@@ -46,38 +46,6 @@ const AddStepTwo = (props: AddStepTwoProps) => {
         })
     }, [selectedIngs])
 
-    // useEffect(() => {
-    //     selectedIngs?.forEach(ing => {
-    //         if (ing.id === ing.name) {
-    //             apiService(`/api/ingredients/find/byname/${ing.name.toLowerCase()}`)
-    //                 .then(found => {
-    //                     console.log({found})
-    //                     // create if not found
-    //                     if (!found) {
-    //                         console.log('not found')
-    //                         apiService(`/api/ingredients`, "POST", { name: ing.name })
-    //                             .then(res => {
-    //                                 return {
-    //                                     id: res.id,
-    //                                     name: ing.name
-    //                                 }
-    //                             })
-    //                             .then(newIng => setIngredients([...selectedIngs, newIng]))
-    //                     } else {
-    //                         const temp = selectedIngs;
-    //                         const duplicate = temp.findIndex(ing => ing.id === ing.name)
-    //                         temp.splice(duplicate, 1)
-    //                         setIngredients([...temp, ing])
-                          
-    //                     }
-    //                 })
-    //         }
-    //         else {
-    //             setIngredients([...selectedIngs])
-    //         }
-    //     })
-    // }, [selectedIngs])
-
     const handleAddIngredients = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
@@ -119,7 +87,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
 
     return (
         <section className="container my-3">
-            <div className='bg-primary rounded shadow mb-3 px-3 pt-2'>
+            <div className='bg-primary rounded shadow mx-auto mb-3 p-1 px-md-3 py-md-4 col-12 col-md-10 col-lg-8'>
                 <div className="row justify-content-end align-items-center">
                     <AddIngredientsEllipsis
                         toUsers_recipes={`/users_recipes/${recipe?.user_id}`}
@@ -129,7 +97,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
                 <h5 className="text-info text-center mb-3 mx-auto">Add Ingredients to</h5>
                 <h3 className="text-info text-center font-italic mb-3 mx-auto">{recipe?.title}</h3>
                 <div className='row justify-content-around '>
-                    <div className="align-items-center mx-auto col-2 col-sm-1">
+                    <div className="align-items-center col-1 col-sm-1">
                         <HowToAddIngredPopOver />
                     </div>
                     <div className="align-items-center mt-1 col-10 col-sm-11">
@@ -142,10 +110,10 @@ const AddStepTwo = (props: AddStepTwoProps) => {
             </div>
 
             {(ingreds.length > 0) && <div className="row d-flex justify-content-center align-items-center rounded p-3">
-                <div className="card justify-content-center bg-primary p-5 col-12 col-md-8 col-lg-8">
+                <div className="card justify-content-center bg-primary py-4 p-2 px-md-5 col-12 col-md-10 col-lg-8">
                     <h5 className='text-info text-bold mx-auto mb-3'>Existing Recipe Ingredients</h5>
 
-                    <div className="card-body justify-content-center rounded shadow mx-auto bg-info pb-3 col-12 col-md-8 col-lg-10">
+                    <div className="card-body justify-content-center rounded shadow mx-auto bg-info px-3 px-md-5 pb-3 col-12 col-md-10 col-lg-10">
                         {ingreds?.map(ingred => (
                             <h5 key={`option-${ingred.ingredient_id}`} className="card-text">{`${ingred.ingredient_qty || "Zero"} ${ingred.name}`}</h5>
                         ))}

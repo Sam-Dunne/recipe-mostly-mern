@@ -16,7 +16,7 @@ const HowToAddIngredPopOver = (props: HowToAddIngredPopOverProps) => {
     );
     return (
         <OverlayTrigger trigger={["focus", "click"]} placement="right" overlay={popover}>
-            <Button variant="primary"><BsFillQuestionCircleFill className='bg-primary text-info question' /></Button>
+            <Button variant="primary"><BsFillQuestionCircleFill className='question' /></Button>
         </OverlayTrigger>
     );
 

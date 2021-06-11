@@ -2,9 +2,10 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { apiService } from '../utils/api-services';
-import { IFlavorTags, IRecipeIngredientsFull } from '../../interfaces';
+import { IFlavorTags, IRecipeIngredientsFull, IUserRecipes } from '../../interfaces';
 import SubmitBtn from '../components/SubmitBtn';
 import HowToQtyMeasurePopOver from '../components/PopOversRBS/HowToQtyMeasurePopOver';
+import AddStepThreeEllipsis from '../components/EllipsisDropdowns/AddStepThreeEllipsis';
 
 
 
@@ -12,6 +13,8 @@ import HowToQtyMeasurePopOver from '../components/PopOversRBS/HowToQtyMeasurePop
 const AddStepThree = (props: AddStepThreeProps) => {
 	const history = useHistory();
 	const { id } = useParams<{ id: string }>();
+
+	const [recipe, setRecipe] = useState<IUserRecipes>(null);
 
 	const [recipeIngreds, setRecipeIngreds] = useState<IRecipeIngredientsFull[]>([]);
 
@@ -51,6 +54,8 @@ const AddStepThree = (props: AddStepThreeProps) => {
 	};
 
 	useEffect(() => {
+		apiService(`/api/recipes/${id}`)
+			.then(recipe => setRecipe(recipe));
 		apiService(`/api/recipeingredients/${id}`).then(ingreds => {
 			setRecipeIngreds(ingreds)
 
@@ -59,25 +64,34 @@ const AddStepThree = (props: AddStepThreeProps) => {
 			setIngredient_Qty(objectifiedIngredz)
 		});
 	}, []);
-	console.log(ingredient_qty);
+	// console.log(ingredient_qty);
 
 	return (
 		<section className="container my-3 col-12 col-md-10 col-lg-8">
-			<div className="p-4 mb-3 rounded shadow bg-primary ">
-				<div className='row justify-content-around mb-3'>
-					<div className="align-items-center mt-1 col-10 col-sm-10">
-						<h3 className="text-info">Add Qty & Measure</h3>
-					</div>
-					<div className="align-items-center mr-4 col-2 col-sm-1">
-						<HowToQtyMeasurePopOver />
+			<div className="p-2 px-md-4 mb-3 rounded shadow bg-primary ">
+				<div className="row justify-content-end">
+					<AddStepThreeEllipsis
+						toUsers_recipes={`/users_recipes/${recipe?.user_id}`}
+						toAdd_ingredients={`/add_Ingredients/${id}`}
+						toEdit_recipe={`/edit_recipe/${recipe?.id}`}
+					/>
+				</div>
+				<div className="container">
+					<div className='row justify-content-between mb-3'>
+						<div className="justify-content-center align-items-center col-12">
+							<h3 className="text-info text-center">Add Qty & Measure</h3>
+						</div>
+						<div className="justify-content-center align-items-center col-12">
+							<HowToQtyMeasurePopOver />
+						</div>
 					</div>
 				</div>
 
 				{recipeIngreds?.map(ingred => (
 					<div
 						key={`option-${ingred.ingredient_id}`}
-						className="pb-3 mx-auto mb-2 rounded shadow card-body justify-content-center bg-info col-12 col-md-10 col-lg-10">
-						<div className="row align-items-center justify-content-between mx-3">
+						className="p-1 py-3 px-md-4 mx-auto mb-2 rounded shadow card-body justify-content-center bg-info col-12 col-md-10 col-lg-10">
+						<div className="row justify-content-between align-items-center mx-3">
 
 							<input
 								name={ingred.ingredient_id}

@@ -30,9 +30,9 @@ const Landing = (props: LandingProps) => {
             })
     }
     return (
-        <section className="container p-2">
-            <div className="row justify-content-center align-items-center p-3">
-                <div className="card card-body bg-primary col-md-10 col-lg-8">
+        <section className="container p-2 ">
+            <div className="row justify-content-center align-items-center ">
+                <div className="card card-body bg-primary px-sm-2 px-md-4 col-md-10 col-lg-8">
                     <h2 className="mx-5 text-center text-info">Recipe Registry</h2>
                     <p className="card card-text bg-light p-2">Welcome! This app is a convenient way to store and edit your favorite personal recipes.
                      First you will input a recipe's Title, brief summary, and cooking instructions, as well as select as many "Flavor Tags" from a dropdown that fit that recipe.
@@ -57,8 +57,8 @@ const Landing = (props: LandingProps) => {
                     </div>
                 </div>
             </div>
-            <div className="row justify-content-center align-items-center p-3">
-                <form className="form-group border rounded shadow bg-primary col-md-8">
+            <div className="row justify-content-center align-items-center mt-3">
+                <form className="form-group border rounded shadow bg-primary px-sm-2 px-md-4 col-md-10 col-lg-8">
                     <input className="form-control bg-light my-3"
                         onChange={handleSetFrom}
                         value={from}
