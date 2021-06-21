@@ -69,23 +69,22 @@ const AddStepThree = (props: AddStepThreeProps) => {
 	return (
 		<section className="container my-3 col-12 col-md-10 col-lg-8">
 			<div className="p-2 px-md-4 mb-3 rounded shadow bg-primary ">
-				<div className="row justify-content-end">
+				<div className="row justify-content-between align-items-center">
+					<HowToQtyMeasurePopOver />
 					<AddStepThreeEllipsis
 						toUsers_recipes={`/users_recipes/${recipe?.user_id}`}
 						toAdd_ingredients={`/add_Ingredients/${id}`}
 						toEdit_recipe={`/edit_recipe/${recipe?.id}`}
 					/>
+
 				</div>
-				<div className="container">
-					<div className='row justify-content-between mb-3'>
-						<div className="justify-content-center align-items-center col-12">
-							<h3 className="text-info text-center">Add Qty & Measure</h3>
-						</div>
-						<div className="justify-content-center align-items-center col-12">
-							<HowToQtyMeasurePopOver />
-						</div>
-					</div>
+
+				<div className="mb-3 justify-content-center align-items-center mb-3 col-12">
+					<h5 className="text-info text-center">Add Qty & Measure to:</h5>
+					<h3 className="text-info text-center font-italic mb-3 mx-auto">{recipe?.title}</h3>
+
 				</div>
+
 
 				{recipeIngreds?.map(ingred => (
 					<div

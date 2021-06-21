@@ -21,9 +21,9 @@ const HowToQtyMeasurePopOver = (props: HowToQtyMeasurePopOverProps) => {
         </Popover>
     );
     return (
-        <div>
-            <OverlayTrigger trigger={["focus", "click"]} placement="left" overlay={popover}>
-                <Button variant="primary"><BsFillQuestionCircleFill className='question' /></Button>
+        <div className='ml-4'>
+            <OverlayTrigger trigger={"focus"} placement="right" overlay={popover}>
+                <Button variant="primary"><BsFillQuestionCircleFill className='question p-0' /></Button>
             </OverlayTrigger>
         </div>
     );

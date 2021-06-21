@@ -86,9 +86,10 @@ const AddStepTwo = (props: AddStepTwoProps) => {
     };
 
     return (
-        <section className="container my-3">
+        <section className="container my-2">
             <div className='bg-primary rounded shadow mx-auto mb-3 p-1 px-md-3 py-md-4 col-12 col-md-10 col-lg-8'>
-                <div className="row justify-content-end align-items-center">
+                <div className="row justify-content-between align-items-center">
+                    <HowToAddIngredPopOver />
                     <AddIngredientsEllipsis
                         toUsers_recipes={`/users_recipes/${recipe?.user_id}`}
                         toAddQtyMeasure={`/add_qtymeasure/${id}`}
@@ -97,9 +98,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
                 <h5 className="text-info text-center mb-3 mx-auto">Add Ingredients to</h5>
                 <h3 className="text-info text-center font-italic mb-3 mx-auto">{recipe?.title}</h3>
                 <div className='row justify-content-around '>
-                    <div className="align-items-center col-1 col-sm-1">
-                        <HowToAddIngredPopOver />
-                    </div>
+                  
                     <div className="align-items-center mt-1 col-10 col-sm-11">
                         <MultiSelect setter={setSelectedIngs} type={'ingredients'} recipeId={{ id }} placeholder={'Ingredients'} />
                     </div>
@@ -111,7 +110,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
 
             {(ingreds.length > 0) && <div className="row d-flex justify-content-center align-items-center rounded p-3">
                 <div className="card justify-content-center bg-primary py-4 p-2 px-md-5 col-12 col-md-10 col-lg-8">
-                    <h5 className='text-info text-bold mx-auto mb-3'>Existing Recipe Ingredients</h5>
+                    <h3 className='text-info text-bold mx-auto mb-3'>Existing Recipe Ingredients</h3>
 
                     <div className="card-body justify-content-center rounded shadow mx-auto bg-info px-3 px-md-5 pb-3 col-12 col-md-10 col-lg-10">
                         {ingreds?.map(ingred => (
