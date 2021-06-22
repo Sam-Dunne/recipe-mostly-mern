@@ -16,7 +16,7 @@ const MultiSelect = (props: MultiSelectProps) => {
     // const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
 
     // all ingredients from db fetch
-    const [selectableItems, setAllSelectableItems] = useState<IIngredients[]>([]);
+    const [selectableItems, setAllSelectableItems] = useState<IIngredients[]>(null);
     // all existing ingredients of this recipe from db fetch
     const [ingreds, setIngreds] = useState<IRecipeIngredientsFull[]>([]);
 
@@ -37,13 +37,14 @@ const MultiSelect = (props: MultiSelectProps) => {
 
     useEffect(() => {
         // removes existing recipeIngredients from options
+        if (!selectableItems) return;
         const result = mergeAndFilter(selectableItems, ingreds);
         // console.log({result});
         type ISelectOption = Pick<OptionProps, "label" | "value">;
         // get  data in array format to work with label+value
         const Options = (result || []).length
             ? (result.map(selectableItem => ({
-                label: selectableItem.name,
+                label: selectableItem.name.toLowerCase(),
                 value: selectableItem.id
             })) as ISelectOption[])
             : []
@@ -52,7 +53,7 @@ const MultiSelect = (props: MultiSelectProps) => {
 
 
     useEffect(() => {
-        if (selectedItemsArray.length === 0) return;
+        // if (selectedItemsArray.length === 0) return;
 
         const cleanedItemsArray = selectedItemsArray.map(sI => {
             return {
@@ -69,11 +70,12 @@ const MultiSelect = (props: MultiSelectProps) => {
     };
 
     const handleUpdateSubmit = (e: any) => {
+        console.log(e)
         setSelectedItemsArray(e);
     };
 
 
-    if (!selectableItems.length) {
+    if (!(selectableItems?.length >= 0)) {
         return <> </>
     }
 

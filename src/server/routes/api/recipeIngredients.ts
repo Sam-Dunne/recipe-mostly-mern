@@ -48,7 +48,7 @@ router.post('/multi/:id', authenticate('jwt'), async (req, res, next) => {
     const recipe_id = req.params.id;
     const { array_of_ingredients } = req.body;
     try {
-        const recipeIngredientsArr = array_of_ingredients.map((item: string) => [recipe_id, item]);
+        const recipeIngredientsArr = array_of_ingredients.map((item: string) => [recipe_id, item.toLocaleLowerCase()]);
 
         const results = await db.recipeIngredients.addRecipeIngredients(recipeIngredientsArr);
         res.json({ results });
@@ -58,22 +58,22 @@ router.post('/multi/:id', authenticate('jwt'), async (req, res, next) => {
     }
 });
 
-// multi RecipeIngredientsFull post
-router.post('/multi_ing_qty/:id', authenticate('jwt'), async (req, res, next) => {
-    const recipe_id = req.params.id;
-    const {array_of_ingredientUpdates} = req.body;
-    try {
-        const ingredient_qty_Arr = array_of_ingredientUpdates.map((item: string) => [recipe_id, item[0], item[1]] );
-        // const ingredient_id_Arr = array_of_ingredientUpdates.map((item: string) => item[0] );
-        // const recipe_id_Arr = array_of_ingredientUpdates.map((item: any) => recipe_id );
+// // multi RecipeIngredientsFull post
+// router.post('/multi_ing_qty/:id', authenticate('jwt'), async (req, res, next) => {
+//     const recipe_id = req.params.id;
+//     const {array_of_ingredientUpdates} = req.body;
+//     try {
+//         const ingredient_qty_Arr = array_of_ingredientUpdates.map((item: string) => [recipe_id, item[0], item[1]] );
+//         // const ingredient_id_Arr = array_of_ingredientUpdates.map((item: string) => item[0] );
+//         // const recipe_id_Arr = array_of_ingredientUpdates.map((item: any) => recipe_id );
 
-        const results = await db.recipeIngredients.addRecipeIngredientsFull(ingredient_qty_Arr);
-        res.json( results );
-    } catch (error) {
-        console.log(error.message);
-        res.status(500).json({ message: 'goof' })
-    }
-});
+//         const results = await db.recipeIngredients.addRecipeIngredientsFull(ingredient_qty_Arr);
+//         res.json( results );
+//     } catch (error) {
+//         console.log(error.message);
+//         res.status(500).json({ message: 'goof' })
+//     }
+// });
 
 // multi RecipeIngredientsFull post for existing recipeIngredients
 router.post('/multi_existing_qty/:id', authenticate('jwt'), async (req, res, next) => {

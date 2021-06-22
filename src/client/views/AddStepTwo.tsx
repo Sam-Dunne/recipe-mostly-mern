@@ -36,7 +36,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
                     .then(res => {
                         return {
                             id: res.id,
-                            name: ing.name
+                            name: ing.name.toLocaleLowerCase()
                         }
                     })
                     .then(newIng => setIngredients([...selectedIngs, newIng]))
