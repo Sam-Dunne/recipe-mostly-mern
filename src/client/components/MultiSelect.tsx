@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { Link } from 'react-router-dom';
 import { apiService } from '../utils/api-services'
 import { IIngredients, IRecipeIngredientsFull } from '../../interfaces';
 import { OptionProps } from "react-select/src/types";
@@ -10,7 +9,6 @@ import Select from 'react-select';
 import { mergeAndFilter } from '../utils/mergeAndFilter';
 
 
-/* HOOK REACT EXAMPLE */
 const MultiSelect = (props: MultiSelectProps) => {
     const history = useHistory();
     const { id } = useParams<{ id: string }>();

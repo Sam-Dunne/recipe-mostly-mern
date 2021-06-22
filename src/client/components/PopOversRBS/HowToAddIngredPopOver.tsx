@@ -2,8 +2,6 @@ import * as React from 'react';
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
 import { BsFillQuestionCircleFill } from 'react-icons/bs';
 
-
-/* HOOK REACT EXAMPLE */
 const HowToAddIngredPopOver = (props: HowToAddIngredPopOverProps) => {
 
     const popover = (

@@ -7,9 +7,6 @@ import { OptionProps } from "react-select/src/types";
 import Select from 'react-select';
 
 
-
-
-/* HOOK REACT EXAMPLE */
 const SingleSelect = (props: SingleSelectProps) => {
     const history = useHistory();
     const { id } = useParams<{ id: string }>();

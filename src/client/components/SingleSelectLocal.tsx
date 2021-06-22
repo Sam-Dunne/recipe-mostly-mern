@@ -8,9 +8,6 @@ import Select from 'react-select';
 import { OptionProps } from "react-select/src/types";
 
 
-
-
-/* HOOK REACT EXAMPLE */
 const SingleSelectLocal = (props: SingleSelectLocalProps) => {
     const history = useHistory();
     const { id } = useParams<{ id: string }>();

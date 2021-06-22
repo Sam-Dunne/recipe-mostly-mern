@@ -8,7 +8,6 @@ import Moment from 'moment';
 import SingleSelect from '../components/SingleSelect';
 
 
-/* HOOK REACT EXAMPLE */
 const UsersRecipes = (props: UsersRecipesProps) => {
     const history = useHistory();
     const { id } = useParams<{ id: string }>();
@@ -26,11 +25,11 @@ const UsersRecipes = (props: UsersRecipesProps) => {
     return (
         <section className="container my-2">
             <h3 className="text-secondary text-center">Users Recipes</h3>
+
             <div className='col-12 col-md-8 col-lg-6 mx-auto'>
-
                 <SingleSelect setter={setFlavorTag} type={'flavorTags'} placeholder={'Flavor Tags'} />
-
             </div>
+            
             <div className="row d-flex justify-content-around align-items-center">
                 {recipes?.map(recipe => (
                     <div className="card rounded shadow bg-light px-0 m-3 col-12 col-md-5 col-lg-3" key={`option-${recipe.id}`}>
@@ -41,11 +40,7 @@ const UsersRecipes = (props: UsersRecipesProps) => {
                             <div className="card-body  ">
                                 <h5 className='card-title'>{recipe.title}</h5>
                                 <h6 className='card-title'>{recipe.summary}</h6>
-                                {/* {Moment(recipe?.created_at).format("MMM Do YY")} */}
                                 <p className='card-text'>{Moment(recipe?.created_at).format("MMM Do YY")}</p>
-                                {/* <div className='col-12 justify-content-center'>
-                                    <Link to={`/recipe_details/${recipe.id}`} className='btn btn-link border-primary rounded mx-auto'>To {recipe.title}</Link>
-                                </div> */}
                             </div>
                         </Link>
                     </div>

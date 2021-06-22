@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { SiLinkedin } from 'react-icons/si';
 import { GoMarkGithub } from "react-icons/go";
 
-/* HOOK REACT EXAMPLE */
 const Footer = (props: FooterProps) => {
 
     return (
@@ -13,7 +12,7 @@ const Footer = (props: FooterProps) => {
                 <div className="row justify-content-around align-items-center px-4 my-2">
                     <a href="https://www.linkedin.com/in/samdunnewebdev/" target='blank'><SiLinkedin className='bg-primary text-info icon' /></a>
                     <Link to='/' className='text-success bg-info p-3 rounded shadow' >Contact</Link>
-                    <a href="https://github.com/Sam-Dunne" target='blank'><GoMarkGithub className='bg-primary text-info icon' /></a>
+                    <a href="https://github.com/Sam-Dunne/recipe-mostly-mern" target='blank'><GoMarkGithub className='bg-primary text-info icon' /></a>
                 </div>
             </div>
 

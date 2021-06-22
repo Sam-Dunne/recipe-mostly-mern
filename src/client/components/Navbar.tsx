@@ -3,7 +3,6 @@ import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 
-/* HOOK REACT EXAMPLE */
 const Navbah = (props: NavbahProps) => {
 
     const handleLogout = (e: React.MouseEvent<HTMLAnchorElement>) => {

@@ -8,8 +8,6 @@ import HowToQtyMeasurePopOver from '../components/PopOversRBS/HowToQtyMeasurePop
 import AddStepThreeEllipsis from '../components/EllipsisDropdowns/AddStepThreeEllipsis';
 
 
-
-/* HOOK REACT EXAMPLE */
 const AddStepThree = (props: AddStepThreeProps) => {
 	const history = useHistory();
 	const { id } = useParams<{ id: string }>();

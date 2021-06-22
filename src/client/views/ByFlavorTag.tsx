@@ -49,11 +49,7 @@ const ByFlavorTag = (props: ByFlavorTagProps) => {
                         <div className="card-body  ">
                             <h5 className='card-title'>{recipe.title}</h5>
                             <h6 className='card-title'>{recipe.summary}</h6>
-                            {/* {Moment(recipe?.created_at).format("MMM Do YY")} */}
                             <p className='card-text'>{Moment(recipe?.created_at).format("MMM Do YY")}</p>
-                            {/* <div className='col-12 justify-content-center'>
-                                <Link to={`/recipe_details/${recipe.id}`} className='btn btn-link border-primary rounded mx-auto'>To {recipe.title}</Link>
-                            </div> */}
                         </div>
                     </Link>
                 </div>

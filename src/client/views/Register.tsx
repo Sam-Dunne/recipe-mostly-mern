@@ -9,9 +9,6 @@ import SubmitBtn from '../components/SubmitBtn';
 import MyModal from '../components/SweetAlerts'
 
 
-
-
-/* HOOK REACT EXAMPLE */
 const Register = (props: RegisterProps) => {
     const history = useHistory();
 

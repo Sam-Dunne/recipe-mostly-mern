@@ -50,8 +50,7 @@ const AddStepTwo = (props: AddStepTwoProps) => {
         e.preventDefault();
 
         if (selectedIngs.length === 0) {
-            // ???  Modal with option to stay or move on to next step ???
-
+            // Modal with option to stay or move on to next step
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You haven't added any new ingredients!",

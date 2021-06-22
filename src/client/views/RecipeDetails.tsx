@@ -12,7 +12,6 @@ import Swal from 'sweetalert2';
 import RecipeDetailsEllipsis from '../components/EllipsisDropdowns/RecipeDetailsEllipsis';
 
 
-
 const RecipeDetails = (props: RecipeDetailsProps) => {
     const history = useHistory();
     const { id } = useParams<{ id: string }>();

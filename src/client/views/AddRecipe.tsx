@@ -4,23 +4,18 @@ import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { apiService } from '../utils/api-services'
 import { IFlavorTags } from '../../interfaces';
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
 import MultiSelect from '../components/MultiSelect';
 import SubmitBtn from '../components/SubmitBtn';
 
 
-/* HOOK REACT EXAMPLE */
 const AddRecipe = (props: AddRecipeProps) => {
     const history = useHistory();
     const { id } = useParams<{ id: string }>();
-    const [x, setx] = useState<string>('');
-    const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
-
-    const [qtyValues, setQtyValues] = useState<{ ingredient_qty: string }[]>([])
-    const [qtyValue, setQtyValue] = useState<string>('');
-    const handleSetQtyValue = (e: React.ChangeEvent<HTMLInputElement>) => setQtyValue(e.target.value);;
+    // const [x, setx] = useState<string>('');
+    // const handleSetX = (e: React.ChangeEvent<HTMLInputElement>) => setx(e.target.value);
 
     const [title, setTitle] = useState<string>('');
     const handleSetTitle = (e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
